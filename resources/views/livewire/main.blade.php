@@ -1,7 +1,16 @@
 <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Dashboard
-    </h2>
+    <div class="flex flex-col">
+        <div class="m-2 w-32 border border-black">
+            <h2 class="font-semibold text-xl text-gray-800t">
+                Dashboard
+            </h2>
+        </div>
+        <div class="flex-auto border border-black">
+            <div class="hidden sm:-my-px sm:ml-10 sm:flex">
+                <livewire:search-index>
+            </div>
+        </div>
+    </div>
 </x-slot>
 
 <x-slot name="footer">

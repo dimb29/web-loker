@@ -11,9 +11,9 @@ class SearchIndex extends Component
 {
     use WithPagination;
     protected $updatesQueryString = [
-        ['search' => ['except' => '']]
+        ['searchtitle' => ['except' => '']]
     ];
-    public $search;
+    public $searchtitle;
     public $isOpen = 0;
 
     public function render()
@@ -23,10 +23,10 @@ class SearchIndex extends Component
                         ->latest()
                         ->paginate(3);
 
-        if ($this->search !== null){
+        if ($this->searchtitle !== null){
             $posts = Post::join('images', 'posts.id', '=', 'images.post_id')
                         ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url', 'posts.created_at')
-                        ->where('posts.title', 'like', '%' . $this->search . '%')
+                        ->where('posts.title', 'like', '%' . $this->searchtitle . '%')
                         ->latest()
                         ->paginate(3);
         }

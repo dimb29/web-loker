@@ -1,3 +1,4 @@
+const Manifest = require("laravel-mix/src/Manifest");
 
 // like-comment | post.blade.php
 $(document).ready(function(){
@@ -7,6 +8,16 @@ $(document).ready(function(){
         
     });
 });
+
+// searchbox | search-index.blade.php
+
+$(document).ready(function(){
+    $("#searchmodaltitle").hide();
+    $("#searchtitle").on('keyup',function(){
+        $("#searchmodaltitle").show();
+    });
+});
+
 //Comments | post.blade.php
 // $(document).ready(function(){
 //     // Fetch all records
