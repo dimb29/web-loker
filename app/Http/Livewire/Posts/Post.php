@@ -27,14 +27,21 @@ class Post extends Component
                         ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url')
                         ->orderBy('posts.views', 'desc')->get();
                         $no = 1;
-        $comments = Comment::leftJoin('users', 'comments.author_id', '=', 'users.id')
+        $comments = Comment::select('comments.id', 'comments.comment','comments.author_id','comments.post_id', 'comments.created_at', 'users.first_name', 'users.last_name', 'likes_comments.id_like', 'likes_comments.user_id', 'likes_comments.id_comment', 'likes_comments.fill')
                         ->leftJoin('likes_comments', 'comments.id', '=', 'likes_comments.id_comment')
+                        ->leftJoin('users', 'comments.author_id', '=', 'users.id')
+                        ->orderBy('comments.created_at', 'ASC')->get();
+                        
+        $likes = Comment::select('comments.id', 'comments.comment','comments.author_id','comments.post_id', 'comments.created_at', 'users.first_name', 'users.last_name', 'likes_comments.id_like', 'likes_comments.user_id', 'likes_comments.id_comment', 'likes_comments.fill')
+                        ->leftJoin('likes_comments', 'comments.id', '=', 'likes_comments.id_comment')
+                        ->leftJoin('users', 'comments.author_id', '=', 'users.id')
                         ->orderBy('comments.created_at', 'ASC')->get();
                         // dd($comments);
         return view('livewire.posts.post', [
             'trend' => $posttrend,
             'no' => $no,
-            'comments' => $comments]);
+            'comms' => $comments,
+        ]);
     }
 
     public function comment_store(){
@@ -51,12 +58,25 @@ class Post extends Component
         ]);
     }
 
-    public function comment_like($id){
+    public function comment_like($id, $fill, $id_like){
         // dd($id);
-        LikesComment::create([
-            'id_post' => $this->post['id'],
-            'id_comment' => $id,
-            'user_id' => Auth::user()->id,
-        ]);
+        // $getLike = LikesComment::where('id_like', '=', $id_like)->first();
+        if($fill == 0){
+            LikesComment::create([
+                'id_post' => $this->post['id'],
+                'id_comment' => $id,
+                'user_id' => Auth::user()->id,
+                'fill' => '1',
+            ]);
+        }else{
+            if($fill == 1){
+                $fill = 2;
+            }else{
+                $fill = 1;
+            }
+            LikesComment::where('id_like', $id_like)->update([
+                'fill' => $fill,
+            ]);
+        }
     }
 }

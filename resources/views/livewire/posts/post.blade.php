@@ -3,6 +3,9 @@
         Post
     </h2>
 </x-slot>
+
+<x-slot name="footer">
+</x-slot>
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <div class="py-12">
@@ -34,7 +37,7 @@
 
                         </div>
                         <div class="flex-auto m-1">
-                                            <div class="font-bold text-xl mb-2">{{ $post->title }}</div>
+                <div class="font-bold text-xl mb-2">{{ $post->title }}</div>
                 <div class="flex">
                     by&nbsp;<span class="italic">{{ $post->author->first_name . ' ' . $post->author->last_name }}</span>
                     &nbsp;in&nbsp;<a href="{{ url('dashboard/categories/' . $post->category->id . '/posts') }}"
@@ -63,6 +66,25 @@
                         @endforeach
                     @endif
                 </div>
+                
+                <div class="py-6 text-2xl border-b">
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight border-b">
+                    Baca Juga
+                    </h2>
+                </div>
+                <div class="grid grid-flow-row grid-cols-4  gap-4">
+                @foreach ($trend->skip(0)->take(4) as $post)
+                    <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300">
+                        <div class="rounded-lg text-slate-500 hover:text-blue-600 transition duration-150 transform hover:scale-90">
+                            <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}">
+                            <img class="object-cover h-48 w-96" src="{{ $post->url }}">
+                                <div class="font-bold text-sm mb-2">{{ $post->title }}</div>
+                            </a>
+                        </div>
+                    </div>
+            @endforeach
+            </div>
+            
                 <form class="w-full max-w-lg">
                     <div class="flex flex-wrap -mx-3">
                         <label for="comment-form" class="block text-gray-700 text-sm font-bold mb-2">Comments</label>
@@ -79,21 +101,23 @@
                     </div>
                 </form>
                         <div class="bg-gray-100 overflow-hidden shadow-xl px-6 pt-4">
-                            @foreach ($post->comments   as $comment)
+                            @foreach ($comms   as $comment)
                                 <div class="border-gray-300 border-b pt-2 mb-2">
                                     <p class="text-gray-500 font-bold">
-                                        {{ $comment->author->first_name . ' ' . $comment->author->last_name }}
+                                        {{ $comment->first_name . ' ' . $comment->last_name }}
                                     </p>
                                     <p class="text-gray-400 text-xs">
                                         {{ $comment->created_at->format('d F Y g:i a') }}
                                     </p>
                                     <p class="text-gray-500">{{ $comment->comment }}</p>
-                                    <p>{{$comment->id}} {{$comment->id_comment}}</p>
                                     @if(Auth::user() != null)
-                                        @if($comment->id_comment !== null)
-                                            <i id="comment_like" wire:click="comment_like($id = {{$comment->id}})" class="mx-1 fa-solid fa-thumbs-up text-red-600"></i>
+                                    {{Auth::user()->id}}
+                                        @if($comment->fill == 1 && $comment->user_id == Auth::user()->id )
+                                            <i id="comment_like" wire:click="comment_like($id = {{$comment->id}}, $fill = {{$comment->fill}}, $id_like = {{$comment->id_like}})" class="mx-1 fa-solid fa-thumbs-up text-red-600"></i>
+                                        @elseif($comment->fill == 2)
+                                            <i id="comment_like" wire:click="comment_like($id = {{$comment->id}}, $fill = {{$comment->fill}}, $id_like = {{$comment->id_like}})" class="mx-1 fa-regular fa-thumbs-up text-blue-600 hover:text-red-600"></i>
                                         @else
-                                            <i id="comment_like" wire:click="comment_like($id = {{$comment->id}})" class="mx-1 fa-regular fa-thumbs-up text-blue-600 hover:text-red-600"></i>
+                                            <i id="comment_like" wire:click="comment_like($id = {{$comment->id}}, $fill= 0, $id_like = 0)" class="mx-1 fa-regular fa-thumbs-up text-blue-600 hover:text-red-600"></i>
                                         @endif
                                     @endif
                                     0 likes
@@ -104,7 +128,7 @@
                         <div>
                         </div>
     
-                            </table>
+                            
                         </div>
                     </div>
                 </div>

@@ -13,10 +13,15 @@ class LikesComment extends Model
         'id_post',
         'id_comment',
         'user_id',
+        'fill',
 
     ];
 
     public function comments(){
         return $this->hasMany(Comment::class, 'id', 'id_comment');
+    }
+
+    public function posts(){
+        return $this->hasMany(Post::class, 'id', 'id_post');
     }
 }
