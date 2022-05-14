@@ -30,7 +30,7 @@
 
     <style>
         figure{
-            width:100%;
+            width:101%;
         }
     </style>
     </head>
