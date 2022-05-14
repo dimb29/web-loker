@@ -1,11 +1,11 @@
 <x-slot name="header">
     <div class="flex flex-col">
-        <div class="m-2 w-32 border border-black">
+        <div class="m-2 w-32">
             <h2 class="font-semibold text-xl text-gray-800t">
                 Dashboard
             </h2>
         </div>
-        <div class="flex-auto border border-black">
+        <div class="flex-auto">
             <div class="hidden sm:-my-px sm:ml-10 sm:flex">
                 <livewire:search-index>
             </div>
@@ -31,7 +31,7 @@
             <div class="grid grid-flow-row grid-cols-4  gap-4">
                 @foreach ($trend->skip(0)->take(4) as $post)
                     <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300">
-                        <div class="rounded-lg text-slate-500 hover:text-blue-600 transition duration-150 transform hover:scale-90">
+                        <div class="rounded-lg text-slate-500 hover:text-blue-600 transition duration-150 transform hover:scale-90 md:hidden lg:hidden">
                             <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}">
                             <img class="object-cover h-48 w-96" src="{{ $post->url }}">
                                 <div class="font-bold text-sm mb-2">{{ $post->title }}</div>
@@ -39,7 +39,6 @@
                         </div>
                     </div>
             @endforeach
-            </div>
 
 
             <div class="flex flex-row">
