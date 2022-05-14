@@ -39,20 +39,16 @@
                             <table class="table-auto">
                                 <tbody>
                                     @foreach ($posts->skip(0)->take(5) as $post)
-                                        <tr class="hover:bg-gray-300 text-slate-500 transition duration-150 transform hover:scale-90 border-b">
-                                        <td class="w-60 pr-4">
-                                            <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}" target="jobdesc">
-                                            <img class="object-cover h-36 w-64"src="{{ $post->url }}">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="text-slate-500 hover:text-blue-600" wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}" target="jobdesc">
-                                            {{ $post->title }}
-                                            <p>
-                                                {!!Str::words($post->content, 20, '...') !!}
-                                            </p>
-                                            </a>
-                                        </td>
+                                        <tr data-id="{{ $post->id}}" class="daft-job hover:bg-gray-300 text-grey-500 hover:text-blue-500 cursor-pointer transition duration-150 transform hover:scale-90 border-b">
+                                            <td class="w-60 pr-4">
+                                                <img class="object-cover h-36 w-64"src="{{ $post->url }}">
+                                            </td>
+                                            <td>
+                                                {{ $post->title }}
+                                                <p>
+                                                    {!!Str::words($post->content, 20, '...') !!}
+                                                </p>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     <tr>
@@ -67,14 +63,9 @@
                         </div>
                     </div>
                 </div>
-                
-
-                <div class="flex-auto m-2 w-96">
-
-            <iframe name="jobdesc" class="h-full w-full" src="{{ url('dashboard/posts', $post->id) }}"></iframe>
-
-
-</div>
+                <div class="flex-auto m-2 w-96 myframe">
+                    <!-- <iframe name="jobdesc" class="h-full w-full" src="{{ url('dashboard/posts', $post->id,'#post-frame') }}"></iframe> -->
+                </div>
                         </div>
                         
                     </div>
@@ -83,3 +74,15 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.daft-job').click(function(){
+            var dataId = $(this).attr("data-id");
+            console.log(dataId);
+            var url = "{{url('dashboard/posts/')}}/"+dataId+" #post-frame";
+            console.log(url);
+            $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
+            
+        })
+    });
+</script>
