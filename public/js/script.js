@@ -11,12 +11,13 @@ $(document).ready(function(){
 
 // searchbox | search-index.blade.php
 
-$(document).ready(function(){
-    $("#searchmodaltitle").hide();
-    $("#searchtitle").on('keyup',function(){
-        $("#searchmodaltitle").show();
-    });
-});
+// $(document).ready(function(){
+//     $("#searchmodaltitle").hide();
+//     $("#searchtitle").on('keyup',function(){
+//         $("#searchmodaltitle").show();
+//     });
+//     $('.js-example-basic-multiple').select2();
+// });
 
 //Comments | post.blade.php
 // $(document).ready(function(){
