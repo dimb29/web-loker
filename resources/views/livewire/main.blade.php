@@ -39,7 +39,7 @@
                             <table class="table-auto">
                                 <tbody>
                                     @foreach ($posts->skip(0)->take(5) as $post)
-                                        <tr class="hover:bg-gray-300 text-slate-500 transition duration-150 transform hover:scale-90">
+                                        <tr class="hover:bg-gray-300 text-slate-500 transition duration-150 transform hover:scale-90 border-b">
                                         <td class="w-60 pr-4">
                                             <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}" target="jobdesc">
                                             <img class="object-cover h-36 w-64"src="{{ $post->url }}">
