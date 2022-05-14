@@ -31,7 +31,7 @@
             <div class="grid grid-flow-row grid-cols-4  gap-4">
                 @foreach ($trend->skip(0)->take(4) as $post)
                     <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300">
-                        <div class="rounded-lg text-slate-500 hover:text-blue-600 transition duration-150 transform hover:scale-90 md:hidden lg:hidden">
+                        <div class="rounded-lg text-slate-500 hover:text-blue-600 transition duration-150 transform hover:scale-90">
                             <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}">
                             <img class="object-cover h-48 w-96" src="{{ $post->url }}">
                                 <div class="font-bold text-sm mb-2">{{ $post->title }}</div>
