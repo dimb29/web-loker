@@ -32,7 +32,7 @@
 
 
             <div class="flex flex-row">
-                <div class="flex-auto m-2 w-96">
+                <div class="flex-auto m-2 w-1/4">
                     <div class="flex flex-col">
                         
                         <div class="flex-auto m-1">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-auto m-2 w-96 myframe">
+                <div class="hidden space-x-8 sm:flex w-4/5 myframe bg-black">
                     <!-- <iframe name="jobdesc" class="h-full w-full" src="{{ url('dashboard/posts', $post->id,'#post-frame') }}"></iframe> -->
                 </div>
                         </div>
@@ -81,8 +81,11 @@
             console.log(dataId);
             var url = "{{url('dashboard/posts/')}}/"+dataId+" #post-frame";
             console.log(url);
-            $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
-            
+            if($('.myframe').is(":visible")){
+                $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
+            } else{
+                window.open("{{url('dashboard/posts/')}}/"+dataId,'_blank');
+            }
         })
     });
 </script>

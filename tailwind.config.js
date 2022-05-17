@@ -1,5 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-
+const colors = require('tailwindcss/colors');
 module.exports = {
     purge: [
         './vendor/laravel/jetstream/**/*.blade.php',
@@ -22,9 +22,13 @@ module.exports = {
             
 
           },
+          // screens: {
+          //   'tiny': '',
+          // },
 
           extend: {
             colors: {
+              yellow: colors.yellow,
               brown: {
                 50: '#fdf8f6',
                 100: '#f2e8e5',
