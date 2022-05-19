@@ -28,22 +28,24 @@
                     </div>
                 </div>
             @endif
-            <div class="slider grid grid-flow-row grid-cols-4  gap-4">
-                @foreach ($trend as $post)
-                    <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300">
-                        <div class="p-2 rounded-lg text-slate-500 hover:text-blue-600 transition duration-150 transform hover:scale-90">
-                            <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}">
-                                <p class="text-gray-400 font-medium">Dibutuhkan</p>
-                                <p class="w-18 overflow-hidden h-5 font-bold">{{ $post->title }}</p>
-                                <img class="object-cover h-48 w-96" src="{{ $post->url }}">
-                                <div class="font-bold text-sm mb-2 truncate">
-                                    <i class="fa-solid fa-gopuram"></i>
-                                    {{ $post->title }}
-                                </div>
-                            </a>
+            <div class="p-4">
+                <div class="slider grid grid-flow-row grid-cols-4 m-4 gap-4">
+                    @foreach ($trend as $post)
+                        <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300">
+                            <div class="p-2 rounded-lg text-slate-500 hover:text-blue-600 transition duration-150 transform hover:scale-90">
+                                <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}">
+                                    <p class="text-gray-400 font-medium">Dibutuhkan</p>
+                                    <p class="w-18 overflow-hidden h-5 font-bold">{{ $post->title }}</p>
+                                    <img class="object-cover h-48 w-96" src="{{ $post->url }}">
+                                    <div class="font-bold text-sm mb-2 truncate">
+                                        <i class="fa-solid fa-gopuram"></i>
+                                        {{ $post->title }}
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-            @endforeach
+                @endforeach
+                </div>
             </div>
             
 
