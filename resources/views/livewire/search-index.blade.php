@@ -1,13 +1,13 @@
 <div class="max-w-md">
     <div class="flex flex-row">
         <div class="pr-4">
-            <select id="searchtitle" name="states[]"
-            class="select2-title-single shadow hover:text-blue w-full"
-            placeholder="Search news">
+            <input type="search" id="search-title" list="title-list" name="searchtitle"
+            class="shadow w-96 h-8">
+            <datalist id="title-list">
                  @foreach ($postsearch as $post)
                 <option value="{{$post->title}}">{{$post->title}}</option>
                 @endforeach
-            </select>
+            </datalist>
         </div>
     </div>
 </div>
