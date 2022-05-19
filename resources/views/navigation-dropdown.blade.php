@@ -162,5 +162,29 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('berita') }}" :active="request()->routeIs('berita')">
+                {{ __('News') }}
+            </x-jet-responsive-nav-link>
+        </div>
+            @if(Auth::user() != null)
+            @if(Auth::user()->user_type == "administr")
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('categories') }}" :active="request()->routeIs('categories')">
+                {{ __('Categories') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('posts') }}" :active="request()->routeIs('posts')">
+                {{ __('Upload Berita') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('tags') }}" :active="request()->routeIs('tags')">
+                {{ __('Tags') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        @endif
+        @endif
     </div>
 </nav>

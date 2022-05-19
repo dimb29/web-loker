@@ -1,12 +1,12 @@
 <x-slot name="header">
     <div class="flex flex-col">
-        <div class="m-2 w-32">
+        <div class="m-2 w-32 border border-black">
             <h2 class="font-semibold text-xl text-gray-800t">
                 Dashboard
             </h2>
         </div>
-        <div class="flex-auto ">
-            <div class="sm:-my-px sm:ml-10 sm:flex">
+        <div class="flex-auto border border-black">
+            <div class="hidden sm:-my-px sm:ml-10 sm:flex">
                 <livewire:search-index>
             </div>
         </div>
@@ -32,7 +32,7 @@
 
 
             <div class="flex flex-row">
-                <div class="flex-auto m-2 w-96">
+                <div class="flex-auto m-2 w-1/4">
                     <div class="flex flex-col">
                         
                         <div class="flex-auto m-1">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full myframe">
+                <div class="hidden space-x-8 sm:flex w-4/5 myframe bg-black">
                     <!-- <iframe name="jobdesc" class="h-full w-full" src="{{ url('dashboard/posts', $post->id,'#post-frame') }}"></iframe> -->
                 </div>
                         </div>
@@ -90,8 +90,11 @@
             console.log(dataId);
             var url = "{{url('dashboard/posts/')}}/"+dataId+" #post-frame";
             console.log(url);
-            $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
-            
+            if($('.myframe').is(":visible")){
+                $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
+            } else{
+                window.open("{{url('dashboard/posts/')}}/"+dataId,'_blank');
+            }
         })
     });
 </script>
