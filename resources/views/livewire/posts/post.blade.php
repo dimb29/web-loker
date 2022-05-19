@@ -19,6 +19,10 @@
                     </div>
                 </div>
             @endif
+            
+            
+
+
            
                 <div class="flex-auto m-1">
                     <div class="grid grid-flow-col">
@@ -36,7 +40,7 @@
                     &nbsp;on&nbsp;{{ $post->updated_at->format('F, d Y') }}
                 </div>
                 
-                <div class="text-gray-700 text-base m-auto whitespace-pre-line m-4" readonly="readonly">
+                <div id="content" class="text-gray-700 text-base m-auto" readonly="readonly">
                     <p>{!! $post->content !!}</p>
                 </div>
 
@@ -100,8 +104,13 @@
                         @endforeach
                     @endif
                 </div>
+                
+            
+                        
                         <div>
                         </div>
+    
+                            
                         </div>
                     </div>
                 </div>

@@ -115,14 +115,14 @@
                 window.open("{{url('dashboard/posts/')}}/"+dataId,'_blank');
             }
         })
-        $('.slider').slick({
-            arrows: true,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            draggable: true,
-            touchMove: true,
-            autoplay: true,
-            autoplaySpeed: 2000,
-        });
+    $('.slider').slick({
+        arrows: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        draggable: true,
+        touchMove: true,
+        autoplay: true,
+        autoplaySpeed: 2000,
+    });
     });
 </script>
