@@ -28,7 +28,6 @@ module.exports = {
 
           extend: {
             colors: {
-              yellow: colors.yellow,
               brown: {
                 50: '#fdf8f6',
                 100: '#f2e8e5',
