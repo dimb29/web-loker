@@ -36,7 +36,7 @@
                     &nbsp;on&nbsp;{{ $post->updated_at->format('F, d Y') }}
                 </div>
                 
-                <div id="content" class="text-gray-700 text-base m-auto" readonly="readonly">
+                <div class="text-gray-700 text-base m-auto whitespace-pre-line m-4" readonly="readonly">
                     <p>{!! $post->content !!}</p>
                 </div>
 
