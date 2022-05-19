@@ -1,12 +1,12 @@
 <x-slot name="header">
     <div class="flex flex-col">
-        <div class="m-2 w-32 border border-black">
+        <div class="m-2 w-32">
             <h2 class="font-semibold text-xl text-gray-800t">
                 Dashboard
             </h2>
         </div>
-        <div class="flex-auto border border-black">
-            <div class="hidden sm:-my-px sm:ml-10 sm:flex">
+        <div class="flex-auto ">
+            <div class="sm:-my-px sm:ml-10 sm:flex">
                 <livewire:search-index>
             </div>
         </div>
@@ -39,14 +39,23 @@
                             <table class="table-auto">
                                 <tbody>
                                     @foreach ($posts->skip(0)->take(5) as $post)
-                                        <tr data-id="{{ $post->id}}" class="daft-job hover:bg-gray-300 text-grey-500 hover:text-blue-500 cursor-pointer transition duration-150 transform hover:scale-90 border-b">
-                                            <td class="w-60 pr-4">
+                                        <tr data-id="{{ $post->id}}" class="daft-job hover:bg-gray-300 text-grey-500 hover:text-blue-500 cursor-pointer transition duration-150 transform hover:scale-90 border-b border-r">
+                                            <td class="w-72 pr-4 py-8">
                                                 <img class="object-cover h-36 w-64"src="{{ $post->url }}">
-                                            </td>
-                                            <td>
+                                            
+                                            
                                                 {{ $post->title }}
                                                 <p>
-                                                    {!!Str::words($post->content, 20, '...') !!}
+                                                    by {!! $post->first_name !!} {!! $post->last_name !!}
+                                                    &nbsp;on&nbsp;{{ $post->updated_at->format('Y-m-d H:i:s') }}
+                                    <br>                
+                                    {{gmdate('i',$thistime->diffInSeconds($post->updated_at))}} menit yang lalu
+                                    <br>                
+                                    {{gmdate('H',$thistime->diffInSeconds($post->updated_at))}} jam yang lalu
+                                    <br>
+                                    {{gmdate('z',$thistime->diffInSeconds($post->updated_at))}} hari yang lalu
+                                    <br>
+                                    {{gmdate('m',$thistime->diffInSeconds($post->updated_at))}} bulan yang lalu
                                                 </p>
                                             </td>
                                         </tr>
@@ -63,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-auto m-2 w-96 myframe">
+                <div class="w-full myframe">
                     <!-- <iframe name="jobdesc" class="h-full w-full" src="{{ url('dashboard/posts', $post->id,'#post-frame') }}"></iframe> -->
                 </div>
                         </div>
