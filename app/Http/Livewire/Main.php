@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Carbon\Carbon;
 
 class Main extends Component
 {
@@ -25,8 +26,13 @@ class Main extends Component
     {
 
         $post = Post::join('images', 'posts.id', '=', 'images.post_id')
-                        ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url')
+                        ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url','b.first_name', 'last_name', 'posts.created_at','posts.updated_at')
+                        ->leftJoin('users as b','author_id','=','b.id')
                         ->orderBy('posts.id', 'desc')->get();
+                        $now = Carbon::now();
+                        $current = Carbon::now();
+                        $dt      = Carbon::now();
+
                         
         $posttrend = Post::join('images', 'posts.id', '=', 'images.post_id')
                         ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url')
@@ -41,7 +47,9 @@ class Main extends Component
                         'posts' => $post,
                         'first' => $first,
                         'trend' => $posttrend,
-                        'no' => $no]);
+                        'no' => $no,
+                        'thistime' => $now,
+                    ]);
     }
 
     public function countview($id)
