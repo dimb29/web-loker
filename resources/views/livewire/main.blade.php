@@ -26,13 +26,32 @@
                     </div>
                 </div>
             @endif
+            <div class="p-4">
+                <div class="slider grid grid-flow-row grid-cols-4 m-4 gap-4">
+                    @foreach ($trend as $post)
+                        <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300">
+                            <div class="p-2 rounded-lg text-slate-500 hover:text-blue-600 transition duration-150 transform hover:scale-90">
+                                <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}">
+                                    <p class="text-gray-400 font-medium">Dibutuhkan</p>
+                                    <p class="w-18 overflow-hidden h-5 font-bold">{{ $post->title }}</p>
+                                    <img class="object-cover h-48 w-96" src="{{ $post->url }}">
+                                    <div class="font-bold text-sm mb-2 truncate">
+                                        <i class="fa-solid fa-gopuram"></i>
+                                        {{ $post->title }}
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                @endforeach
+                </div>
+            </div>
             
 
 
             <div class="flex flex-row">
-                <div class="flex-auto m-2 w-96">
+                <div class="flex-auto"></div>
+                <div class="flex-auto m-2 w-1/4">
                     <div class="flex flex-col">
-                        
                         <div class="flex-auto m-1">
                             <table class="table-auto">
                                 <tbody>
@@ -70,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full myframe">
+                <div class="hidden space-x-8 sm:flex w-4/5 myframe">
                     <!-- <iframe name="jobdesc" class="h-full w-full" src="{{ url('dashboard/posts', $post->id,'#post-frame') }}"></iframe> -->
                 </div>
                         </div>
@@ -88,8 +107,20 @@
             console.log(dataId);
             var url = "{{url('dashboard/posts/')}}/"+dataId+" #post-frame";
             console.log(url);
-            $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
-            
+            if($('.myframe').is(":visible")){
+                $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
+            } else{
+                window.open("{{url('dashboard/posts/')}}/"+dataId,'_blank');
+            }
         })
+    $('.slider').slick({
+        arrows: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        draggable: true,
+        touchMove: true,
+        autoplay: true,
+        autoplaySpeed: 2000,
+    });
     });
 </script>
