@@ -32,14 +32,24 @@
                 <div class="slider grid grid-flow-row grid-cols-4 m-4 gap-4">
                     @foreach ($trend as $post)
                         <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300">
-                            <div class="p-2 rounded-lg text-slate-500 hover:text-blue-600 transition duration-150 transform hover:scale-90">
+                            <div class="p-4 rounded-lg text-slate-500 hover:text-blue-600 transition duration-150 transform hover:scale-90">
                                 <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}">
                                     <p class="text-gray-400 font-medium">Dibutuhkan</p>
                                     <p class="w-18 overflow-hidden h-5 font-bold">{{ $post->title }}</p>
                                     <img class="object-cover h-48 w-96" src="{{ $post->url }}">
-                                    <div class="font-bold text-sm mb-2 truncate">
-                                        <i class="fa-solid fa-gopuram"></i>
-                                        {{ $post->title }}
+                                    <div class="font-bold text-sm truncate">
+                                        <i class="fa fa-university" aria-hidden="true"></i>
+                                        PT. Tujuan
+                                    </div>
+                                    <div div="grid grid-cols-2 gap-4">
+                                        <div class="font-medium text-sm text-gray-400">
+                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                            SMA/SMK
+                                        </div>
+                                        <div class="font-medium text-sm text-gray-400">
+                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                            SMA/SMK
+                                        </div>
                                     </div>
                                 </a>
                             </div>
@@ -51,16 +61,16 @@
 
 
             <div class="flex flex-row">
-                <div class="flex-auto"></div>
-                <div class="flex-auto m-2 w-1/4">
+                
+                <div class="flex-auto m-2 space-x-8 w-96">
                     <div class="flex flex-col">
                         <div class="flex-auto m-1">
                             <table class="table-auto">
                                 <tbody>
                                     @foreach ($posts->skip(0)->take(5) as $post)
                                         <tr data-id="{{ $post->id}}" class="daft-job hover:bg-gray-300 text-grey-500 hover:text-blue-500 cursor-pointer transition duration-150 transform hover:scale-90 border-b border-r">
-                                            <td class="w-72 pr-4 py-8">
-                                                <img class="object-cover h-36 w-64"src="{{ $post->url }}">
+                                            <td class="pr-4 py-8">
+                                                <img class="object-cover"src="{{ $post->url }}">
                                             
                                             
                                                 {{ $post->title }}
@@ -72,7 +82,7 @@
                                     <br>                
                                     {{gmdate('H',$thistime->diffInSeconds($post->updated_at))}} jam yang lalu
                                     <br>
-                                    {{gmdate('z',$thistime->diffInSeconds($post->updated_at))}} hari yang lalu
+                                    {{}} hari yang lalu
                                     <br>
                                     {{gmdate('m',$thistime->diffInSeconds($post->updated_at))}} bulan yang lalu
                                                 </p>
@@ -115,14 +125,40 @@
                 window.open("{{url('dashboard/posts/')}}/"+dataId,'_blank');
             }
         })
-    $('.slider').slick({
-        arrows: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        draggable: true,
-        touchMove: true,
-        autoplay: true,
-        autoplaySpeed: 2000,
-    });
+    if($('.myframe').is(":visible")){
+        $('.slider').slick({
+            arrows: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            draggable: true,
+            touchMove: true,
+            autoplay: true,
+            autoplaySpeed: 2000,
+        });
+    }else{
+        $('.slider').slick({
+            arrows: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            draggable: true,
+            touchMove: true,
+            autoplay: true,
+            autoplaySpeed: 2000,
+        });
+    }
+
+        (function(){
+            var width = screen.width,
+            height = screen.height;
+            
+            setInterval(function () {
+                if (screen.width !== width || screen.height !== height) {
+                    width = screen.width;
+                    height = screen.height;
+                    $(window).trigger('resolutionchange');
+                    alert("resolution change")
+                }
+            }, 50);
+        }());
     });
 </script>
