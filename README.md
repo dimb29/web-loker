@@ -1,8 +1,8 @@
 # Laravel News API with Admin Panel
 Laravel 8 Admin Panel with API using Jetstream, Livewire, Sanctum, and Tailwind.
 
-1. `git clone https://github.com/dimb29/portal-news.git`
-2. `cd laravel-news`
+1. `git clone https://github.com/dimb29/web-loker.git`
+2. `cd web-loker`
 3. `composer install`
 4. `cp .env.example .env`
 5. `cd public`
