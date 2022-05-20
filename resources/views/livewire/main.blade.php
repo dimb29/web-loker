@@ -1,21 +1,19 @@
 <x-slot name="header">
-    <div class="flex flex-col">
-        <div class="m-2 w-32">
-            <h2 class="font-semibold text-xl text-gray-800t">
-                Dashboard
-            </h2>
-        </div>
-        <div class="flex-auto">
-            <div class="hidden sm:-my-px sm:ml-10 sm:flex">
-                <livewire:search-index>
-            </div>
-        </div>
+    <div class="flex flex-col h-48">
+    <img class="object-cover h-48 w-fit" src="https://cdn.vectorstock.com/i/1000x1000/17/52/professional-workers-different-jobs-professionals-vector-31651752.webp">
     </div>
 </x-slot>
 
 <x-slot name="footer">
 </x-slot>
-<div class="py-12 bg-indigo-100">
+<div class="py-12 bg-yellow">
+<div class="flex-auto ">
+<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 -mt-48">
+            <div class="sm:-my-px sm:ml-10 sm:flex">
+                <livewire:search-index>
+            </div>
+        </div>
+</div>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
             @if (session()->has('message'))
