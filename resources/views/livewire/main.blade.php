@@ -69,20 +69,31 @@
                                         <tr data-id="{{ $post->id}}" class="daft-job hover:bg-gray-300 text-grey-500 hover:text-blue-500 cursor-pointer transition duration-150 transform hover:scale-90 border-b border-r">
                                             <td class="pr-4 py-8">
                                                 <img class="object-cover"src="{{ $post->url }}">
-                                            
-                                            
-                                                {{ $post->title }}
                                                 <p>
-                                                    by {!! $post->first_name !!} {!! $post->last_name !!}
-                                                    &nbsp;on&nbsp;{{ $post->updated_at->format('Y-m-d H:i:s') }}
-                                    <br>                
-                                    {{gmdate('i',$thistime->diffInSeconds($post->updated_at))}} menit yang lalu
-                                    <br>                
-                                    {{gmdate('H',$thistime->diffInSeconds($post->updated_at))}} jam yang lalu
-                                    <br>
-                                    {{}} hari yang lalu
-                                    <br>
-                                    {{gmdate('m',$thistime->diffInSeconds($post->updated_at))}} bulan yang lalu
+                                                    {{ $post->title }}
+                                                </p>
+                                                <p>
+                                                    @php
+                                                    $minutes = $thistime->diffInMinutes($post->updated_at);
+                                                    $hours = $thistime->diffInHours($post->updated_at);
+                                                    $days = $thistime->diff($post->updated_at)->days;
+                                                    $weeks = $thistime->diffInWeeks($post->updated_at);
+                                                    $months = $thistime->diffInMonths($post->updated_at);
+                                                    $years = $thistime->diffInYears($post->updated_at);
+                                                    @endphp
+                                                    @if($minutes <= 60)
+                                                        {{$minutes}} menit yang lalu
+                                                    @elseif($hours <= 24)
+                                                        {{$hours}} jam yang lalu
+                                                    @elseif($days <= 7)
+                                                        {{$days}} hari yang lalu
+                                                    @elseif($weeks <= 4)
+                                                        {{$weeks}} minggu yang lalu
+                                                    @elseif($months <= 12)
+                                                        {{$months}} bulan yang lalu
+                                                    @else
+                                                        {{$years}} tahun yang lalu
+                                                    @endif
                                                 </p>
                                             </td>
                                         </tr>
