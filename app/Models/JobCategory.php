@@ -9,7 +9,10 @@ class JobCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name_jobcat',
+    protected $fillabel = [
+        'name_jc',
     ];
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
 }

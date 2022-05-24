@@ -38,25 +38,23 @@
 
 	<div>
 	  <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-		<select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+		<select id="sel-loc" 
+		class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
 		  <option value="">Semua Lokasi</option>
-		  @foreach ($postsearch as $post)
-                <option value="{{$post->title}}">{{$post->title}}</option>
-                @endforeach
 		</select>
 
 		<select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
 		  <option value="">Semua Lulusan</option>
-		  @foreach ($postsearch as $post)
-                <option value="{{$post->title}}">{{$post->title}}</option>
-                @endforeach
+			@foreach ($kualifs as $kualif)
+                <option value="{{$kualif->id}}">{{$kualif->name_kl}}</option>
+        	@endforeach
 		</select>
 
 		<select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
 		  <option value="">Semua Tipe Pekerjaan</option>
-		  <option value="1000">Fulltime</option>
-		  <option value="2000">Part Time</option>
-		  <option value="3000">Freelance</option>
+			@foreach ($spesialises as $spesialis)
+                <option value="{{$spesialis->id}}">{{$spesialis->name_sk}}</option>
+        	@endforeach
 		  </select>
 
 		<button
@@ -82,7 +80,7 @@
         $('.select2-title-single').select2({
             placeholder: "Select your Location"
         });
-        $('.select2-jobcat-multiple').select2({
+        $('.select2-loc-multiple').select2({
             placeholder: "Select your Location"
         });
         $('.select2-jobtype-multiple').select2({

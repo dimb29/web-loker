@@ -81,7 +81,7 @@
 			<td class="w-64 h-24">
             <p class="font-bold"> Jenis Pekerjaan </p>
             <a href="{{ url('dashboard/tags/' . $tag . '/posts') }}"
-                class="underline px-1">{{ $key }}
+                class="underline px-1">{{ $post->jeniskerja->name_jk }}
             </a>
             </td>
 		</tr>

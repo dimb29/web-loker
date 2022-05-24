@@ -16,8 +16,19 @@ class Post extends Component
 
     public function mount($id)
     {
-        $this->post = PostModel::with(['author', 'category', 'images', 'videos', 'tags'])->find($id);
-        // dd($this);
+        $this->post = PostModel::with([
+            'author', 
+            'category', 
+            'images', 
+            'videos', 
+            'tags', 
+            'jeniskerja', 
+            'kualifikasilulus',
+            'pengalamankerja',
+            'spesialiskerja',
+            'tingkatkerja',
+            ])->find($id);
+        dd($this);
         
     }
 
