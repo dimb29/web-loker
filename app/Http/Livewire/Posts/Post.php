@@ -28,7 +28,7 @@ class Post extends Component
             'spesialiskerja',
             'tingkatkerja',
             ])->find($id);
-        dd($this);
+        // dd($this);
         
     }
 
