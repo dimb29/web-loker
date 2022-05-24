@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TingkatKerja extends Model
+class Perusahaan extends Model
 {
     use HasFactory;
 
-    protected $table = "tingkat_kerja";
-
     protected $fillable = [
-        'name_tk',
+        'per_nama',
+        'per_type',
+        'per_alamat',
+        'per_prov',
+        'per_kota',
+        'owner_id',
     ];
-    public function posts(){
-        return $this->hasMany(Post::class);
-    }
 }

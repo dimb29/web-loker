@@ -47,4 +47,27 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function jeniskerja(){
+        return $this->belongsTo(JenisKerja::class);
+    }
+    
+    public function jobcategory(){
+        return $this->belongsTo(JobCategory::class);
+    }
+    
+    public function kualifikasilulus(){
+        return $this->belongsTo(KualifikasiLulus::class);
+    }
+    
+    public function pengalamankerja(){
+        return $this->belongsTo(PengalamanKerja::class);
+    }
+    
+    public function tingkatkerja(){
+        return $this->belongsTo(TingkatKerja::class);
+    }
+
+    public function spesialiskerja(){
+        return $this->belongsTo(SpesialisKerja::class);
+    }
 }

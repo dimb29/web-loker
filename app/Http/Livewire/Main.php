@@ -16,11 +16,17 @@ use Carbon\Carbon;
 
 class Main extends Component
 {
-
-
     public $isOpen = 0;
     public $search;
+    public $limitPerPage = 3;
     protected $queryString = ['search'];
+    protected $listeners = [
+        'post-scroll' => 'postScroll',
+    ];
+
+    public function postScroll(){
+        $this->limitPerPage = $this->limitPerPage + 1;
+    }
 
     public function render()
     {
@@ -28,24 +34,16 @@ class Main extends Component
         $post = Post::join('images', 'posts.id', '=', 'images.post_id')
                         ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url','b.first_name', 'last_name', 'posts.created_at','posts.updated_at')
                         ->leftJoin('users as b','author_id','=','b.id')
-                        ->orderBy('posts.id', 'desc')->get();
-                        $now = Carbon::now();
-                        $current = Carbon::now();
-                        $dt      = Carbon::now();
-
-                        
+                        ->orderBy('posts.id', 'desc')->paginate($this->limitPerPage);
+        $this->emit('postStore');
+        $now = Carbon::now();
         $posttrend = Post::join('images', 'posts.id', '=', 'images.post_id')
                         ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url')
-                        ->orderBy('posts.views', 'desc')->get();   
-        
-        if (!$post->isEmpty()){
-            $first = $post->firstorfail()->toArray();
-        }
+                        ->orderBy('posts.views', 'desc')->get();
         $no = 1;
         
         return view('livewire.main', [
                         'posts' => $post,
-                        'first' => $first,
                         'trend' => $posttrend,
                         'no' => $no,
                         'thistime' => $now,
