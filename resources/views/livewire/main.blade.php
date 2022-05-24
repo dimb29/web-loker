@@ -1,6 +1,6 @@
 <x-slot name="header">
     <div class="flex flex-col h-48">
-    <img class="object-cover h-48 w-full" src="http://localhost:8000/storage/photos/jobicon.jpg">
+    <img class="object-cover h-48 w-fit" src="https://cdn.vectorstock.com/i/1000x1000/17/52/professional-workers-different-jobs-professionals-vector-31651752.webp">
     </div>
 </x-slot>
 
@@ -60,30 +60,15 @@
                 </div>
             </div>
 </div>
-            
-
-
-
 
 
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-            @if (session()->has('message'))
-                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
-                    role="alert">
-                    <div class="flex">
-                        <div>
-                            <p class="text-sm">{{ session('message') }}</p>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
             <div class="flex flex-row">
                 
                 <div class="flex-auto m-2 space-x-8 w-96">
                     <div class="flex flex-col">
-                        <div id="left-content" class="left-content flex-auto m-1 max-h-52 overflow-scroll">
+                        <div id="left-content" class="left-content flex-auto m-1">
                             <table class="table-auto">
                                 <tbody>
                                     @foreach ($posts->skip(0)->take(5) as $post)
@@ -156,7 +141,8 @@
             var url = "{{url('dashboard/posts/')}}/"+dataId+" #post-frame";
             console.log(url);
             if($('.myframe').is(":visible")){
-                $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
+                $('.myframe').load(url);
+                // $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
             } else{
                 window.open("{{url('dashboard/posts/')}}/"+dataId,'_blank');
             }
