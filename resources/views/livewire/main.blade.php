@@ -15,7 +15,7 @@
         </div>
 </div>
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-15" >
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-15">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
             @if (session()->has('message'))
                 <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
@@ -83,10 +83,9 @@
                 
                 <div class="flex-auto m-2 space-x-8 w-96">
                     <div class="flex flex-col">
-                        <div id="left-content" class="left-content flex-auto m-1 max-h-52 overflow-scroll">
-                            <table class="table-auto">
-                                <tbody>
-                                    @foreach ($posts->skip(0)->take(5) as $post)
+                        <div class="flex-auto m-1">
+                            <div class="flex flex-col">
+                                    @foreach ($posts as $post)
                                         <div data-id="{{ $post->id}}" class="daft-job rounded-lg shadow-xl my-6 hover:scale-110 transition duration-300 ease-in-out 
                                                 text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" data-mdb-ripple="true" data-mdb-ripple-color="light">
                                                 <img class="object-cover h-48 w-96 rounded-lg"src="{{ $post->url }}">
@@ -120,19 +119,14 @@
                                                 </div>
                                             </div>
                                     @endforeach
-                                    <tr>
-                                        <td colspan="2">
-                                            <button id="button2"class="load-more bg-transparent hover:bg-indigo-400 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-indigo-400 hover:border-transparent rounded">
+                                    <div>
+                                        <div colspan="2">
+                                            <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                                                 Selengkapnya
                                             </button>
-                                            @if($posts->hasMorePages())
-                                                <button wire:click="postScroll()" class="btn btn-dark btn-lg shadow-sm">Load More</button>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                                            scroll <div id="scrollup"></div> time
+</div>
+</div>
+</div>
                         </div>
                     </div>
                 </div>
@@ -196,28 +190,6 @@
                 }
             }, 50);
         }());
-        var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
-        $.get(ApiWilIndo + 'provinsi',  // url
-        function (data, textStatus, jqXHR) {  // success callback
-            console.log(data)
-            var i;
-            for(i=0; i < data.provinsi.length; i++){
-                // console.log(data.provinsi[i])
-                datprov = data.provinsi[i]
-                var apdata = '<option value="'+datprov.id+'">'+datprov.nama+'</option>'
-                // console.log(apdata)
-                $('#sel-loc').append(apdata)
-            }
-        });
-                var scrollonTop = $(".left-content").scrollTop()
-                const left_scroll_id = document.getElementById("left-content")
-            $(left_scroll_id).scroll(function(){
-                const element = left_scroll_id.offsetHeight;
-                if ((window.innerHeight + window.scrollY) >= element) {
-                    window.livewire.emit('post-scroll');
-                }
-
-            });
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
