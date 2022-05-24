@@ -1,6 +1,6 @@
 <x-slot name="header">
     <div class="flex flex-col h-48">
-    <img class="object-cover h-48 w-fit" src="https://cdn.vectorstock.com/i/1000x1000/17/52/professional-workers-different-jobs-professionals-vector-31651752.webp">
+    <img class="object-cover h-48 w-full" src="http://localhost:8000/storage/photos/jobicon.jpg">
     </div>
 </x-slot>
 
@@ -8,13 +8,14 @@
 </x-slot>
 <div class="py-12 bg-yellow">
 <div class="flex-auto ">
-<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 -mt-48">
-            <div class="sm:-my-px sm:ml-10 sm:flex">
+<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 -mt-40">
+            <div class=" justify-center">
                 <livewire:search-index>
             </div>
         </div>
 </div>
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-15">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
             @if (session()->has('message'))
                 <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
@@ -26,37 +27,57 @@
                     </div>
                 </div>
             @endif
-            <div class="p-4">
-                <div class="slider grid grid-flow-row grid-cols-4 m-4 gap-4">
+
+
+            <div class="p-6">
+                <div class="slider ">
                     @foreach ($trend as $post)
-                        <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300">
-                            <div class="p-4 rounded-lg text-slate-500 hover:text-blue-600 transition duration-150 transform hover:scale-90">
+                        <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300 m-8
+                        rounded-lg hover:text-blue-600 hover:scale-110 transition duration-300 ease-in-out">
                                 <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}">
-                                    <p class="text-gray-400 font-medium">Dibutuhkan</p>
-                                    <p class="w-18 overflow-hidden h-5 font-bold">{{ $post->title }}</p>
+                                    
                                     <img class="object-cover h-48 w-96" src="{{ $post->url }}">
-                                    <div class="font-bold text-sm truncate">
-                                        <i class="fa-regular fa-building"></i>
-                                        PT. Tujuan
+                                    <div class="p-6">
+                                        <h5 class="text-gray-900 text-xl font-medium mb-2 h-16 pb-4">{{ $post->title }}</h5>
+                                        <p class="text-gray-500 text-base mb-4">
+                                        PT Istana Kemakmuran Motor
+                                        </p>
                                     </div>
                                     <div div="grid grid-cols-2 gap-4">
-                                        <div class="font-medium text-sm text-gray-400">
-                                            <i class="fa-solid fa-graduation-cap"></i>
+                                        <div class="p-6 font-medium text-sm text-gray-400">
+                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                             SMA/SMK
                                         </div>
-                                        <div class="font-medium text-sm text-gray-400">
+                                        <div class="p-6 font-medium text-sm text-gray-400">
                                             <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                             SMA/SMK
                                         </div>
                                     </div>
                                 </a>
-                            </div>
+                            
                         </div>
                 @endforeach
                 </div>
             </div>
+</div>
             
 
+
+
+
+
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+            @if (session()->has('message'))
+                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
+                    role="alert">
+                    <div class="flex">
+                        <div>
+                            <p class="text-sm">{{ session('message') }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             <div class="flex flex-row">
                 
@@ -66,12 +87,13 @@
                             <table class="table-auto">
                                 <tbody>
                                     @foreach ($posts->skip(0)->take(5) as $post)
-                                        <tr data-id="{{ $post->id}}" class="daft-job hover:bg-gray-300 text-grey-500 hover:text-blue-500 cursor-pointer transition duration-150 transform hover:scale-90 border-b border-r">
-                                            <td class="pr-4 py-8">
-                                                <img class="object-cover"src="{{ $post->url }}">
-                                                <p>
-                                                    {{ $post->title }}
-                                                </p>
+                                        <div data-id="{{ $post->id}}" class="daft-job rounded-lg shadow-xl my-6 hover:scale-110 transition duration-300 ease-in-out 
+                                                text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" data-mdb-ripple="true" data-mdb-ripple-color="light">
+                                                <img class="object-cover h-48 w-96 rounded-lg"src="{{ $post->url }}">
+                                                <div class="p-6 -mt-4">
+                                                    <h5 class="text-gray-900 text-xl font-medium mb-2 h-16 pb-4 mb-8">
+                                                        {{ $post->title }}
+                                                    </h5>
                                                 <p>
                                                     @php
                                                     $minutes = $thistime->diffInMinutes($post->updated_at);
@@ -95,8 +117,8 @@
                                                         {{$years}} tahun yang lalu
                                                     @endif
                                                 </p>
-                                            </td>
-                                        </tr>
+                                                </div>
+                                            </div>
                                     @endforeach
                                     <tr>
                                         <td colspan="2">
@@ -114,6 +136,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="hidden space-x-8 sm:flex w-4/5 myframe">
                     <!-- <iframe name="jobdesc" class="h-full w-full" src="{{ url('dashboard/posts', $post->id,'#post-frame') }}"></iframe> -->
                 </div>
@@ -197,3 +220,4 @@
             });
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
