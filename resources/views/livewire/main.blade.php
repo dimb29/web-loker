@@ -36,12 +36,12 @@
                                     <p class="w-18 overflow-hidden h-5 font-bold">{{ $post->title }}</p>
                                     <img class="object-cover h-48 w-96" src="{{ $post->url }}">
                                     <div class="font-bold text-sm truncate">
-                                        <i class="fa fa-university" aria-hidden="true"></i>
+                                        <i class="fa-regular fa-building"></i>
                                         PT. Tujuan
                                     </div>
                                     <div div="grid grid-cols-2 gap-4">
                                         <div class="font-medium text-sm text-gray-400">
-                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                            <i class="fa-solid fa-graduation-cap"></i>
                                             SMA/SMK
                                         </div>
                                         <div class="font-medium text-sm text-gray-400">
@@ -62,7 +62,7 @@
                 
                 <div class="flex-auto m-2 space-x-8 w-96">
                     <div class="flex flex-col">
-                        <div class="flex-auto m-1">
+                        <div id="left-content" class="left-content flex-auto m-1 max-h-52 overflow-scroll">
                             <table class="table-auto">
                                 <tbody>
                                     @foreach ($posts->skip(0)->take(5) as $post)
@@ -100,13 +100,17 @@
                                     @endforeach
                                     <tr>
                                         <td colspan="2">
-                                            <button class="bg-transparent hover:bg-indigo-400 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-indigo-400 hover:border-transparent rounded">
+                                            <button id="button2"class="load-more bg-transparent hover:bg-indigo-400 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-indigo-400 hover:border-transparent rounded">
                                                 Selengkapnya
                                             </button>
+                                            @if($posts->hasMorePages())
+                                                <button wire:click="postScroll()" class="btn btn-dark btn-lg shadow-sm">Load More</button>
+                                            @endif
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+                                            scroll <div id="scrollup"></div> time
                         </div>
                     </div>
                 </div>
@@ -169,5 +173,27 @@
                 }
             }, 50);
         }());
+        var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
+        $.get(ApiWilIndo + 'provinsi',  // url
+        function (data, textStatus, jqXHR) {  // success callback
+            console.log(data)
+            var i;
+            for(i=0; i < data.provinsi.length; i++){
+                // console.log(data.provinsi[i])
+                datprov = data.provinsi[i]
+                var apdata = '<option value="'+datprov.id+'">'+datprov.nama+'</option>'
+                // console.log(apdata)
+                $('#sel-loc').append(apdata)
+            }
+        });
+                var scrollonTop = $(".left-content").scrollTop()
+                const left_scroll_id = document.getElementById("left-content")
+            $(left_scroll_id).scroll(function(){
+                const element = left_scroll_id.offsetHeight;
+                if ((window.innerHeight + window.scrollY) >= element) {
+                    window.livewire.emit('post-scroll');
+                }
+
+            });
     });
 </script>
