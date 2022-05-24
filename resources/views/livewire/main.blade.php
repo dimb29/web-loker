@@ -1,6 +1,6 @@
 <x-slot name="header">
     <div class="flex flex-col h-48">
-    <img class="object-cover h-48 w-fit" src="https://cdn.vectorstock.com/i/1000x1000/17/52/professional-workers-different-jobs-professionals-vector-31651752.webp">
+    <!-- <img class="object-cover h-48 w-fit" src="https://cdn.vectorstock.com/i/1000x1000/17/52/professional-workers-different-jobs-professionals-vector-31651752.webp"> -->
     </div>
 </x-slot>
 

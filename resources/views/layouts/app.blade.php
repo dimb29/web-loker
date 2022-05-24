@@ -19,11 +19,13 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick-theme.min.css"/>
         <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css"/> -->
         @livewireStyles
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
 
 
         <!-- Scripts -->
         <script src="{{ asset('js/cdn-jsdelivr.js') }}" defer></script>
-        <script src="../node_modules/@ckeditor/ckeditor5-inspector/build/inspector.js"></script>
+        <!-- <script src="../node_modules/@ckeditor/ckeditor5-inspector/build/inspector.js"></script> -->
+        <script src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
         <script src="{{ asset('js/ckeditor.js') }}"></script>
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <!-- <script src="{{ asset('js/bootstrap.min.js') }}"></script> -->

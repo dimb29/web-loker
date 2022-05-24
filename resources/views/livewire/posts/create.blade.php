@@ -70,6 +70,62 @@
                                 @endforeach
                             </select>
                         </div>
+                        
+                        <div class="mb-4">
+                            <label for="jenker" class="block text-gray-700 text-sm font-bold mb-2">Jenis Kerja:</label>
+                            <select name="jenker" id="jenker" wire:model="jenker"
+                                class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                                <option value="" selected>Select Jenis Pekerjaan</option>
+                                @foreach ($jenkers as $jenker)
+                                    <option value="{{ $jenker->id }}">{{ $jenker->name_jk }}</option>
+                                @endforeach
+                            </select>
+                            @error('jenker') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="kualif" class="block text-gray-700 text-sm font-bold mb-2">Kualifikasi Lulusan:</label>
+                            <select name="kualif" id="kualif" wire:model="kualif"
+                                class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                                <option value="" selected>Select Lulusan</option>
+                                @foreach ($kualifs as $kualif)
+                                    <option value="{{ $kualif->id }}">{{ $kualif->name_kl }}</option>
+                                @endforeach
+                            </select>
+                            @error('kualif') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="pengkerja" class="block text-gray-700 text-sm font-bold mb-2">Pengalaman Kerja:</label>
+                            <select name="pengkerja" id="pengkerja" wire:model="pengkerja"
+                                class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                                <option value="" selected>Select Pengalaman</option>
+                                @foreach ($pengkerjas as $pengkerja)
+                                    <option value="{{ $pengkerja->id }}">{{ $pengkerja->name_pk }}</option>
+                                @endforeach
+                            </select>
+                            @error('pengkerja') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="spesialis" class="block text-gray-700 text-sm font-bold mb-2">Spesialis Pekerjaan:</label>
+                            <select name="spesialis" id="spesialis" wire:model="spesialis"
+                                class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                                <option value="" selected>Select Spesialis</option>
+                                @foreach ($spesialises as $spesialis)
+                                    <option value="{{ $spesialis->id }}">{{ $spesialis->name_sk }}</option>
+                                @endforeach
+                            </select>
+                            @error('spesialis') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="mb-4">
+                            <label for="tingker" class="block text-gray-700 text-sm font-bold mb-2">Tingkat Kerja:</label>
+                            <select name="tingker" id="tingker" wire:model="tingker"
+                                class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                                <option value="" selected>Select Tingkat</option>
+                                @foreach ($tingkers as $tingker)
+                                    <option value="{{ $tingker->id }}">{{ $tingker->name_tk }}</option>
+                                @endforeach
+                            </select>
+                            @error('tingker') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
 
@@ -92,16 +148,19 @@
     </div>
 </div>
 </div>
-
+<script src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
 <script>
-    ClassicEditor
-        .create(document.querySelector('#content'))
-        .then(editor => {
-            editor.model.document.on('change:data', () => {
-                @this.set('content', editor.getData());
-            })
-        })
-        .catch(error => {
-            console.error(error);
-        });
+    // ClassicEditor
+    //     .create(document.querySelector('#content'))
+    //     .then(editor => {
+    //         editor.model.document.on('change:data', () => {
+    //             @this.set('content', editor.getData());
+    //         })
+    //     })
+    //     .catch(error => {
+    //         console.error(error);
+    //     });
+   var konten = document.getElementById("content");
+     CKEDITOR.replace(konten);
+   CKEDITOR.config.allowedContent = true;
 </script>
