@@ -17,14 +17,24 @@
 	  </div>
 
 	<div class="flex items-center justify-between mt-4">
-	  <p class="font-medium">
-		Filters
-	  </p>
-
-	  <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
-		Reset Filter
-	  </button>
+	
+		<p class="mb-4">
+		<button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md active:shadow-lg transition duration-150 ease-in-out" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+			Filters
+		</button>
+		</p>
+		<div class="flex items-center justify-end -mt-4" data-mdb-ripple="true"
+				data-mdb-ripple-color="light">
+			<button class="	inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800">
+				SEARCH
+			</button>
+		</div>
 	</div>
+	<!-- px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md -->
+	<!-- inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 -->
+
+	<div class="collapse collapse-horizontal" id="collapseWidthExample">
+	
 
 	<div>
 	  <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
@@ -49,18 +59,18 @@
 		  <option value="3000">Freelance</option>
 		  </select>
 
-		<select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-		  <option value="">Floor Area</option>
-		  <option value="200">200 sq.ft</option>
-		  <option value="400">400 sq.ft</option>
-		  <option value="600">600 sq.ft</option>
-		  <option value="800 sq.ft">800</option>
-		  <option value="1000 sq.ft">1000</option>
-		  <option value="1200 sq.ft">1200</option>
-		</select>
+		<button
+				type="button"
+				data-mdb-ripple="true"
+				data-mdb-ripple-color="light"
+				class="px-4 py-3 w-full rounded-md border-transparent focus:border-gray-500 focus:ring-0 text-sm inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md
+				hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+			>Reset Filter
+		</button>
 	  </div>
 	</div>
   </div>
+</div>
 </div>
 
 <script>
