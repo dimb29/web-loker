@@ -69,4 +69,5 @@ Route::get('dashboard/ckeditor',function(){
     return view('livewire/ckeditor');
 });
 Route::get('dashboard/berita', Berita::class)->name('berita');
+Route::get('dashboard/slider', Berita::class)->name('slider');
 Route::get('dashboard/search', Search::class)->name('search');

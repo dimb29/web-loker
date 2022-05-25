@@ -27,38 +27,7 @@
                     </div>
                 </div>
             @endif
-
-
-            <div class="p-6">
-                <div class="slider ">
-                    @foreach ($trend as $post)
-                        <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300 m-8
-                        rounded-lg hover:text-blue-600 hover:scale-110 transition duration-300 ease-in-out">
-                                <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}">
-                                    
-                                    <img class="object-cover h-48 w-96" src="{{ $post->url }}">
-                                    <div class="p-6">
-                                        <h5 class="text-gray-900 text-xl font-medium mb-2 h-16 pb-4">{{ $post->title }}</h5>
-                                        <p class="text-gray-500 text-base mb-4">
-                                        PT Istana Kemakmuran Motor
-                                        </p>
-                                    </div>
-                                    <div div="grid grid-cols-2 gap-4">
-                                        <div class="p-6 font-medium text-sm text-gray-400">
-                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                            SMA/SMK
-                                        </div>
-                                        <div class="p-6 font-medium text-sm text-gray-400">
-                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                            SMA/SMK
-                                        </div>
-                                    </div>
-                                </a>
-                            
-                        </div>
-                @endforeach
-                </div>
-            </div>
+            <livewire:slider>
 </div>
 
 
@@ -69,7 +38,7 @@
                 <div class="flex-auto m-2 space-x-8 w-96">
                     <div class="flex flex-col">
                         <div id="left-content" class="left-content flex-auto m-1">
-                                    @foreach ($posts->skip(0)->take(5) as $post)
+                                    @foreach ($posts as $post)
                                         <div data-id="{{ $post->id}}" class="daft-job rounded-lg shadow-xl my-6 hover:scale-110 transition duration-300 ease-in-out 
                                                 text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" data-mdb-ripple="true" data-mdb-ripple-color="light">
                                                 <img class="object-cover h-48 w-96 rounded-lg"src="{{ $post->url }}">
@@ -183,15 +152,11 @@
                 $('#sel-loc').append(apdata)
             }
         });
-            //     var scrollonTop = $(".left-content").scrollTop()
-            //     const left_scroll_id = document.getElementById("left-content")
-            // $(left_scroll_id).scroll(function(){
-            //     const element = left_scroll_id.offsetHeight;
-            //     if ((window.innerHeight + window.scrollY) >= element) {
-            //         window.livewire.emit('post-scroll');
-            //     }
-
-            // });
+            window.onscroll = function (ev) {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                    window.livewire.emit('post-data');
+                }
+            };
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
