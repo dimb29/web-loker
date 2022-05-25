@@ -152,6 +152,19 @@
                 $('#sel-loc').append(apdata)
             }
         });
+<<<<<<< HEAD
+            window.onscroll = function (ev) {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                    window.livewire.emit('post-data');
+                }
+            };
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+@livewireScripts
+        <script type="text/javascript">
+=======
+>>>>>>> cba55095e778d94d046e71479c30ae703b07f4e9
             window.onscroll = function (ev) {
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                     window.livewire.emit('post-data');
