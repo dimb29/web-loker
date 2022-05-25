@@ -5,6 +5,11 @@ use App\Models\Category;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\JenisKerja;
+use App\Models\KualifikasiLulus;
+use App\Models\PengalamanKerja;
+use App\Models\SpesialisKerja;
+use App\Models\TingkatKerja;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -19,6 +24,7 @@ class Posts extends Component
     use WithFileUploads;
 
     public $title, $content, $category, $post_id, $views;
+    public $jenker, $kualif, $pengkerja, $spesialis, $tingker;
     public $tagids = array();
     public $photos = [];
     public $isOpen = 0;
@@ -29,6 +35,11 @@ class Posts extends Component
             'posts' => Post::orderBy('id', 'desc')->paginate(),
             'categories' => Category::all(),
             'tags' => Tag::all(),
+            'jenkers' => JenisKerja::all(),
+            'kualifs' => KualifikasiLulus::all(),
+            'pengkerjas' => PengalamanKerja::all(),
+            'spesialises' => SpesialisKerja::all(),
+            'tingkers' => TingkatKerja::all(),
         ]);
     }
 
@@ -39,6 +50,11 @@ class Posts extends Component
             'content' => 'required',
             'category' => 'required',
             'photos.*' => 'image|max:4000',
+            'jenker'    => 'required',
+            'kualif'    => 'required',
+            'pengkerja' => 'required',
+            'spesialis' => 'required',
+            'tingker'   => 'required',
         ]);
         // dd($this);
         // Update or Insert Post
@@ -46,28 +62,35 @@ class Posts extends Component
             'title' => $this->title,
             'content' => $this->content,
             'category_id' => intVal($this->category),
+            'jeniskerja_id' => intVal($this->jenker),
+            'kualifikasilulus_id' => intVal($this->kualif),
+            'pengalamankerja_id' => intVal($this->pengkerja),
+            'spesialiskerja_id' => intVal($this->spesialis),
+            'tingkatkerja_id' => intVal($this->tingker),
             'author_id' => Auth::user()->id,
         ]);
 
         // Image upload and store name in db
-        if (count($this->photos) > 0) {
-            Image::where('post_id', $post->id)->delete();
-            $counter = 0;
-            foreach ($this->photos as $photo) {
+        if($this->photos != null){
+            if (count($this->photos) > 0) {
+                Image::where('post_id', $post->id)->delete();
+                $counter = 0;
+                foreach ($this->photos as $photo) {
 
-                $storedImage = $photo->store('public/photos');
+                    $storedImage = $photo->store('public/photos');
 
-                $featured = false;
-                if($counter == 0 ){
-                    $featured = true;
+                    $featured = false;
+                    if($counter == 0 ){
+                        $featured = true;
+                    }
+                    Image::create([
+                        'url' => url('storage'. Str::substr($storedImage, 6)),
+                        'title' => $this->title,
+                        'post_id' => $post->id,
+                        'featured' => $featured
+                    ]);
+                    $counter++;
                 }
-                Image::create([
-                    'url' => url('storage'. Str::substr($storedImage, 6)),
-                    'title' => $this->title,
-                    'post_id' => $post->id,
-                    'featured' => $featured
-                ]);
-                $counter++;
             }
         }
 

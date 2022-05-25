@@ -33,7 +33,7 @@
                 <div class="slider ">
                     @foreach ($trend as $post)
                         <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300 m-8
-                        rounded-lg hover:text-blue-600 hover:scale-110 transition duration-300 ease-in-out">
+                        rounded-lg hover:text-blue-600 transition duration-150 transform hover:scale-110 hover:-translate-y-2">
                                 <a wire:click="countview({{ $post->id}})" href="{{ url('dashboard/posts', $post->id) }}">
                                     
                                     <img class="object-cover h-48 w-96" src="{{ $post->url }}">
@@ -85,8 +85,8 @@
                     <div class="flex flex-col">
                         <div class="flex-auto m-1">
                             <div class="flex flex-col">
-                                    @foreach ($posts as $post)
-                                        <div data-id="{{ $post->id}}" class="daft-job rounded-lg shadow-xl my-6 hover:scale-110 transition duration-300 ease-in-out 
+                                    @foreach ($posts->skip(0)->take(5) as $post)
+                                        <div data-id="{{ $post->id}}" class="daft-job rounded-lg shadow-xl my-6 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
                                                 text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" data-mdb-ripple="true" data-mdb-ripple-color="light">
                                                 <img class="object-cover h-48 w-96 rounded-lg"src="{{ $post->url }}">
                                                 <div class="p-6 -mt-4">
@@ -193,3 +193,11 @@
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+@livewireScripts
+        <script type="text/javascript">
+            window.onscroll = function (ev) {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                    window.livewire.emit('post-scroll');
+                }
+            };
+        </script>
