@@ -3,7 +3,7 @@
                 <div class="slider">
                     @foreach ($trend as $postrend)
                         <div class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300 m-8
-                        rounded-lg hover:text-blue-600 hover:scale-110 transition duration-300 ease-in-out">
+                        rounded-lg hover:text-blue-600 transition duration-150 transform hover:scale-110 hover:-translate-y-2 ">
                                 <a wire:click="countview({{ $postrend->id}})" href="{{ url('dashboard/posts', $postrend->id) }}">
                                     
                                     <img class="object-cover h-48 w-96" src="{{ $postrend->url }}">
