@@ -1,6 +1,6 @@
 <x-slot name="header">
     <div class="flex flex-col h-48">
-    <img class="object-cover h-48 w-full" src="http://localhost:8000/storage/photos/jobicon.jpg">
+    <!-- <img class="object-cover h-48 w-fit" src="https://cdn.vectorstock.com/i/1000x1000/17/52/professional-workers-different-jobs-professionals-vector-31651752.webp"> -->
     </div>
 </x-slot>
 
@@ -15,7 +15,7 @@
         </div>
 </div>
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-15">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-15" >
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
             @if (session()->has('message'))
                 <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
@@ -29,33 +29,17 @@
             @endif
             <livewire:slider>
 </div>
-            
-
-
-
 
 
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-            @if (session()->has('message'))
-                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
-                    role="alert">
-                    <div class="flex">
-                        <div>
-                            <p class="text-sm">{{ session('message') }}</p>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
             <div class="flex flex-row">
                 
                 <div class="flex-auto m-2 space-x-8 w-96">
                     <div class="flex flex-col">
-                        <div class="flex-auto m-1">
-                            <div class="flex flex-col">
-                                    @foreach ($posts->skip(0)->take(5) as $post)
-                                        <div data-id="{{ $post->id}}" class="daft-job rounded-lg shadow-xl my-6 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
+                        <div id="left-content" class="left-content flex-auto m-1">
+                                    @foreach ($posts as $post)
+                                        <div data-id="{{ $post->id}}" class="daft-job rounded-lg shadow-xl my-6 hover:scale-110 transition duration-300 ease-in-out 
                                                 text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" data-mdb-ripple="true" data-mdb-ripple-color="light">
                                                 <img class="object-cover h-48 w-96 rounded-lg"src="{{ $post->url }}">
                                                 <div class="p-6 -mt-4">
@@ -88,14 +72,9 @@
                                                 </div>
                                             </div>
                                     @endforeach
-                                    <div>
-                                        <div colspan="2">
-                                            <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                            <button id="button2"class="load-more bg-transparent hover:bg-indigo-400 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-indigo-400 hover:border-transparent rounded">
                                                 Selengkapnya
                                             </button>
-</div>
-</div>
-</div>
                         </div>
                     </div>
                 </div>
@@ -119,7 +98,8 @@
             var url = "{{url('dashboard/posts/')}}/"+dataId+" #post-frame";
             console.log(url);
             if($('.myframe').is(":visible")){
-                $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
+                $('.myframe').load(url);
+                // $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
             } else{
                 window.open("{{url('dashboard/posts/')}}/"+dataId,'_blank');
             }
@@ -172,6 +152,7 @@
                 $('#sel-loc').append(apdata)
             }
         });
+<<<<<<< HEAD
             window.onscroll = function (ev) {
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                     window.livewire.emit('post-data');
@@ -182,9 +163,13 @@
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 @livewireScripts
         <script type="text/javascript">
+=======
+>>>>>>> cba55095e778d94d046e71479c30ae703b07f4e9
             window.onscroll = function (ev) {
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                    window.livewire.emit('post-scroll');
+                    window.livewire.emit('post-data');
                 }
             };
-        </script>
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>

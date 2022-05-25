@@ -55,55 +55,55 @@
                             
                             @endforeach
                         @endif
-        <div class="flex flex-col mt-8">
-		<div>
+        <table>
+		<tr>
 			<td>Informasi Tambahan :</td>
 			
-        </div>
-		<div class="flex flex-row mt-4 mb-6">
-			<div class="w-96">
+		</tr>
+		<tr>
+			<td class="w-64 h-24">
             <p class="font-bold"> Tingkat Pekerjaan </p>
             <!-- <a href="{{ url('dashboard/tags/' . $tag . '/posts') }}" -->
             <a href="{{ url('dashboard/tags/posts') }}"
                 class="underline px-1">{{ $post->tingkatkerja->name_tk }}
             </a>
-            </div>
-			<div class="ml-8">
+            </td>
+			<td class="w-64 h-24">
             <p class="font-bold"> Pengalaman kerja </p>
             <a href="{{ url('dashboard/tags/posts') }}"
                 class="underline px-1">{{ $post->pengalamankerja->name_pk }}
             </a>
-            </div>
-        </div>
-		<div class="flex flex-row mb-6">
-            <div class="w-96">
-            <p class="font-bold"> Kualifikasi </p>
+            </td>
+		</tr>
+		<tr>
+        <td class="w-64 h-24">
+        <p class="font-bold"> Kualifikasi </p>
             <a href="{{ url('dashboard/tags/posts') }}"
                 class="underline px-1">{{ $post->kualifikasilulus->name_kl }}
             </a>
-            </div>
-			<div class="ml-8">
+            </td>
+			<td class="w-64 h-24">
             <p class="font-bold"> Jenis Pekerjaan </p>
             <a href="{{ url('dashboard/tags/posts') }}"
                 class="underline px-1">{{ $post->jeniskerja->name_jk }}
             </a>
-            </div>
-        </div>
-        <div class="flex flex-row mb-6">
-            <div class="w-96">
+            </td>
+		</tr>
+        <tr>
+            <td class="w-64 h-24">
             <p class="font-bold"> Spesialisasi pekerjaan </p>
             <a href="{{ url('dashboard/tags/posts') }}"
                 class="underline px-1">{{ $post->spesialiskerja->name_sk }}
             </a>
-            </div>
-			<div class="ml-8">
+            </td>
+			<td class="w-64 h-24">
             <p class="font-bold"> Industri </p>
             <a href="{{ url('dashboard/tags/posts') }}"
                 class="underline px-1">{{ $key }}
             </a>
-            </div>
-        </div>
-    </div>
+            </td>
+		</tr>
+	</table>
                 </div>
                 
             

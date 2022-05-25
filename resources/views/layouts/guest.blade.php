@@ -16,7 +16,6 @@
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
         <script src="../node_modules/@ckeditor/ckeditor5-inspector/build/inspector.js"></script>
-        <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 
     </head>
     <body>
