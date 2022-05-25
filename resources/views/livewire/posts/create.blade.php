@@ -148,19 +148,54 @@
     </div>
 </div>
 </div>
-<script src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
+
 <script>
-    // ClassicEditor
-    //     .create(document.querySelector('#content'))
-    //     .then(editor => {
-    //         editor.model.document.on('change:data', () => {
-    //             @this.set('content', editor.getData());
-    //         })
-    //     })
-    //     .catch(error => {
-    //         console.error(error);
-    //     });
-   var konten = document.getElementById("content");
-     CKEDITOR.replace(konten);
-   CKEDITOR.config.allowedContent = true;
+    ClassicEditor
+        .create(document.querySelector('#content'), {
+        fontColor: {
+            colors: [
+                {
+                    color: 'hsl(0, 0%, 0%)',
+                    label: 'Black'
+                },
+                {
+                    color: 'hsl(0, 0%, 30%)',
+                    label: 'Dim grey'
+                },
+                {
+                    color: 'hsl(0, 0%, 60%)',
+                    label: 'Grey'
+                },
+                {
+                    color: 'hsl(0, 0%, 90%)',
+                    label: 'Light grey'
+                },
+                {
+                    color: 'hsl(0, 0%, 100%)',
+                    label: 'White',
+                    hasBorder: true
+                },
+
+                // ...
+            ]
+        },
+        fontFamily: {
+            options: [
+                'default',
+                'Ubuntu, Arial, sans-serif',
+                'Ubuntu Mono, Courier New, Courier, monospace'
+            ]
+        },
+        toolbar: [
+            'heading', 'bulletedList','fontColor', 'numberedList', 'fontFamily', 'undo', 'redo'
+        ]
+        })
+        .then(editor => {
+            editor.model.document.on('change:data', () => {
+                @this.set('content', editor.getData());
+            })
+        })
+        .catch(error => {
+            console.error(error);
+        });
 </script>
