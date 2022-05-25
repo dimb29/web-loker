@@ -18,28 +18,28 @@ class Main extends Component
 {
     public $isOpen = 0;
     public $search;
-    public $limitPerPage = 3;
     protected $queryString = ['search'];
-    protected $listeners = [
-        'post-scroll' => 'postScroll',
-    ];
-
-    public function postScroll(){
-        $this->limitPerPage = $this->limitPerPage + 1;
-    }
+    // public $limitPerPage = 3;
+    // protected $listeners = [
+    //     'post-scroll' => 'postScroll',
+    // ];
+    // public function postScroll(){
+    //     $this->limitPerPage = $this->limitPerPage + 1;
+    // }
 
     public function render()
     {
 
-        $post = Post::join('images', 'posts.id', '=', 'images.post_id')
-                        ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url','b.first_name', 'last_name', 'posts.created_at','posts.updated_at')
-                        ->leftJoin('users as b','author_id','=','b.id')
-                        ->orderBy('posts.id', 'desc')->paginate($this->limitPerPage);
-        $this->emit('postStore');
         $now = Carbon::now();
         $posttrend = Post::join('images', 'posts.id', '=', 'images.post_id')
                         ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url')
                         ->orderBy('posts.views', 'desc')->get();
+        
+        $post = Post::join('images', 'posts.id', '=', 'images.post_id')
+                        ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url','b.first_name', 'last_name', 'posts.created_at','posts.updated_at')
+                        ->leftJoin('users as b','author_id','=','b.id')
+                        ->orderBy('posts.id', 'desc')->get();
+        // $this->emit('postStore');
         $no = 1;
         
         return view('livewire.main', [
