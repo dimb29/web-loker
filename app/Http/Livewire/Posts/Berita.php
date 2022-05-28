@@ -27,7 +27,14 @@ class Berita extends Component
     public $limitPerPage = 3;
     protected $listeners = [
         'post-data' => 'postScroll',
+        'post-detail' => 'postDetail',
+
     ];
+
+    public $myid = 0;
+    public function postDetail($id){
+        $this->myid = $id;
+    }
 
     public function postScroll(){
         $this->limitPerPage = $this->limitPerPage + 1;
@@ -45,6 +52,25 @@ class Berita extends Component
 
         $no = 1;
 
+        if($this->myid != 0){
+            $post_detail = Post::with([
+                'author', 
+                'category', 
+                'images', 
+                'videos', 
+                'tags', 
+                'jeniskerja', 
+                'kualifikasilulus',
+                'pengalamankerja',
+                'spesialiskerja',
+                'tingkatkerja',
+                ])->find($this->myid);
+            // $post_detail = $post->firstorfail()->toArray();
+        }else{
+            $post_detail = null;
+        }
+        // dd($post_detail);
+
                         
         return view('livewire.posts.berita', [
             'posts' => $post,
@@ -52,6 +78,8 @@ class Berita extends Component
             'tags' => Tag::all(),
             'no' => $no,
             'thistime' => $now,
+            'post_detail' => $post_detail,
+
         ]);
     }
     public function countview($id)
