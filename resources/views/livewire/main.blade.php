@@ -98,7 +98,11 @@
                             </div>
                         </div> 
                         @if($post_detail != null)
+                        <div class="hidden space-x-8 sm:flex w-4/5">
+                            <div class="child top-0">
                             <livewire:post-data :post="$post_detail" :key="$post_detail['id']"/>
+                            </div>
+                        </div>
                         @else
                             <div class="hidden space-x-8 sm:flex w-4/5 myframe">
                                 <!-- <iframe name="jobdesc" class="h-full w-full" src="{{ url('dashboard/posts', $post->id,'#post-frame') }}"></iframe> -->

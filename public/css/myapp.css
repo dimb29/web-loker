@@ -31,7 +31,8 @@
   position: sticky;
   top: 0;
   bottom: 50;
-  margin-bottom: 10px;
+  margin-bottom: 100px;
+  margin-top: 50px;
   height: 100vh;
   overflow-y: auto;
 }
