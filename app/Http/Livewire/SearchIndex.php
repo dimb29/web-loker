@@ -18,8 +18,19 @@ class SearchIndex extends Component
     // protected $updatesQueryString = [
     //     ['searchtitle' => ['except' => '']]
     // ];
-    public $searchtitle;
+    public $searchjob;
     public $isOpen = 0;
+
+    public $myid = 0;
+    public function postDetail($id){
+        $this->myid = $id;
+    }
+
+    public function searchJob(){
+        // $this->postjob = $postjob;
+        $emit = $this->emit('searchJobs', $this->searchjob);
+        // dd($emit);
+    }
 
     public function render()
     {
@@ -34,7 +45,8 @@ class SearchIndex extends Component
         $this->spesialis = SpesialisKerja::all();
         $this->tingker = TingkatKerja::all();
 
-        View::share([
+        
+        return view('livewire.search-index',[
             'postsearch' => $posts,
             'jenkers' => $this->jenker,
             'kualifs' => $this->kualif,
@@ -42,8 +54,6 @@ class SearchIndex extends Component
             'spesialises' => $this->spesialis,
             'tingkers' => $this->tingker,
         ]);
-        
-        return view('livewire.search-index');
     }
     public function searchClick()
     {

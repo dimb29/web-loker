@@ -25,9 +25,11 @@ class Berita extends Component
     public $photos = [];
     public $isOpen = 0;
     public $limitPerPage = 3;
+    public $searchjob;
     protected $listeners = [
         'post-data' => 'postScroll',
         'post-detail' => 'postDetail',
+        'searchJobs',
 
     ];
 
@@ -39,6 +41,12 @@ class Berita extends Component
     public function postScroll(){
         $this->limitPerPage = $this->limitPerPage + 1;
     }
+    public function searchJobs($titlejob){
+        $this->searchjob = $titlejob;
+        $this->myid = "";
+        // dd($titlejob);
+
+    }
 
     public function render()
     {
@@ -47,6 +55,7 @@ class Berita extends Component
         $post = Post::join('images', 'posts.id', '=', 'images.post_id')
                         ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url','b.first_name', 'last_name', 'posts.created_at','posts.updated_at')
                         ->leftJoin('users as b','author_id','=','b.id')
+                        ->where('posts.title', 'like', '%' . $this->searchjob . '%')
                         ->orderBy('posts.id', 'desc')->paginate($this->limitPerPage);
                         $this->emit('postStore');
 
