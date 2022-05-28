@@ -52,6 +52,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Main::class)->name('dashboard');
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', Main::class)->name('dashboard');
 Route::get('/dashboard', Main::class)->name('dashboard');
+Route::get('/dashboard/scroll', [Main::class, 'showSroll']);
 
 Route::get('dashboard/categories', Categories::class)->name('categories');
 Route::get('dashboard/categories/{id}/posts', Categoryposts::class);

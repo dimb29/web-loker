@@ -22,14 +22,19 @@ class Main extends Component
     public $limitPerPage = 3;
     protected $listeners = [
         'post-data' => 'postScroll',
+        'post-detail' => 'postDetail',
     ];
     public function postScroll(){
         $this->limitPerPage = $this->limitPerPage + 1;
     }
 
+    public $myid = 0;
+    public function postDetail($id){
+        $this->myid = $id;
+    }
+
     public function render()
     {
-
         $now = Carbon::now();
         
         $post = Post::join('images', 'posts.id', '=', 'images.post_id')
@@ -38,13 +43,46 @@ class Main extends Component
                         ->orderBy('posts.id', 'desc')->paginate($this->limitPerPage);
                         $this->emit('postStore');
         $no = 1;
+        if($this->myid != 0){
+            $post_detail = Post::with([
+                'author', 
+                'category', 
+                'images', 
+                'videos', 
+                'tags', 
+                'jeniskerja', 
+                'kualifikasilulus',
+                'pengalamankerja',
+                'spesialiskerja',
+                'tingkatkerja',
+                ])->find($this->myid);
+            // $post_detail = $post->firstorfail()->toArray();
+        }else{
+            $post_detail = null;
+        }
+        // dd($post_detail);
         
         return view('livewire.main', [
                         'posts' => $post,
                         'no' => $no,
                         'thistime' => $now,
+                        'post_detail' => $post_detail,
+
                     ]);
     }
+    // public function scrollPost($id){
+        
+    //     if($id !== null){
+    //         $post = Post::join('images', 'posts.id', '=', 'images.post_id')
+    //                         ->where('posts.id', '=', $id)
+    //                         ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url','b.first_name', 'last_name', 'posts.created_at','posts.updated_at')
+    //                         ->leftJoin('users as b','author_id','=','b.id')
+    //                         ->orderBy('posts.id', 'desc')->first();
+    //     }
+    //     return view('livewire.main', [
+    //                     'post_detail' => $post,
+    //                 ]);
+    // }
 
     public function countview($id)
     {
