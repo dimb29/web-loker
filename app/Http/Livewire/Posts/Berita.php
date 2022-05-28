@@ -12,6 +12,8 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Carbon\Carbon;
+
 
 
 class Berita extends Component
@@ -22,17 +24,34 @@ class Berita extends Component
     public $tagids = array();
     public $photos = [];
     public $isOpen = 0;
+    public $limitPerPage = 3;
+    protected $listeners = [
+        'post-data' => 'postScroll',
+    ];
+
+    public function postScroll(){
+        $this->limitPerPage = $this->limitPerPage + 1;
+    }
 
     public function render()
     {
+        $now = Carbon::now();
         
         $post = Post::join('images', 'posts.id', '=', 'images.post_id')
-                        ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url')
-                        ->orderBy('posts.id', 'desc')->paginate();
+                        ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url','b.first_name', 'last_name', 'posts.created_at','posts.updated_at')
+                        ->leftJoin('users as b','author_id','=','b.id')
+                        ->orderBy('posts.id', 'desc')->paginate($this->limitPerPage);
+                        $this->emit('postStore');
+
+        $no = 1;
+
+                        
         return view('livewire.posts.berita', [
             'posts' => $post,
             'categories' => Category::all(),
             'tags' => Tag::all(),
+            'no' => $no,
+            'thistime' => $now,
         ]);
     }
     public function countview($id)
