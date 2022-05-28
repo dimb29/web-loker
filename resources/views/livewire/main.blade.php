@@ -99,7 +99,7 @@
                         </div> 
                         @if($post_detail != null)
                         <div class="hidden space-x-8 sm:flex w-4/5">
-                            <div class="child top-0">
+                            <div class="child">
                             <livewire:post-data :post="$post_detail" :key="$post_detail['id']"/>
                             </div>
                         </div>

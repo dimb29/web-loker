@@ -1,14 +1,30 @@
 
 <x-slot name="header">
-<div class="sticky top-0 justify-center">
-                <livewire:search-index>
-            </div>
+<div class="flex flex-col h-48">
+    <img class="object-cover h-48 w-full" src="http://localhost:8000/storage/photos/jobicon.jpg">
+    </div>
 </x-slot>
 <x-slot name="footer">
 </x-slot>
             
+<div class="py-12 bg-yellow">
+    <div class="child1">
+    <div class="flex-auto ">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 -mt-40">
+            <div class=" justify-center">
+                <livewire:search-index>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="flex flex-row mx-52">
+
+            
+
+
+      
+
+                    <div class="flex flex-row mx-56">
                         
                         <div class="flex-auto m-2 space-x-8 w-96">
                             <div class="flex flex-col">
