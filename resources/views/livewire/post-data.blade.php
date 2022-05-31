@@ -1,4 +1,4 @@
-
+<div class="mb-8">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" id="post-frame">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
             @if (session()->has('message'))
@@ -39,58 +39,59 @@
                                     
                             @endforeach
                         @endif
-                        <table>
-                            <tr>
-                                <td>Informasi Tambahan :</td>
-                            </tr>
-                            <tr>
-                                <td class="w-64 h-24">
-                                    <p class="font-bold"> Tingkat Pekerjaan </p>
-                                    <!-- <a href="{{ url('dashboard/tags/' . $tag . '/posts') }}" -->
-                                    <a href="{{ url('dashboard/tags/posts') }}"
-                                        class="underline px-1">{{ $post->tingkatkerja->name_tk }}
-                                    </a>
-                                </td>
-                                <td class="w-64 h-24">
-                                    <p class="font-bold"> Pengalaman kerja </p>
-                                    <a href="{{ url('dashboard/tags/posts') }}"
-                                        class="underline px-1">{{ $post->pengalamankerja->name_pk }}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-64 h-24">
-                                    <p class="font-bold"> Kualifikasi </p>
-                                    <a href="{{ url('dashboard/tags/posts') }}"
-                                        class="underline px-1">{{ $post->kualifikasilulus->name_kl }}
-                                    </a>
-                                </td>
-                                <td class="w-64 h-24">
-                                    <p class="font-bold"> Jenis Pekerjaan </p>
-                                    <a href="{{ url('dashboard/tags/posts') }}"
-                                        class="underline px-1">{{ $post->jeniskerja->name_jk }}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="w-64 h-24">
-                                    <p class="font-bold"> Spesialisasi pekerjaan </p>
-                                    <a href="{{ url('dashboard/tags/posts') }}"
-                                        class="underline px-1">{{ $post->spesialiskerja->name_sk }}
-                                    </a>
-                                </td>
-                                <td class="w-64 h-24">
-                                    <p class="font-bold"> Industri </p>
-                                    <a href="{{ url('dashboard/tags/posts') }}"
-                                        class="underline px-1">{{ $key }}
-                                    </a>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="flex flex-col">
+                            <div class="flex flex-auto mt-10">
+                                <div class="text-xl font-medium">Informasi Tambahan :</div>
+                                
+                            </div>
+                            <div class="flex flex-row mt-5">
+                                <div class="w-96 h-24">
+                                <p class="font-bold"> Tingkat Pekerjaan </p>
+                                <!-- <a href="{{ url('dashboard/tags/' . $tag . '/posts') }}" -->
+                                <a href="{{ url('dashboard/tags/posts') }}"
+                                    class="underline px-1">{{ $post->tingkatkerja->name_tk }}
+                                </a>
+                                </div>
+                                <div class="w-64 h-24">
+                                <p class="font-bold"> Pengalaman kerja </p>
+                                <a href="{{ url('dashboard/tags/posts') }}"
+                                    class="underline px-1">{{ $post->pengalamankerja->name_pk }}
+                                </a>
+                                </div>
+                            </div>
+                            <div class="flex flex-row">
+                            <div class="w-96 h-24">
+                            <p class="font-bold"> Kualifikasi </p>
+                                <a href="{{ url('dashboard/tags/posts') }}"
+                                    class="underline px-1">{{ $post->kualifikasilulus->name_kl }}
+                                </a>
+                                </div>
+                                <div class="w-64 h-24">
+                                <p class="font-bold"> Jenis Pekerjaan </p>
+                                <a href="{{ url('dashboard/tags/posts') }}"
+                                    class="underline px-1">{{ $post->jeniskerja->name_jk }}
+                                </a>
+                                </div>
+                            </div>
+                            <div class="flex flex-row">
+                                <div class="w-96 h-24">
+                                <p class="font-bold"> Spesialisasi pekerjaan </p>
+                                <a href="{{ url('dashboard/tags/posts') }}"
+                                    class="underline px-1">{{ $post->spesialiskerja->name_sk }}
+                                </a>
+                                </div>
+                                <div class="w-64 h-24">
+                                <p class="font-bold"> Industri </p>
+                                <a href="{{ url('dashboard/tags/posts') }}"
+                                    class="underline px-1">{{ $key }}
+                                </a>
+                                </div>
+                            </div>
+                        </div>
                 </div>
         </div>
     </div>
-
+</div>
 
 <script>
     ClassicEditor
