@@ -6,8 +6,7 @@
         </div>
 
         <!-- This element is to trick the browser into centering the modal contents. -->
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>​
-
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <form>
@@ -71,6 +70,21 @@
                             </select>
                         </div>
                         
+                        <div class="mb-4">
+                            <label for="location" class="block text-gray-700 text-sm font-bold mb-2">Lokasi:</label>
+                            <select name="location" id="location" wire:model="location"
+                                class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                                <option value="" selected>Select Lokasi</option>
+                                @foreach ($provinces as $provinsi)
+                                    <option value="{{ $provinsi['id'] }}">{{ $provinsi['nama'] }}</option>
+                                @endforeach
+                                @php $countc = count($cities); @endphp
+                                @for($i = 0; $i < count($cities); $i++)
+                                    <option value="{{ $cities[$i]['id'] }}">{{ $cities[$i]['nama'] }}</option>
+                                @endfor
+                            </select>
+                            @error('location') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
                         <div class="mb-4">
                             <label for="jenker" class="block text-gray-700 text-sm font-bold mb-2">Jenis Kerja:</label>
                             <select name="jenker" id="jenker" wire:model="jenker"
@@ -155,4 +169,19 @@
         .catch( error => {
             console.error( error );
         } );
+// $(document).ready(function(){
+//     var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
+//     $.get(ApiWilIndo + 'provinsi',  // url
+//     function (data, textStatus, jqXHR) {  // success callback
+//         // console.log(data)
+//         var i;
+//         for(i=0; i < data.provinsi.length; i++){
+//             // console.log(data.provinsi[i])
+//             var datprov = data.provinsi[i]
+//             var apdata = '<option value="'+datprov.id+'">'+datprov.nama+'</option>'
+//             console.log(apdata)
+//             $('#sel-loc').append(apdata)
+//         }
+//     });
+// }) 
 </script>

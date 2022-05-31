@@ -16,6 +16,7 @@ class Post extends Model
         'post_type',
         'meta_data',
         'category_id',
+        'location_id',
         'author_id',
     ];
 

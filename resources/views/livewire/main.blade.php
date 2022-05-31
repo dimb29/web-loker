@@ -149,32 +149,19 @@
         });
     }
 
-        (function(){
-            var width = screen.width,
-            height = screen.height;
+        // (function(){
+        //     var width = screen.width,
+        //     height = screen.height;
             
-            setInterval(function () {
-                if (screen.width !== width || screen.height !== height) {
-                    width = screen.width;
-                    height = screen.height;
-                    $(window).trigger('resolutionchange');
-                    alert("resolution change")
-                }
-            }, 50);
-        }());
-        var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
-        $.get(ApiWilIndo + 'provinsi',  // url
-        function (data, textStatus, jqXHR) {  // success callback
-            console.log(data)
-            var i;
-            for(i=0; i < data.provinsi.length; i++){
-                // console.log(data.provinsi[i])
-                datprov = data.provinsi[i]
-                var apdata = '<option value="'+datprov.id+'">'+datprov.nama+'</option>'
-                // console.log(apdata)
-                $('#sel-loc').append(apdata)
-            }
-        });
+        //     setInterval(function () {
+        //         if (screen.width !== width || screen.height !== height) {
+        //             width = screen.width;
+        //             height = screen.height;
+        //             $(window).trigger('resolutionchange');
+        //             alert("resolution change")
+        //         }
+        //     }, 50);
+        // }());
             window.onscroll = function (ev) {
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                     window.livewire.emit('post-data');

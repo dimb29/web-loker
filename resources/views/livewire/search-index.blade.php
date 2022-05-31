@@ -38,22 +38,31 @@
 
 	<div>
 	  <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-		<select id="sel-loc" 
+		<select id="sel-loc" wire:model.defer="locations"
 		class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-		  <option value="">Semua Lokasi</option>
+			<option value="">Semua Lokasi</option>
+			@foreach ($provinces as $provinsi)
+				<option value="{{ $provinsi['id'] }}">{{ $provinsi['nama'] }}</option>
+			@endforeach
+			@php $countc = count($cities); @endphp
+			@for($i = 0; $i < count($cities); $i++)
+				<option value="{{ $cities[$i]['id'] }}">{{ $cities[$i]['nama'] }}</option>
+			@endfor
 		</select>
 
-		<select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+		<select wire:model.defer="kualif_lulus"
+		class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
 		  <option value="">Semua Lulusan</option>
 			@foreach ($kualifs as $kualif)
                 <option value="{{$kualif->id}}">{{$kualif->name_kl}}</option>
         	@endforeach
 		</select>
 
-		<select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-		  <option value="">Semua Tipe Pekerjaan</option>
-			@foreach ($spesialises as $spesialis)
-                <option value="{{$spesialis->id}}">{{$spesialis->name_sk}}</option>
+		<select wire:model.defer="jenis_kerja"
+		class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+		  <option value="">Semua Jenis Pekerjaan</option>
+			@foreach ($jenkers as $jenker)
+                <option value="{{$jenker->id}}">{{$jenker->name_jk}}</option>
         	@endforeach
 		  </select>
 
@@ -61,6 +70,7 @@
 				type="button"
 				data-mdb-ripple="true"
 				data-mdb-ripple-color="light"
+				wire:click="resetFilter()"
 				class="px-4 py-3 w-full rounded-md border-transparent focus:border-gray-500 focus:ring-0 text-sm inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md
 				hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
 			>Reset Filter

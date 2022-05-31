@@ -28,6 +28,7 @@
                             <div class="flex flex-col">
                                 <div class="flex-auto m-1">
                                     <div class="flex flex-col">
+                                        @if($posts != '')
                                             @foreach ($posts as $post)
                                                 <div wire:click="postDetail({{$post->id}})"
                                                 data-id="{{ $post->id}}" class="daft-job bg-white rounded-lg shadow-xl my-6 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
@@ -63,6 +64,7 @@
                                                         </div>
                                                     </div>
                                             @endforeach
+                                        @endif
                                             <div>
                                                 <div colspan="2">
                                                     <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
@@ -82,7 +84,6 @@
                         </div>
                         @else
                             <div class="hidden space-x-8 sm:flex w-4/5 myframe">
-                                <!-- <iframe name="jobdesc" class="h-full w-full" src="{{ url('dashboard/posts', $post->id,'#post-frame') }}"></iframe> -->
                             </div>
                         @endif
                     </div>
@@ -137,19 +138,19 @@
                 }
             }, 50);
         }());
-        var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
-        $.get(ApiWilIndo + 'provinsi',  // url
-        function (data, textStatus, jqXHR) {  // success callback
-            console.log(data)
-            var i;
-            for(i=0; i < data.provinsi.length; i++){
-                // console.log(data.provinsi[i])
-                datprov = data.provinsi[i]
-                var apdata = '<option value="'+datprov.id+'">'+datprov.nama+'</option>'
-                // console.log(apdata)
-                $('#sel-loc').append(apdata)
-            }
-        });
+        // var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
+        // $.get(ApiWilIndo + 'provinsi',  // url
+        // function (data, textStatus, jqXHR) {  // success callback
+        //     console.log(data)
+        //     var i;
+        //     for(i=0; i < data.provinsi.length; i++){
+        //         // console.log(data.provinsi[i])
+        //         datprov = data.provinsi[i]
+        //         var apdata = '<option value="'+datprov.id+'">'+datprov.nama+'</option>'
+        //         // console.log(apdata)
+        //         $('#sel-loc').append(apdata)
+        //     }
+        // });
             window.onscroll = function (ev) {
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                     window.livewire.emit('post-data');

@@ -11,6 +11,8 @@ use App\Models\TingkatKerja;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\Response;
 
 class SearchIndex extends Component
 {
@@ -18,7 +20,7 @@ class SearchIndex extends Component
     // protected $updatesQueryString = [
     //     ['searchtitle' => ['except' => '']]
     // ];
-    public $searchjob;
+    public $searchjob,$locations,$kualif_lulus,$jenis_kerja;
     public $isOpen = 0;
 
     public $myid = 0;
@@ -28,10 +30,20 @@ class SearchIndex extends Component
 
     public function searchJob(){
         // $this->postjob = $postjob;
-        $emit = $this->emit('searchJobs', $this->searchjob);
+        $emit = $this->emit('searchJobs', [$this->searchjob,$this->locations,$this->kualif_lulus,$this->jenis_kerja]);
+        // $emit = $this->emit('searchJobs', [$this->locations]);
         // dd($emit);
     }
-
+    public function mount(){
+        $this->provinces = Http::acceptJson()->get('https://dev.farizdotid.com/api/daerahindonesia/provinsi')['provinsi'];
+        
+        foreach($this->provinces as $provin){
+            $kota_prof = Http::acceptJson()->get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='.$provin['id'])['kota_kabupaten'];
+            foreach($kota_prof as $key => $kotas[]){
+                $this->cities = $kotas;
+            }
+        }
+    }
     public function render()
     {
         $posts = Post::join('images', 'posts.id', '=', 'images.post_id')
@@ -54,6 +66,11 @@ class SearchIndex extends Component
             'spesialises' => $this->spesialis,
             'tingkers' => $this->tingker,
         ]);
+    }
+    public function resetFilter(){
+        $this->locations = null;
+        $this->kualif_lulus = null;
+        $this->jenis_kerja = null;
     }
     public function searchClick()
     {

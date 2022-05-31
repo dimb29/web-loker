@@ -16,6 +16,8 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\Response;
 
 
 class Posts extends Component
@@ -24,10 +26,23 @@ class Posts extends Component
     use WithFileUploads;
 
     public $title, $content, $category, $post_id, $views;
-    public $jenker, $kualif, $pengkerja, $spesialis, $tingker;
+    public $location, $jenker, $kualif, $pengkerja, $spesialis, $tingker;
     public $tagids = array();
     public $photos = [];
     public $isOpen = 0;
+
+    public function mount(){
+        
+        $this->provinces = Http::acceptJson()->get('https://dev.farizdotid.com/api/daerahindonesia/provinsi')['provinsi'];
+        
+        foreach($this->provinces as $provin){
+            $kota_prof = Http::acceptJson()->get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='.$provin['id'])['kota_kabupaten'];
+            foreach($kota_prof as $key => $kotas[]){
+                $this->cities = $kotas;
+            }
+        }
+
+    }
 
     public function render()
     {
@@ -55,8 +70,9 @@ class Posts extends Component
             'pengkerja' => 'required',
             'spesialis' => 'required',
             'tingker'   => 'required',
+            'location'   => 'required',
         ]);
-        // dd($this);
+        // dd($this->location);
         // Update or Insert Post
         $post = Post::updateOrCreate(['id' => $this->post_id], [
             'title' => $this->title,
@@ -67,6 +83,7 @@ class Posts extends Component
             'pengalamankerja_id' => intVal($this->pengkerja),
             'spesialiskerja_id' => intVal($this->spesialis),
             'tingkatkerja_id' => intVal($this->tingker),
+            'location_id' => intVal($this->location),
             'author_id' => Auth::user()->id,
         ]);
 
@@ -133,6 +150,12 @@ class Posts extends Component
         $this->title = $post->title;
         $this->content = $post->content;
         $this->category = $post->category_id;
+        $this->location = $post->location_id;
+        $this->jenker = $post->jeniskerja_id;
+        $this->kualif = $post->kualifikasilulus_id;
+        $this->spesialis = $post->spesialiskerja_id;
+        $this->pengkerja = $post->pengalamankerja_id;
+        $this->tingker = $post->tingkatkerja_id;
         $this->tagids = $post->tags->pluck('id');
 
         $this->openModal();

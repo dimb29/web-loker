@@ -39,6 +39,7 @@
                         class="underline">{{ $post->category->title }}</a>
                     &nbsp;on&nbsp;{{ $post->updated_at->format('F, d Y') }}
                 </div>
+                <div id="location" data-id="{{$post->location_id}}"></div>
                 
                 <div id="content" class="text-gray-700 text-base m-auto" readonly="readonly">
                     <p>{!! $post->content !!}</p>
@@ -134,10 +135,28 @@
         });
 
 $(document).ready(function(){
-    $('#comment_like').on('click',function(){
-        $('#comment_like').removeClass('fa-regular');
-        $('#comment_like').addClass('fa-solid');
-        console.log(<?php $post->comment ?> + 'bisa yok');
-    });
+    // $('#comment_like').on('click',function(){
+    //     $('#comment_like').removeClass('fa-regular');
+    //     $('#comment_like').addClass('fa-solid');
+    //     console.log(<?php $post->comment ?> + 'bisa yok');
+    // });
+    var dataId = $('#location').attr("data-id")
+    // $('#location').append(dataId)
+        var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
+        $.get(ApiWilIndo + 'provinsi',  // url
+        function (data, textStatus, jqXHR) {  // success callback
+            console.log(data)
+            var i;
+            for(i=0; i < data.provinsi.length; i++){
+                // console.log(data.provinsi[i])
+                var datprov = data.provinsi[i]
+                var apdata = '<option value="'+datprov.id+'">'+datprov.nama+'</option>'
+                // console.log(apdata)
+                $('#sel-loc').append(apdata)
+                if(datprov.id == dataId){
+                    $('#location').append(datprov.nama)
+                }
+            }
+        });
 });
 </script>

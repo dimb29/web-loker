@@ -25,7 +25,7 @@ class Berita extends Component
     public $photos = [];
     public $isOpen = 0;
     public $limitPerPage = 3;
-    public $searchjob;
+    public $searchjob,$locations,$kualif_lulus,$jenis_kerja;
     protected $listeners = [
         'post-data' => 'postScroll',
         'post-detail' => 'postDetail',
@@ -41,10 +41,16 @@ class Berita extends Component
     public function postScroll(){
         $this->limitPerPage = $this->limitPerPage + 1;
     }
-    public function searchJobs($titlejob){
-        $this->searchjob = $titlejob;
+    public function searchJobs($search){
+        $this->searchjob = $search[0];
+        if($search[1] == null){
+            $search[1] = "";
+        }
+        $this->locations = $search[1];
+        $this->kualif_lulus = $search[2];
+        $this->jenis_kerja = $search[3];
         $this->myid = "";
-        // dd($titlejob);
+        // dd($search);
 
     }
 
@@ -56,6 +62,9 @@ class Berita extends Component
                         ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url','b.first_name', 'last_name', 'posts.created_at','posts.updated_at')
                         ->leftJoin('users as b','author_id','=','b.id')
                         ->where('posts.title', 'like', '%' . $this->searchjob . '%')
+                        ->where('posts.location_id', 'like',$this->locations . '%')
+                        ->where('posts.kualifikasilulus_id', 'like',$this->kualif_lulus . '%')
+                        ->where('posts.spesialiskerja_id', 'like',$this->jenis_kerja . '%')
                         ->orderBy('posts.id', 'desc')->paginate($this->limitPerPage);
                         $this->emit('postStore');
 
