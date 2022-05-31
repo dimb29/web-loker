@@ -1,14 +1,13 @@
 
 <x-slot name="header">
 <div class="flex flex-col h-48">
-    <img class="object-cover h-48 w-full" src="http://localhost:8000/storage/photos/jobicon.jpg">
+    <img class="object-cover h-48 w-full" src="http://localhost:8000/storage/photos/jobicon1.jpg">
     </div>
 </x-slot>
 <x-slot name="footer">
 </x-slot>
             
 <div class="py-12 bg-yellow">
-    <div class="child1">
     <div class="flex-auto ">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 -mt-40">
             <div class=" justify-center">
@@ -16,13 +15,12 @@
             </div>
         </div>
     </div>
-</div>
             
 
 
       
-
-                    <div class="flex flex-row mx-56">
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8">
+                    <div class="flex flex-row">
                         
                         <div class="flex-auto m-2 space-x-8 w-96">
                             <div class="flex flex-col">
@@ -32,7 +30,7 @@
                                                 <div wire:click="postDetail({{$post->id}})"
                                                 data-id="{{ $post->id}}" class="daft-job bg-white rounded-lg shadow-xl my-6 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
                                                         text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" data-mdb-ripple="true" data-mdb-ripple-color="light">
-                                                        <img class="object-cover h-48 w-96 rounded-lg"src="{{ $post->url }}">
+                                                        <img class="object-cover h-48 w-screen rounded-lg"src="{{ $post->url }}">
                                                         <div class="p-6 -mt-4">
                                                             <h5 class="text-gray-900 text-xl font-medium mb-2 h-16 pb-4 mb-8">
                                                                 {{ $post->title }}
@@ -81,13 +79,24 @@
                             </div>
                         </div>
                         @else
-                            <div class="hidden space-x-8 sm:flex w-4/5 myframe">
-                                <!-- <iframe name="jobdesc" class="h-full w-full" src="{{ url('dashboard/posts', $post->id,'#post-frame') }}"></iframe> -->
+                            <div class="hidden flex flex-col bg-white shadow-xl sm:rounded-lg mx-12 my-8 space-x-8 sm:flex w-4/5 myframe">
+                                <div>
+                            <img class="mx-72 mt-48 h-48 w-48" src="https://th.jobsdb.com/assets/2982a5e7e83c56a68c79.png">
+                                </div>
+                            <div class="w-full sm:m-10">
+                            <h5 class="font-bold font-serif text-xl text-center mr-12">
+                            We have 30,226 jobs for you
+                            </h5>
+                            <h5 class="font-medium font-serif text-xl text-center mr-12">
+                            Select a job to view details
+                            </h5>
+                            </div>
                             </div>
                         @endif
                     </div>
                 </div>
             </div>
+</div>
 
 <script>
     $(document).ready(function(){

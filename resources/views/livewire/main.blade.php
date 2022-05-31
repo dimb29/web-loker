@@ -1,12 +1,12 @@
 <x-slot name="header">
     <div class="flex flex-col h-48">
-    <img class="object-cover h-48 w-full" src="http://localhost:8000/storage/photos/jobicon.jpg">
+    <img class="object-cover h-48 w-full" src="http://localhost:8000/storage/photos/jobicon1.jpg">
     </div>
 </x-slot>
 
 <x-slot name="footer">
 </x-slot>
-<div class="py-12 bg-yellow">
+<div class="py-12 bg-yellow bg-fixed ..." style="background-image: url(http://localhost:8000/storage/photos/bgbnww.jpg)">
     <div class="flex-auto ">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 -mt-40">
             <div class=" justify-center">
@@ -15,104 +15,122 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-15">
+    <div class="max-w-7xl mx-auto lg:px-8 pt-15">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-            @if (session()->has('message'))
-                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
-                    role="alert">
-                    <div class="flex">
-                        <div>
-                            <p class="text-sm">{{ session('message') }}</p>
-                        </div>
-                    </div>
-                </div>
-            @endif
+        <h2 class="secondary-heading mt-2 ml-4">Job Recommendation</h2>
             <livewire:slider>
         </div>
+</div>
+                <div class="hidden space-x-8 sm:flex w-4/5 myframe">
+                </div>
             
 
-
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8">
+<div class="flex justify-end">
+        <div class="sm:max-w-7xl pt-24 transition duration-150 transform hover:scale-110 hover:-translate-y-2">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-                    @if (session()->has('message'))
-                        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
-                            role="alert">
-                            <div class="flex">
-                                <div>
-                                    <p class="text-sm">{{ session('message') }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
 
-                    <div class="flex flex-row">
-                        
-                        <div class="flex-auto m-2 space-x-8 w-96">
-                            <div class="flex flex-col">
-                                <div class="flex-auto m-1">
-                                    <div class="flex flex-col">
-                                            @foreach ($posts as $post)
-                                                <div wire:click="postDetail({{$post->id}})"
-                                                data-id="{{ $post->id}}" class="daft-job rounded-lg shadow-xl my-6 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
-                                                        text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" data-mdb-ripple="true" data-mdb-ripple-color="light">
-                                                        <img class="object-cover h-48 w-96 rounded-lg"src="{{ $post->url }}">
-                                                        <div class="p-6 -mt-4">
-                                                            <h5 class="text-gray-900 text-xl font-medium mb-2 h-16 pb-4 mb-8">
-                                                                {{ $post->title }}
-                                                            </h5>
-                                                        <p>
-                                                            @php
-                                                            $minutes = $thistime->diffInMinutes($post->updated_at);
-                                                            $hours = $thistime->diffInHours($post->updated_at);
-                                                            $days = $thistime->diff($post->updated_at)->days;
-                                                            $weeks = $thistime->diffInWeeks($post->updated_at);
-                                                            $months = $thistime->diffInMonths($post->updated_at);
-                                                            $years = $thistime->diffInYears($post->updated_at);
-                                                            @endphp
-                                                            @if($minutes <= 60)
-                                                                {{$minutes}} menit yang lalu
-                                                            @elseif($hours <= 24)
-                                                                {{$hours}} jam yang lalu
-                                                            @elseif($days <= 7)
-                                                                {{$days}} hari yang lalu
-                                                            @elseif($weeks <= 4)
-                                                                {{$weeks}} minggu yang lalu
-                                                            @elseif($months <= 12)
-                                                                {{$months}} bulan yang lalu
-                                                            @else
-                                                                {{$years}} tahun yang lalu
-                                                            @endif
-                                                        </p>
-                                                        </div>
-                                                    </div>
-                                            @endforeach
-                                            <div>
-                                                <div colspan="2">
-                                                    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                                                        Selengkapnya
-                                                    </button>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                        @if($post_detail != null)
-                        <div class="hidden space-x-8 sm:flex w-4/5">
-                            <div class="child">
-                            <livewire:post-data :post="$post_detail" :key="$post_detail['id']"/>
-                            </div>
+
+
+                    <div class="sm:flex flex-row">
+                        <div class="sm:w-1/2 sm:m-10">
+                            <h2 class="secondary-heading mt-4">Find the right job or</h2>
+                            <h2 class="secondary-heading mb-12">internship for you</h2>
                         </div>
-                        @else
-                            <div class="hidden space-x-8 sm:flex w-4/5 myframe">
-                                <!-- <iframe name="jobdesc" class="h-full w-full" src="{{ url('dashboard/posts', $post->id,'#post-frame') }}"></iframe> -->
-                            </div>
-                        @endif
+                        <div class="md:w-1/2 md:mt-6 md:mb-4">
+                            <p class="font-medium mb-2">SUGGESTED SEARCHES</p>
+                            <button type="button" class="inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Engineering</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Business Development</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Finance</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Administrative Assistant</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Retail Associate</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Customer Service</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Operations</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Information Technology</button>
+                        </div>
                     </div>
-                </div>
-            </div>
+
         </div>
     </div>
+</div>
+
+
+            <div class="max-w-7xl pt-24 transition duration-150 transform hover:scale-110 hover:-translate-y-2">
+             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+
+                    <div class="sm:flex flex-row my-4">
+                        <div class="sm:w-1/2 sm:m-10">
+                            <h2 class="secondary-heading mt-4">Explore location</h2>
+                            <h2 class="secondary-heading mb-12">you are interested in</h2>
+                        </div>
+                        <div class="sm:w-1/2 sm:mt-10 sm:mb-4">
+                            <p class="font-medium mb-2">SUGGESTED LOCATION</p>
+                            <button type="button" class="inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Jakarta Pusat</button>
+                            <button type="button" class="inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Banjarnegara</button>
+                            <button type="button" class="inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Semarang</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Bandar Lampung</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Bandung</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Jakarta Selatan</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Yogyakarta</button>
+                            <button type="button" class="mt-2 inline-block px-6 py-3 bg-gray-200 text-gray-700 font-medium leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 
+                            hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">
+                            Surabaya</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        <div class="sm:max-w-full mt-28">
+        <a  href="{{ url('dashboard/berita') }}">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-4">
+
+                <div class="sm:flex flex-row sm:my-6">
+                    <div class="sm:w-1/3 lg:ml-80">
+                    <img class="sm:ml-48 sm:h-96" src="https://static-exp1.licdn.com/aero-v1/sc/h/dkfub4sc7jgzg3o31flfr91rv">
+                    </div>
+
+                    <div class="sm:w-2/3 ml-24 sm:mt-28">
+                    <h2 class="secondary-heading">Find the right job</h2>
+                    <h2 class="secondary-heading">for you now..</h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        
 </div>
 <script>
     $(document).ready(function(){
