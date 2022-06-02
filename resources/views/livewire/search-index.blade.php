@@ -38,16 +38,17 @@
 
 	<div>
 	  <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-		<select id="sel-loc" wire:model.defer="locations"
-		class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+		<select wire:model.defer="locations"
+		class="sel-loc px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+		style="background-color:#FF0000">
 			<option value="">Semua Lokasi</option>
 			@foreach ($provinces as $provinsi)
-				<option value="{{ $provinsi['id'] }}">{{ $provinsi['nama'] }}</option>
+				<option value="{{ $provinsi['id'] }}">{{ $provinsi['name'] }}</option>
 			@endforeach
 			@php $countc = count($cities); @endphp
-			@for($i = 0; $i < count($cities); $i++)
-				<option value="{{ $cities[$i]['id'] }}">{{ $cities[$i]['nama'] }}</option>
-			@endfor
+			@foreach($cities as $kota)
+				<option value="{{ $kota['id'] }}">{{ $kota['name'] }}</option>
+			@endforeach
 		</select>
 
 		<select wire:model.defer="kualif_lulus"
@@ -80,21 +81,8 @@
   </div>
 </div>
 </div>
-
 <script>
-    $(document).ready(function(){
-        $("#searchmodaltitle").hide();
-        $("#searchtitle").on('keyup',function(){
-            $("#searchmodaltitle").show();
-        });
-        $('.select2-title-single').select2({
-            placeholder: "Select your Location"
-        });
-        $('.select2-loc-multiple').select2({
-            placeholder: "Select your Location"
-        });
-        $('.select2-jobtype-multiple').select2({
-            placeholder: "Select your Location"
-        });
-    });
+$(document).ready(function() {
+    $('.sel-loc').select2();
+});
 </script>

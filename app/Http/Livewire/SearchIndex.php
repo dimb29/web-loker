@@ -8,6 +8,8 @@ use App\Models\KualifikasiLulus;
 use App\Models\PengalamanKerja;
 use App\Models\SpesialisKerja;
 use App\Models\TingkatKerja;
+use App\Models\Province;
+use App\Models\Regency;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\View;
@@ -34,23 +36,15 @@ class SearchIndex extends Component
         // $emit = $this->emit('searchJobs', [$this->locations]);
         // dd($emit);
     }
-    public function mount(){
-        $this->provinces = Http::acceptJson()->get('https://dev.farizdotid.com/api/daerahindonesia/provinsi')['provinsi'];
-        
-        foreach($this->provinces as $provin){
-            $kota_prof = Http::acceptJson()->get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='.$provin['id'])['kota_kabupaten'];
-            foreach($kota_prof as $key => $kotas[]){
-                $this->cities = $kotas;
-            }
-        }
-    }
     public function render()
     {
         $posts = Post::join('images', 'posts.id', '=', 'images.post_id')
                         ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url', 'posts.created_at')
                         ->latest()
                         ->get();
-        
+
+        $provinces = Province::all();
+        $regencies = Regency::all();        
         $this->jenker = JenisKerja::all();
         $this->kualif = KualifikasiLulus::all();
         $this->pengkerja = PengalamanKerja::all();
@@ -65,6 +59,8 @@ class SearchIndex extends Component
             'pengkerjas' => $this->pengkerja,
             'spesialises' => $this->spesialis,
             'tingkers' => $this->tingker,
+            'provinces' => $provinces,
+            'cities'    => $regencies,
         ]);
     }
     public function resetFilter(){
