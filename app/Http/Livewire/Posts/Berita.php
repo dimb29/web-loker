@@ -77,7 +77,7 @@ class Berita extends Component
                 $this->jenis_kerja = $jk_split[1];
             }
         }
-    }
+    } 
 
     public function render()
     {
