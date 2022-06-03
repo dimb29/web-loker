@@ -23,7 +23,7 @@
                     <div class="flex flex-row">
                         
                         <div class="flex-auto m-2 space-x-8 w-96">
-                            <div class="flex flex-col">
+                            <div class="flex flex-col"> 
                                 <div class="flex-auto m-1">
                                     <div class="flex flex-col">
                                         @if($posts != '')
