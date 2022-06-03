@@ -20,8 +20,29 @@
                                             SMA/SMK
                                         </div>
                                         <div class="p-6 font-medium text-sm text-gray-400">
-                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                            SMA/SMK
+                                        <p>
+                                                            @php
+                                                            $minutes = $thistime->diffInMinutes($postrend->updated_at);
+                                                            $hours = $thistime->diffInHours($postrend->updated_at);
+                                                            $days = $thistime->diff($postrend->updated_at)->days;
+                                                            $weeks = $thistime->diffInWeeks($postrend->updated_at);
+                                                            $months = $thistime->diffInMonths($postrend->updated_at);
+                                                            $years = $thistime->diffInYears($postrend->updated_at);
+                                                            @endphp
+                                                            @if($minutes <= 60)
+                                                                {{$minutes}} menit yang lalu
+                                                            @elseif($hours <= 24)
+                                                                {{$hours}} jam yang lalu
+                                                            @elseif($days <= 7)
+                                                                {{$days}} hari yang lalu
+                                                            @elseif($weeks <= 4)
+                                                                {{$weeks}} minggu yang lalu
+                                                            @elseif($months <= 12)
+                                                                {{$months}} bulan yang lalu
+                                                            @else
+                                                                {{$years}} tahun yang lalu
+                                                            @endif
+                                                        </p>
                                         </div>
                                     </div>
                                 </a>
