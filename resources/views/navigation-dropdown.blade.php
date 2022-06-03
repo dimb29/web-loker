@@ -17,7 +17,7 @@
                     </x-jet-nav-link>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('berita') }}" :active="request()->routeIs('berita')">
+                        <x-jet-nav-link href="{{ url('dashboard/berita/sj_send=&loc_send=&kl_send=&jk_send=') }}" :active="request()->routeIs('berita')">
                             {{ __('News') }}
                         </x-jet-nav-link>
                     </div>
@@ -163,7 +163,7 @@
             </x-jet-responsive-nav-link>
         </div>
         <div class="ml-2">
-            <x-jet-responsive-nav-link href="{{ route('berita') }}" :active="request()->routeIs('berita')">
+            <x-jet-responsive-nav-link href="{{ url('dashboard/berita/sj_send=&loc_send=&kl_send=&jk_send=') }}" :active="request()->routeIs('berita')">
                 {{ __('News') }}
             </x-jet-responsive-nav-link>
         </div>
