@@ -67,4 +67,5 @@ Route::get('dashboard/posts/{id}', p::class);
 Route::get('dashboard/filter', Filter::class)->name('tags');
 // Route::get('dashboard/filter/{id}/posts', JenisKerjaPost::class);
 Route::get('dashboard/berita', Berita::class)->name('berita');
+Route::get('dashboard/berita/{id}', Berita::class);
 Route::get('dashboard/search', Search::class)->name('search');

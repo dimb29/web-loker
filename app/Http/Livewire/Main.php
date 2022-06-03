@@ -28,9 +28,20 @@ class Main extends Component
         $this->limitPerPage = $this->limitPerPage + 1;
     }
 
+    public $searchjob,$locations,$kualif_lulus,$jenis_kerja;
     public $myid = 0;
     public function postDetail($id){
         $this->myid = $id;
+    }
+
+    public function searchJobs(){
+        // $this->postjob = $postjob;
+        $emit = $this->emit('searchJobs', [$this->searchjob,$this->locations,$this->kualif_lulus,$this->jenis_kerja]);
+        // $emit = $this->emit('searchJobs', [$this->locations]);
+        // dd($emit);
+        $return = redirect("/dashboard/berita/sj_send=$this->searchjob&loc_send=$this->locations&kl_send=$this->kualif_lulus&jk_send=$this->jenis_kerja");
+        // dd($return);
+        return $return;
     }
 
     public function render()
