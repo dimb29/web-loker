@@ -11,7 +11,7 @@
                     </div>
                 </div>
             @endif
-                <div class="flex-auto m-1">
+                <div class="daft-job flex-auto m-1">
                     <div class="grid grid-flow-col">
                         @foreach ($post['images'] as $image)
                             <div class="py-4">

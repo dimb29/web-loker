@@ -31,23 +31,13 @@ class Posts extends Component
     public $photos = [];
     public $isOpen = 0;
 
-    public function mount(){
-        
-        $this->provinces = Http::acceptJson()->get('https://dev.farizdotid.com/api/daerahindonesia/provinsi')['provinsi'];
-        
-        foreach($this->provinces as $provin){
-            $kota_prof = Http::acceptJson()->get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='.$provin['id'])['kota_kabupaten'];
-            foreach($kota_prof as $key => $kotas[]){
-                $this->cities = $kotas;
-            }
-        }
-
-    }
 
     public function render()
     {
+        $posts = Post::with('author')->orderBy('id', 'desc')->paginate();
+        // dd($posts);
         return view('livewire.posts.posts', [
-            'posts' => Post::orderBy('id', 'desc')->paginate(),
+            'posts' =>  $posts,
             'categories' => Category::all(),
             'tags' => Tag::all(),
             'jenkers' => JenisKerja::all(),

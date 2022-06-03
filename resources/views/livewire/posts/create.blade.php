@@ -76,12 +76,11 @@
                                 class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
                                 <option value="" selected>Select Lokasi</option>
                                 @foreach ($provinces as $provinsi)
-                                    <option value="{{ $provinsi['id'] }}">{{ $provinsi['nama'] }}</option>
+                                    <option value="{{ $provinsi->id }}">{{ ucwords(strtolower($provinsi->name)) }}</option>
                                 @endforeach
-                                @php $countc = count($cities); @endphp
-                                @for($i = 0; $i < count($cities); $i++)
-                                    <option value="{{ $cities[$i]['id'] }}">{{ $cities[$i]['nama'] }}</option>
-                                @endfor
+                                @foreach($cities as $kota)
+                                    <option value="{{ $kota->id }}">{{ ucwords(strtolower($kota->name)) }}</option>
+                                @endforeach
                             </select>
                             @error('location') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
@@ -166,6 +165,11 @@
 <script>
     ClassicEditor
         .create( document.querySelector( '#content' ) )
+        .then(editor => {
+            editor.model.document.on('change:data', () => {
+                @this.set('content', editor.getData());
+            })
+        })
         .catch( error => {
             console.error( error );
         } );

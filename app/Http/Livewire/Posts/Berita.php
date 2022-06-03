@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Posts;
 
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Regency;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,7 @@ class Berita extends Component
     public $myid = 0;
     public function postDetail($id){
         $this->myid = $id;
+        // dd($id);
     }
 
     public function postScroll(){
@@ -57,17 +59,17 @@ class Berita extends Component
     public function render()
     {
         $now = Carbon::now();
-        
-        $post = Post::join('images', 'posts.id', '=', 'images.post_id')
-                        ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url','b.first_name', 'last_name', 'posts.created_at','posts.updated_at')
-                        ->leftJoin('users as b','author_id','=','b.id')
+        $regency = Regency::where('name', 'like',$this->locations . '%')->first();
+        // dd($regency->id);
+        $post = Post::leftJoin('images','posts.id', 'images.post_id')
+                        ->leftJoin('regencies', 'posts.location_id', 'regencies.id')
                         ->where('posts.title', 'like', '%' . $this->searchjob . '%')
-                        ->where('posts.location_id', 'like',$this->locations . '%')
+                        ->where('posts.location_id', 'like',$regency->id . '%')
                         ->where('posts.kualifikasilulus_id', 'like',$this->kualif_lulus . '%')
-                        ->where('posts.spesialiskerja_id', 'like',$this->jenis_kerja . '%')
+                        ->where('posts.jeniskerja_id', 'like',$this->jenis_kerja . '%')
                         ->orderBy('posts.id', 'desc')->paginate($this->limitPerPage);
                         $this->emit('postStore');
-
+// dd($post);
         $no = 1;
 
         if($this->myid != 0){

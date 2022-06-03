@@ -16,6 +16,11 @@ class Post extends Model
         'post_type',
         'meta_data',
         'category_id',
+        'jeniskerja_id',
+        'kualifikasilulus_id',
+        'pengalamankerja_id',
+        'spesialiskerja_id',
+        'tingkatkerja_id',
         'location_id',
         'author_id',
     ];
@@ -70,5 +75,11 @@ class Post extends Model
 
     public function spesialiskerja(){
         return $this->belongsTo(SpesialisKerja::class);
+    }
+    public function province(){
+        return $this->belongsTo(Province::class, 'location_id', 'id');
+    }
+    public function regency(){
+        return $this->belongsTo(Regency::class, 'location_id', 'id');
     }
 }

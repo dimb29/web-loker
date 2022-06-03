@@ -38,18 +38,15 @@
 
 	<div>
 	  <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-		<select wire:model.defer="locations"
-		class="sel-loc px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
-		style="background-color:#FF0000">
-			<option value="">Semua Lokasi</option>
-			@foreach ($provinces as $provinsi)
-				<option value="{{ $provinsi['id'] }}">{{ $provinsi['name'] }}</option>
-			@endforeach
-			@php $countc = count($cities); @endphp
+		<input type="search" id="search-title" list="job-list" wire:model.defer="locations" name="locations" type="text" placeholder="Search by location..." 
+		class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+		<datalist id="job-list">
 			@foreach($cities as $kota)
-				<option value="{{ $kota['id'] }}">{{ $kota['name'] }}</option>
+				<option value="{{ ucwords(strtolower($kota['name'])) }}">
+					{{ ucwords(strtolower($kota['name'])) }}
+				</option>
 			@endforeach
-		</select>
+		</datalist>
 
 		<select wire:model.defer="kualif_lulus"
 		class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">

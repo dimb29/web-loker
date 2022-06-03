@@ -2,14 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Post;
-use App\Models\JenisKerja;
-use App\Models\KualifikasiLulus;
-use App\Models\PengalamanKerja;
-use App\Models\SpesialisKerja;
-use App\Models\TingkatKerja;
-use App\Models\Province;
-use App\Models\Regency;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\View;
@@ -38,30 +30,7 @@ class SearchIndex extends Component
     }
     public function render()
     {
-        $posts = Post::join('images', 'posts.id', '=', 'images.post_id')
-                        ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url', 'posts.created_at')
-                        ->latest()
-                        ->get();
-
-        $provinces = Province::all();
-        $regencies = Regency::all();        
-        $this->jenker = JenisKerja::all();
-        $this->kualif = KualifikasiLulus::all();
-        $this->pengkerja = PengalamanKerja::all();
-        $this->spesialis = SpesialisKerja::all();
-        $this->tingker = TingkatKerja::all();
-
-        
-        return view('livewire.search-index',[
-            'postsearch' => $posts,
-            'jenkers' => $this->jenker,
-            'kualifs' => $this->kualif,
-            'pengkerjas' => $this->pengkerja,
-            'spesialises' => $this->spesialis,
-            'tingkers' => $this->tingker,
-            'provinces' => $provinces,
-            'cities'    => $regencies,
-        ]);
+        return view('livewire.search-index');
     }
     public function resetFilter(){
         $this->locations = null;

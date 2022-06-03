@@ -31,6 +31,7 @@
             @endif
             <div class="grid grid-flow-row grid-cols-3  gap-4">
                 @foreach ($posts as $post)
+                    @if($post->author->user_type == Auth::user()->user_type)
                     <div class="max-w-sm rounded overflow-hidden shadow-lg">
                         <div class="px-6 py-4">
                             <div class="font-bold text-xl mb-2">{{ $post->title }}</div>
@@ -52,8 +53,8 @@
                                 Delete
                             </button>
                         </div>
-
                     </div>
+                    @endif
                 @endforeach
             </div>
         </div>
