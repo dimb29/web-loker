@@ -56,6 +56,7 @@
 
 .child3 {
   position: fixed;
+  position: relative;
   width: 600px;
   height: 200px;
   left: 50%;
