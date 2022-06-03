@@ -42,7 +42,7 @@
                                                             <h5 class="text-gray-900 text-xl font-medium mb-8">
                                                                 {{ $post->regency->name }}
                                                             </h5>
-                                                        <p>
+                                                        <p> 
                                                             @php
                                                             $minutes = $thistime->diffInMinutes($post->updated_at);
                                                             $hours = $thistime->diffInHours($post->updated_at);
