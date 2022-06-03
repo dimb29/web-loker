@@ -135,19 +135,19 @@
         });
     }
 
-        // (function(){
-        //     var width = screen.width,
-        //     height = screen.height;
+        (function(){
+            var width = screen.width,
+            height = screen.height;
             
-        //     setInterval(function () {
-        //         if (screen.width !== width || screen.height !== height) {
-        //             width = screen.width;
-        //             height = screen.height;
-        //             $(window).trigger('resolutionchange');
-        //             alert("resolution change")
-        //         }
-        //     }, 50);
-        // }());
+            setInterval(function () {
+                if (screen.width !== width || screen.height !== height) {
+                    width = screen.width;
+                    height = screen.height;
+                    $(window).trigger('resolutionchange');
+                    alert("resolution change")
+                }
+            }, 50);
+        }());
         // var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
         // $.get(ApiWilIndo + 'provinsi',  // url
         // function (data, textStatus, jqXHR) {  // success callback
