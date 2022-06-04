@@ -26,7 +26,7 @@ class Berita extends Component
     public $photos = [];
     public $isOpen = 0;
     public $limitPerPage = 3;
-    public $searchjob,$kualif_lulus,$jenis_kerja;
+    public $searchjob,$kualif_lulus,$jenis_kerja,$spes_kerja,$peng_kerja,$ting_kerja;
     public $sj_split,$loc_split,$kl_split,$jk_split;
     public $locations = "";
     // public $posts;
@@ -44,7 +44,7 @@ class Berita extends Component
     }
 
     public function postScroll(){
-        $this->limitPerPage = $this->limitPerPage + 1;
+        $this->limitPerPage = $this->limitPerPage + 3;
     }
     public function searchJobs($search){
         $this->searchjob = $search[0];
@@ -62,19 +62,40 @@ class Berita extends Component
 
     public function mount($id){
         $split = explode('&', $id);
-        $sj_split = str_replace('+',' ',explode('=', $split[0]));
-        $loc_split = str_replace('+',' ',explode('=', $split[1]));
-        $kl_split = str_replace('+',' ',explode('=', $split[2]));
-        $jk_split = str_replace('+',' ',explode('=', $split[3]));
-        // dd($sj_split);
-        if($sj_split[1] != '' || $loc_split[1] != '' || $kl_split[1] != '' || $jk_split[1] != ''){
-            if($this->searchjob != '' || $this->locations != '' || $this->kualif_lulus != '' || $this->jenis_kerja != ''){
-
-            }else{
-                $this->searchjob = $sj_split[1];
-                $this->locations = $loc_split[1];
-                $this->kualif_lulus = $kl_split[1];
-                $this->jenis_kerja = $jk_split[1];
+        // dd(count($split));
+        if(count($split) > 1){
+            $sj_split = str_replace('+',' ',explode('=', $split[0]));
+            $loc_split = str_replace('+',' ',explode('=', $split[1]));
+            $kl_split = str_replace('+',' ',explode('=', $split[2]));
+            $jk_split = str_replace('+',' ',explode('=', $split[3]));
+            // dd($sj_split);
+            if($sj_split[1] != '' || $loc_split[1] != '' || $kl_split[1] != '' || $jk_split[1] != ''){
+                if($this->searchjob != '' || $this->locations != '' || $this->kualif_lulus != '' || $this->jenis_kerja != ''){
+    
+                }else{
+                    $this->searchjob = $sj_split[1];
+                    $this->locations = $loc_split[1];
+                    $this->kualif_lulus = $kl_split[1];
+                    $this->jenis_kerja = $jk_split[1];
+                }
+            }
+        }elseif(count($split) == 1){
+            $fil_split = str_replace('+',' ',explode('=', $split[0]));
+            // dd($fil_split[0]);
+            if($fil_split[0] == 'sj_send'){
+                $this->searchjob = $fil_split[1];
+            }elseif($fil_split[0] == 'jk_send'){
+                $this->jenis_kerja = $fil_split[1];
+            }elseif($fil_split[0] == 'loc_send'){
+                $this->locations = $fil_split[1];
+            }elseif($fil_split[0] == 'kl_send'){
+                $this->kualif_lulus = $fil_split[1];
+            }elseif($fil_split[0] == 'pk_send'){
+                $this->peng_kerja = $fil_split[1];
+            }elseif($fil_split[0] == 'sk_send'){
+                $this->spes_kerja = $fil_split[1];
+            }elseif($fil_split[0] == 'tk_send'){
+                $this->ting_kerja = $fil_split[1];
             }
         }
     } 
@@ -83,13 +104,16 @@ class Berita extends Component
     {
         $now = Carbon::now();
         $regency = Regency::where('name', 'like',$this->locations . '%')->first();
-        // dd($this->kualif_lulus);
+        // dd($this->peng_kerja);
         if($this->locations == ""){
             $posts = Post::leftJoin('images','posts.id', 'images.post_id')
                             ->leftJoin('regencies', 'posts.location_id', 'regencies.id')
                             ->where('posts.title', 'like', '%' . $this->searchjob . '%')
-                            ->where('posts.kualifikasilulus_id', 'like',$this->kualif_lulus . '%')
                             ->where('posts.jeniskerja_id', 'like',$this->jenis_kerja . '%')
+                            ->where('posts.kualifikasilulus_id', 'like',$this->kualif_lulus . '%')
+                            ->where('posts.pengalamankerja_id', 'like',$this->peng_kerja . '%')
+                            ->where('posts.spesialiskerja_id', 'like',$this->spes_kerja . '%')
+                            ->where('posts.tingkatkerja_id', 'like',$this->ting_kerja . '%')
                             ->orderBy('posts.id', 'desc')->paginate($this->limitPerPage);
                             $this->emit('postStore');
         }else{
@@ -97,12 +121,15 @@ class Berita extends Component
                             ->leftJoin('regencies', 'posts.location_id', 'regencies.id')
                             ->where('posts.title', 'like', '%' . $this->searchjob . '%')
                             ->where('posts.location_id', 'like',$regency->id . '%')
-                            ->where('posts.kualifikasilulus_id', 'like',$this->kualif_lulus . '%')
                             ->where('posts.jeniskerja_id', 'like',$this->jenis_kerja . '%')
+                            ->where('posts.kualifikasilulus_id', 'like',$this->kualif_lulus . '%')
+                            ->where('posts.pengalamankerja_id', 'like',$this->peng_kerja . '%')
+                            ->where('posts.spesialiskerja_id', 'like',$this->spes_kerja . '%')
+                            ->where('posts.tingkatkerja_id', 'like',$this->ting_kerja . '%')
                             ->orderBy('posts.id', 'desc')->paginate($this->limitPerPage);
                             $this->emit('postStore');
         }
-// dd($post);
+// dd($posts);
         $no = 1;
 
         if($this->myid != 0){
