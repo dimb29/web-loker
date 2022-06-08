@@ -196,7 +196,7 @@
 
 
         <div class="sm:max-w-full mt-28">
-        <a  href="{{ url('dashboard/berita') }}">
+        <a  href="{{ url('dashboard/berita/sj_send=') }}">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-4">
 
                 <div class="sm:flex flex-row sm:my-6">

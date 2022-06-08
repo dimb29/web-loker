@@ -10,7 +10,7 @@
 <div class="py-12 bg-yellow">
     <div class="flex-auto ">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 -mt-40">
-            <div class=" justify-center">
+            <div id="top" class=" justify-center">
                 <livewire:search-index>
             </div>
         </div>
@@ -24,11 +24,17 @@
                     <div class="flex flex-col">
                         @if($posts != '')
                             @foreach ($posts as $post)
+<<<<<<< HEAD
                                 <div wire:click="postDetail({{$post->post_id}})" id="daft_job"
                                 data-id="{{ $post->post_id}}" class="daft-job bg-white rounded-lg shadow-xl 
                                     mt-4 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
                                     text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" 
                                     data-mdb-ripple="true" data-mdb-ripple-color="light">
+=======
+                                <div wire:click="postDetail({{$post->post_id}})"
+                                data-id="{{ $post->post_id}}" class="bg-white rounded-lg shadow-xl my-6 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
+                                    text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" data-mdb-ripple="true" data-mdb-ripple-color="light">
+>>>>>>> f12c0dd6c0d2db798c85fcb43bc86e9608a4329c
                                     <img class="object-cover h-48 w-screen rounded-lg"src="{{ $post->url }}">
                                     <div class="p-6 -mt-4">
                                         <h5 class="text-gray-900 text-xl font-semibold h-16  mb-8">
@@ -93,13 +99,15 @@
                                 @endif
                             @endforeach
                         @endif
+                        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                     </div>
                 </div>
             </div>
         </div> 
+
         @if($post_detail != null)
             <div class="hidden space-x-8 sm:flex w-4/5 myframe">
-                <div class="child top-0">
+                <div class="child">
                 <livewire:post-data :post="$post_detail" :key="$post_detail['id']"/>
                 </div>
             </div>
@@ -109,12 +117,12 @@
                     <img class="mx-72 mt-48 h-48 w-48" src="https://th.jobsdb.com/assets/2982a5e7e83c56a68c79.png">
                 </div>
                 <div class="w-full sm:m-10">
-                    <h5 class="font-bold font-serif text-xl text-center mr-12">
-                        We have 30,226 jobs for you
-                    </h5>
-                    <h5 class="font-medium font-serif text-xl text-center mr-12">
-                        Select a job to view details
-                    </h5>
+                <h5 class="font-bold font-serif text-xl text-center mr-12">
+                    We have 30,226 jobs for you
+                </h5>
+                <h5 class="font-medium font-serif text-xl text-center mr-12">
+                    Select a job to view details
+                </h5>
                 </div>
             </div>
         @endif

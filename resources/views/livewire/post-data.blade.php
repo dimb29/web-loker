@@ -116,6 +116,21 @@
     </div>
 </div>
 
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10">
+<a href="#top">
+<lord-icon
+    src="https://cdn.lordicon.com/msoeawqm.json"
+    trigger="loop"
+    colors="primary:#121331,secondary:#ffffff"
+    style="width:25px;height:25px"
+    class="-mb-16 ml-2">
+</lord-icon>
+<button type="button" class="w-full text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:shadow-lg shadow-cyan-500/50 hover:from-cyan-500 hover:to-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+
+Cyan</button>
+</a>
+</div>
+
 <script>
     ClassicEditor
         .create(document.querySelector('#content'))
