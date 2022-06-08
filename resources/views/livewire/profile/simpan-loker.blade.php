@@ -25,9 +25,10 @@
 				        data-mdb-ripple-color="light" class="job-list max-w-full sm:max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300 m-2
                         rounded-lg hover:text-blue-600 transition cursor-pointer duration-150 transform hover:scale-110 hover:-translate-y-2 ">
                         <div class="px-6 py-4">
+                            <img class="object-cover h-48 w-96" src="{{ $post->url }}">
                             <div class="font-bold text-xl mb-2">{{ $post->title }}</div>
                             <p class="text-gray-700 text-base">
-                                {!! Str::words($post->content, 20, '...') !!}
+                                {{$post->per_nama}}
                             </p>
                         </div>
                     </div>

@@ -24,17 +24,11 @@
                     <div class="flex flex-col">
                         @if($posts != '')
                             @foreach ($posts as $post)
-<<<<<<< HEAD
                                 <div wire:click="postDetail({{$post->post_id}})" id="daft_job"
                                 data-id="{{ $post->post_id}}" class="daft-job bg-white rounded-lg shadow-xl 
                                     mt-4 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
                                     text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" 
                                     data-mdb-ripple="true" data-mdb-ripple-color="light">
-=======
-                                <div wire:click="postDetail({{$post->post_id}})"
-                                data-id="{{ $post->post_id}}" class="bg-white rounded-lg shadow-xl my-6 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
-                                    text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" data-mdb-ripple="true" data-mdb-ripple-color="light">
->>>>>>> f12c0dd6c0d2db798c85fcb43bc86e9608a4329c
                                     <img class="object-cover h-48 w-screen rounded-lg"src="{{ $post->url }}">
                                     <div class="p-6 -mt-4">
                                         <h5 class="text-gray-900 text-xl font-semibold h-16  mb-8">
@@ -99,7 +93,9 @@
                                 @endif
                             @endforeach
                         @endif
+                        @if($posts->hasMorePages())
                         <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                        @endif
                     </div>
                 </div>
             </div>
