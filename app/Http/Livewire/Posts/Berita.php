@@ -144,12 +144,14 @@ class Berita extends Component
                 'pengalamankerja',
                 'spesialiskerja',
                 'tingkatkerja',
+                'perusahaan',
                 ])->find($this->myid);
             // $post_detail = $post->firstorfail()->toArray();
         }else{
             $post_detail = null;
         }
-        // dd($post_detail);
+        $jobsave = Post::rightJoin('post_save', 'posts.id', 'post_save.post_id')->get();
+        // dd($jobsave);
 
                         
         return view('livewire.posts.berita', [
@@ -159,9 +161,24 @@ class Berita extends Component
             'no' => $no,
             'thistime' => $now,
             'post_detail' => $post_detail,
+            'simpan_job' => $jobsave,
 
         ]);
     }
+
+    public function saveJob($id){
+        DB::table('post_save')->insert([
+            'user_id' => Auth::user()->id,
+            'post_id' => $id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    public function delSaveJob($id){
+        DB::table('post_save')->where('post_id', $id)->delete();
+    }
+
     public function countview($id)
     {
         $getdata = Post::select('views')

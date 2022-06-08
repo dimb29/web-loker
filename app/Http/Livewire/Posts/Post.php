@@ -27,32 +27,15 @@ class Post extends Component
             'pengalamankerja',
             'spesialiskerja',
             'tingkatkerja',
+            'perusahaan',
             ])->find($id);
-        // dd($this);
+        dd($this);
         
     }
 
     public function render()
-    {                        
-        $posttrend = PostModel::join('images', 'posts.id', '=', 'images.post_id')
-                        ->select('posts.id', 'posts.title', 'posts.content', 'posts.views', 'images.url')
-                        ->orderBy('posts.views', 'desc')->get();
-                        $no = 1;
-        $comments = Comment::select('comments.id', 'comments.comment','comments.author_id','comments.post_id', 'comments.created_at', 'users.first_name', 'users.last_name', 'likes_comments.id_like', 'likes_comments.user_id', 'likes_comments.id_comment', 'likes_comments.fill')
-                        ->leftJoin('likes_comments', 'comments.id', '=', 'likes_comments.id_comment')
-                        ->leftJoin('users', 'comments.author_id', '=', 'users.id')
-                        ->orderBy('comments.created_at', 'ASC')->get();
-                        
-        $likes = Comment::select('comments.id', 'comments.comment','comments.author_id','comments.post_id', 'comments.created_at', 'users.first_name', 'users.last_name', 'likes_comments.id_like', 'likes_comments.user_id', 'likes_comments.id_comment', 'likes_comments.fill')
-                        ->leftJoin('likes_comments', 'comments.id', '=', 'likes_comments.id_comment')
-                        ->leftJoin('users', 'comments.author_id', '=', 'users.id')
-                        ->orderBy('comments.created_at', 'ASC')->get();
-                        // dd($comments);
-        return view('livewire.posts.post', [
-            'trend' => $posttrend,
-            'no' => $no,
-            'comms' => $comments,
-        ]);
+    {
+        return view('livewire.posts.post');
     }
 
     public function comment_store(){

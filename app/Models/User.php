@@ -40,8 +40,15 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class, 'author_id', 'id');
     }
 
+    public function perusahaan(){
+        return $this->hasMany(Perusahaan::class, 'owner_id', 'id');
+    }
+
     public function posts(){
         return $this->hasMany(Post::class, 'author_id', 'id');
+    }
+    public function postsave(){
+        return $this->belongsToMany(Post::class);
     }
 
     /**

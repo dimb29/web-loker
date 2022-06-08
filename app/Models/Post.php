@@ -41,6 +41,10 @@ class Post extends Model
         return $this->hasMany(Comment::class)->with(['author', 'likes_comment']);
     }
 
+    public function perusahaan(){
+        return $this->hasMany(Perusahaan::class, 'owner_id','author_id')->with(['author']);
+    }
+
     public function images(){
         return $this->hasMany(Image::class);
     }
@@ -51,6 +55,9 @@ class Post extends Model
 
     public function tags(){
         return $this->belongsToMany(Tag::class);
+    }
+    public function postsave(){
+        return $this->hasMany(User::class);
     }
 
     public function jeniskerja(){

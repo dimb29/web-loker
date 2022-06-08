@@ -5,7 +5,7 @@
                         <div data-mdb-ripple="true"
 				data-mdb-ripple-color="light" class="max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300 mt-12 m-8
                         rounded-lg hover:text-blue-600 transition duration-150 transform hover:scale-110 hover:-translate-y-2 ">
-                                <a wire:click="countview({{ $postrend->id}})" href="{{ url('dashboard/posts', $postrend->id) }}">
+                                <a href="{{ url('dashboard/posts', $postrend->post_id) }}">
                                     
                                     <img class="object-cover h-48 w-96" src="{{ $postrend->url }}">
                                     <div class="p-6">

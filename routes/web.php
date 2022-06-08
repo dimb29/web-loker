@@ -3,9 +3,11 @@
 
 use App\Http\Livewire\Main;
 use App\Http\Livewire\Search;
+use App\Http\Livewire\ProvilNav;
 use App\Http\Livewire\NavigationDropdown;
 use App\Http\Livewire\Categories\Categories;
 use App\Http\Livewire\Categories\Categoryposts;
+use App\Http\Livewire\Profile\SimpanLoker;
 use App\Http\Livewire\Posts\Berita;
 use App\Http\Livewire\Posts\Posts;
 use App\Http\Livewire\Posts\Post as p;
@@ -52,20 +54,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Main::class)->name('dashboard');
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', Main::class)->name('dashboard');
 Route::get('/dashboard', Main::class)->name('dashboard');
-Route::get('/dashboard/scroll', [Main::class, 'showSroll']);
 
 Route::get('dashboard/categories', Categories::class)->name('categories');
 Route::get('dashboard/categories/{id}/posts', Categoryposts::class);
 
 Route::get('dashboard/posts', Posts::class)->name('posts');
 Route::get('dashboard/posts/{id}', p::class);
-// Route::get('dashboard/posts/{id}', p::getComment(),);
-
-// Route::get('dashboard/tags', Tags::class)->name('tags');
-// Route::get('dashboard/tags/{id}/posts', Tagposts::class);
 
 Route::get('dashboard/filter', Filter::class)->name('tags');
-// Route::get('dashboard/filter/{id}/jeniskerja', FilterPost::class);
-Route::get('dashboard/berita/{id}', Berita::class)->name('berita');
+// Route::get('dashboard/berita/{id}', Berita::class)->name('berita');
 Route::get('dashboard/berita/{id}', Berita::class);
 Route::get('dashboard/search', Search::class)->name('search');
+// Route::get('dashboard/navprov', ProvilNav::class)->name('navprov');
+
+Route::prefix('user')->group(function(){
+    Route::get('/saveloker', SimpanLoker::class)->name('saveloker');
+});
