@@ -21,15 +21,26 @@
             <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-3  gap-4">
                 @foreach ($posts as $post)
                     @if($post->author->user_type == Auth::user()->user_type)
-                    <div data-mdb-ripple="true" data-id="{{$post->id}}"
-				        data-mdb-ripple-color="light" class="job-list max-w-full sm:max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300 m-2
+                    <div data-mdb-ripple="true"
+				        data-mdb-ripple-color="light" class="max-w-full sm:max-w-sm rounded overflow-hidden shadow-lg hover:bg-gray-300 m-2
                         rounded-lg hover:text-blue-600 transition cursor-pointer duration-150 transform hover:scale-110 hover:-translate-y-2 ">
-                        <div class="px-6 py-4">
-                            <img class="object-cover h-48 w-96" src="{{ $post->url }}">
-                            <div class="font-bold text-xl mb-2">{{ $post->title }}</div>
-                            <p class="text-gray-700 text-base">
-                                {{$post->per_nama}}
-                            </p>
+                        <div class="job-list " data-id="{{$post->id}}">
+                            <div class="px-6 py-4">
+                                <img class="object-cover h-48 w-96" src="{{ $post->url }}">
+                                <div class="font-bold text-xl mb-2">
+                                    <input class="w-80 bg-transparent cursor-pointer" readonly type="text" value="{{ $post->title }}">
+                                </div>
+                                <p class="text-gray-700 text-base">
+                                    {{$post->per_nama}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="m-2 px-4 top-0">
+                            <button wire:click="delSaveJob({{$post->post_id}})"
+                                class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                    <i class="fa-solid fa-trash-can"></i> | 
+                                Delete
+                            </button>
                         </div>
                     </div>
                     @endif

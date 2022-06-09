@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Profile;
 use App\Models\Post;
 use App\Models\PostSave;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 
 class SimpanLoker extends Component
 {
@@ -17,5 +18,8 @@ class SimpanLoker extends Component
         ->orderBy('posts.id', 'desc')->paginate();
         // dd($posts);
         return view('livewire.profile.simpan-loker',['posts'=>$posts]);
+    }
+    public function delSaveJob($id){
+        DB::table('post_save')->where('post_id', $id)->delete();
     }
 }

@@ -2,6 +2,11 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Upload Berita
     </h2>
+<div class="loading-div fixed z-20 inset-0 place-content-center opacity-25 bg-gray-400" hidden>
+    <div class="flex justify-center mt-56">
+            <img class="object-cover w-36" src="http://localhost:8000/storage/loaders/rings.svg">
+    </div>
+</div>
 </x-slot>
 
 <x-slot name="footer">
@@ -21,7 +26,7 @@
             @endif
             @if (Request::getPathInfo() == '/dashboard/posts')
                 <button wire:click="create()"
-                    class="inline-flex items-center px-4 py-2 my-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                    class="loadings inline-flex items-center px-4 py-2 my-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                     Create New Post
                 </button>
             @endif
@@ -29,10 +34,10 @@
             @if ($isOpen)
                 @include('livewire.posts.create')
             @endif
-            <div class="grid grid-flow-row grid-cols-3  gap-4">
+            <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-3 gap-4">
                 @foreach ($posts as $post)
                     @if($post->author->user_type == Auth::user()->user_type)
-                    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                    <div class="max-w-full sm:max-w-sm rounded overflow-hidden shadow-lg">
                         <div class="px-6 py-4">
                             <div class="font-bold text-xl mb-2">{{ $post->title }}</div>
                             <p class="text-gray-700 text-base">
@@ -45,7 +50,7 @@
                                 Read post
                             </a>
                             <button wire:click="edit({{ $post->id }})"
-                                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                class="loadings inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                 Edit
                             </button>
                             <button wire:click="delete({{ $post->id }})"
@@ -63,3 +68,11 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.loadings').click(function(){
+            $('.loading-div').show();
+            $('.loading-div').delay(4000).fadeOut();
+        })
+    })
+</script>

@@ -10,12 +10,16 @@
 <div class="py-12 bg-yellow">
     <div class="flex-auto ">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 -mt-40">
-            <div id="top" class=" justify-center">
+            <div class=" justify-center">
                 <livewire:search-index>
             </div>
         </div>
     </div>
-            
+<div wire:loading wire:target="postDetail,delSaveJob,saveJob" class="fixed z-20 inset-0 place-content-center opacity-25 bg-gray-400">
+    <div class="flex justify-center mt-56">
+            <img class="object-cover w-36" src="http://localhost:8000/storage/loaders/rings.svg">
+    </div>
+</div>
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8">
     <div class="flex flex-row">
         <div class="flex-auto m-2 space-x-8 w-96">
@@ -24,11 +28,9 @@
                     <div class="flex flex-col">
                         @if($posts != '')
                             @foreach ($posts as $post)
-                                <div wire:click="postDetail({{$post->post_id}})" id="daft_job"
-                                data-id="{{ $post->post_id}}" class="daft-job bg-white rounded-lg shadow-xl 
-                                    mt-4 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
-                                    text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" 
-                                    data-mdb-ripple="true" data-mdb-ripple-color="light">
+                                <div wire:click="postDetail({{$post->post_id}})"
+                                data-id="{{ $post->post_id}}" class="daft-job bg-white rounded-lg shadow-xl my-6 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
+                                    text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" data-mdb-ripple="true" data-mdb-ripple-color="light">
                                     <img class="object-cover h-48 w-screen rounded-lg"src="{{ $post->url }}">
                                     <div class="p-6 -mt-4">
                                         <h5 class="text-gray-900 text-xl font-semibold h-16  mb-8">
@@ -91,6 +93,7 @@
                                     </div>
                                 @endif
                                 @endif
+
                             @endforeach
                         @endif
                         @if($posts->hasMorePages())
@@ -100,10 +103,9 @@
                 </div>
             </div>
         </div> 
-
         @if($post_detail != null)
             <div class="hidden space-x-8 sm:flex w-4/5 myframe">
-                <div class="child">
+                <div class="child top-0">
                 <livewire:post-data :post="$post_detail" :key="$post_detail['id']"/>
                 </div>
             </div>
@@ -119,7 +121,6 @@
                 <h5 class="font-medium font-serif text-xl text-center mr-12">
                     Select a job to view details
                 </h5>
-                </div>
             </div>
         @endif
     </div>
@@ -160,6 +161,20 @@
             autoplaySpeed: 2000,
         });
     }
+
+        (function(){
+            var width = screen.width,
+            height = screen.height;
+            
+            setInterval(function () {
+                if (screen.width !== width || screen.height !== height) {
+                    width = screen.width;
+                    height = screen.height;
+                    $(window).trigger('resolutionchange');
+                    alert("resolution change")
+                }
+            }, 50);
+        }());
         // var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
         // $.get(ApiWilIndo + 'provinsi',  // url
         // function (data, textStatus, jqXHR) {  // success callback
