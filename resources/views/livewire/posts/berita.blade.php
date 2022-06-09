@@ -15,7 +15,11 @@
             </div>
         </div>
     </div>
-            
+<div wire:loading wire:target="postDetail,delSaveJob,saveJob" class="fixed z-20 inset-0 place-content-center opacity-25 bg-gray-400">
+    <div class="flex justify-center mt-56">
+            <img class="object-cover w-36" src="http://localhost:8000/storage/loaders/rings.svg">
+    </div>
+</div>
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8">
     <div class="flex flex-row">
         <div class="flex-auto m-2 space-x-8 w-96">
@@ -97,15 +101,16 @@
                                 
                             @endforeach
                         @endif
+                        @if($posts->hasMorePages())
                         <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div> 
-
         @if($post_detail != null)
             <div class="hidden space-x-8 sm:flex w-4/5 myframe">
-                <div class="child">
+                <div class="child top-0">
                 <livewire:post-data :post="$post_detail" :key="$post_detail['id']"/>
                 </div>
             </div>
@@ -172,6 +177,20 @@
             autoplaySpeed: 2000,
         });
     }
+
+        (function(){
+            var width = screen.width,
+            height = screen.height;
+            
+            setInterval(function () {
+                if (screen.width !== width || screen.height !== height) {
+                    width = screen.width;
+                    height = screen.height;
+                    $(window).trigger('resolutionchange');
+                    alert("resolution change")
+                }
+            }, 50);
+        }());
         // var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
         // $.get(ApiWilIndo + 'provinsi',  // url
         // function (data, textStatus, jqXHR) {  // success callback
