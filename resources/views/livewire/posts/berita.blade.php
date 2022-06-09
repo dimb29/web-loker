@@ -24,19 +24,14 @@
                     <div class="flex flex-col">
                         @if($posts != '')
                             @foreach ($posts as $post)
-<<<<<<< HEAD
-                                <div wire:click="postDetail({{$post->post_id}})" id="daft_job"
-                                data-id="{{ $post->post_id}}" class="daft-job bg-white rounded-lg shadow-xl 
+                            <div class="mb-8 bg-white rounded-lg shadow-xl 
                                     mt-4 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
                                     text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" 
                                     data-mdb-ripple="true" data-mdb-ripple-color="light">
-=======
-                                <div wire:click="postDetail({{$post->post_id}})"
-                                data-id="{{ $post->post_id}}" class="bg-white rounded-lg shadow-xl my-6 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
-                                    text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" data-mdb-ripple="true" data-mdb-ripple-color="light">
->>>>>>> f12c0dd6c0d2db798c85fcb43bc86e9608a4329c
+                                <div wire:click="postDetail({{$post->post_id}})" id="daft_job"
+                                data-id="{{ $post->post_id}}" class="daft-job">
                                     <img class="object-cover h-48 w-screen rounded-lg"src="{{ $post->url }}">
-                                    <div class="p-6 -mt-4">
+                                    <div class="pt-6 px-6 -mt-4">
                                         <h5 class="text-gray-900 text-xl font-semibold h-16  mb-8">
                                             {{ $post->title }}
                                         </h5>
@@ -84,19 +79,22 @@
                                 @endif
                                 @endforeach
                                 @if($getpostid == $post->post_id)
-                                    <div class="-mt-14 mb-14 text-right z-10 px-4">
+                                    <div class="mb-2 text-right z-10 px-4">
                                         <button wire:click="delSaveJob({{$post->post_id}})" class="w-10 h-10 focus:outline-none rounded-3xl hover:bg-gray-300">
                                             <i class="fa-solid fa-bookmark"></i>
                                         </button>
                                     </div>
                                 @else
-                                    <div class="-mt-14 mb-14 text-right z-10 px-4">
+                                    <div class="mb-2 text-right z-10 px-4">
                                         <button wire:click="saveJob({{$post->post_id}})" class="w-10 h-10 focus:outline-none rounded-3xl hover:bg-gray-300">
                                             <i class="fa-regular fa-bookmark"></i>
                                         </button>
                                     </div>
                                 @endif
                                 @endif
+
+</div>
+                                
                             @endforeach
                         @endif
                         <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
@@ -126,6 +124,16 @@
                 </div>
             </div>
         @endif
+        <div class="bg-slate-50 rounded-full section" id="anchoredCtaWeb">
+  <div class="container">
+  <lord-icon
+    src="https://cdn.lordicon.com/msoeawqm.json"
+    trigger="loop"
+    colors="primary:#b4b4b4,secondary:#08a88a"
+    style="width:50px;height:50px">
+</lord-icon>
+ </div>
+</div>
     </div>
 </div>
 
@@ -183,6 +191,17 @@
                 }
             };
     });
+
+    document.addEventListener("scroll", function() {
+  const anchoredCtaWeb = document.getElementById("anchoredCtaWeb");
+  if (window.pageYOffset > 200) {
+    anchoredCtaWeb.classList.add("show");
+  }
+  if (window.pageYOffset < 200) {
+    anchoredCtaWeb.classList.remove("show");
+  }
+});
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 @livewireScripts

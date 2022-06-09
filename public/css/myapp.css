@@ -127,3 +127,19 @@
     transform: translate(24px, 0);
   }
 }
+
+#anchoredCtaWeb {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  transform: translateY(50px);
+  opacity: 0;
+  visibility: hidden;
+}
+
+#anchoredCtaWeb.show {
+  transform: translateY(0px);
+  opacity: 1;
+  visibility: visible;
+  transition: 0.5s ease-in-out;
+}
