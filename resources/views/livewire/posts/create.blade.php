@@ -173,19 +173,4 @@
         .catch( error => {
             console.error( error );
         } );
-// $(document).ready(function(){
-//     var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
-//     $.get(ApiWilIndo + 'provinsi',  // url
-//     function (data, textStatus, jqXHR) {  // success callback
-//         // console.log(data)
-//         var i;
-//         for(i=0; i < data.provinsi.length; i++){
-//             // console.log(data.provinsi[i])
-//             var datprov = data.provinsi[i]
-//             var apdata = '<option value="'+datprov.id+'">'+datprov.nama+'</option>'
-//             console.log(apdata)
-//             $('#sel-loc').append(apdata)
-//         }
-//     });
-// }) 
 </script>

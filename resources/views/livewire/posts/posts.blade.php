@@ -2,7 +2,8 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Upload Berita
     </h2>
-<div class="loading-div fixed z-20 inset-0 place-content-center opacity-25 bg-gray-400" hidden>
+<div class="loading-div fixed z-20 inset-0 place-content-center" hidden>
+    <div class="fixed justify-center h-full w-full opacity-25 bg-gray-400"> </div>
     <div class="flex justify-center mt-56">
             <img class="object-cover w-36" src="http://localhost:8000/storage/loaders/rings.svg">
     </div>

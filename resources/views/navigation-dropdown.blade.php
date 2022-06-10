@@ -4,7 +4,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
+                <div class="hidden space-x-8 sm:-my-px sm:flex flex-shrink-0 items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
@@ -163,7 +163,7 @@
             </x-jet-responsive-nav-link>
         </div>
         <div class="ml-2">
-            <x-jet-responsive-nav-link href="{{ url('dashboard/berita/sj_send=') }}" :active="request()->routeIs('berita')">
+            <x-jet-responsive-nav-link href="{{ url('dashboard/berita/sj_send=') }}" :active="request()->routeIs('berita/{id}')">
                 {{ __('News') }}
             </x-jet-responsive-nav-link>
         </div>
@@ -201,17 +201,5 @@
         </div>
         @endif
         @endif
-        <div class="ml-2">
-            <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                {{ __('Profile') }}
-            </x-jet-dropdown-link>
-        </div>
-        <div class="ml-2">
-            <x-jet-dropdown-link href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                {{ __('Logout') }}
-            </x-jet-dropdown-link>
-        </div>
     </div>
 </nav>

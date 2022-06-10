@@ -33,8 +33,6 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick.js"></script>
         <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
 
-
-
     <style>
         figure{
             width:101%;
@@ -54,6 +52,68 @@
             <!-- Page Content -->
             <main>
                 {{ $slot }}
+            <!-- Side Bar-->
+            <div class="fixed z-20 inset-0 w-32 h-16 sm:hidden">
+                <button class="open-side mx-4 my-6">Profil Saya</button>
+            </div>
+            <aside class="sidebar fixed w-full max-w-screen z-30 inset-0 sm:hidden" hidden aria-label="Sidebar">
+                    <div class="overflow-y-auto h-full max-h-screen py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+                        <div class="flex text-gray-900">
+                            <div class="flex-auto w-14">
+                                <i class="close-side fa-solid fa-arrow-left"></i>
+                            </div>
+                            <div class="flex-auto w-full">
+                                My Profile
+                            </div>
+                        </div>
+                        <ul class="space-y-2" style="list-style: none" >
+                            <li>
+                                <x-jet-responsive-nav-link :active="request()->routeIs('profile.show')" 
+                                href="{{ route('profile.show') }}"
+                                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <i class="fa-solid fa-user-gear w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                                    {{ __('Profile') }}
+                                </x-jet-responsive-nav-link>
+                            </li>
+                            <li>
+                                <x-jet-responsive-nav-link :active="request()->routeIs('saveloker')" 
+                                href="{{ route('saveloker') }}"
+                                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <i class="fa-solid fa-file-circle-plus w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                                    {{ __('Lowongan Tersimpan') }}
+                                </x-jet-responsive-nav-link>
+                            </li>
+                            <li>
+                                <x-jet-responsive-nav-link class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" href="{{ route('profile.show') }}">
+                                    <i class="fa-solid fa-briefcase w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                                    {{ __('Pengalaman') }}
+                                </x-jet-responsive-nav-link>
+                            </li>
+                            <li>
+                                <x-jet-responsive-nav-link class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" href="{{ route('profile.show') }}">
+                                    <i class="fa-solid fa-user-graduate w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                                    {{ __('Pendidikan') }}
+                                </x-jet-responsive-nav-link>
+                            </li>
+                            <li>
+                                <x-jet-responsive-nav-link class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" href="{{ route('profile.show') }}">
+                                    <i class="fa-solid fa-compass-drafting w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                                    {{ __('Keterampilan') }}
+                                </x-jet-responsive-nav-link>
+                            </li>
+                            <li>
+                                <x-jet-responsive-nav-link class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                    <i class="fa-solid fa-arrow-right-from-bracket w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
+                                    {{ __('Logout') }}
+                                </x-jet-responsive-nav-link>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <!--/ Side Bar -->
             </main>
 
             <!-- Page footer -->
@@ -182,3 +242,35 @@
         @livewireScripts
     </body>
 </html>
+
+<script>
+    $(document).ready(function(){
+        $(".close-side").click(function(){
+            $(".sidebar").animate({
+            opacity: '0.5',
+            width: '0px'
+            });
+            $(".sidebar").fadeOut();
+        });
+        $(".open-side").click(function(){
+            $(".sidebar").fadeIn();
+            $(".sidebar").animate({
+            opacity: '100',
+            width: '100%'
+            });
+        })
+    (function(){
+            var width = screen.width,
+            height = screen.height;
+            
+            setInterval(function () {
+                if (screen.width !== width || screen.height !== height) {
+                    width = screen.width;
+                    height = screen.height;
+                    // $(window).trigger('resolutionchange');
+                    $(".sidebar").hide();
+                }
+            }, 50);
+        }());
+    });
+</script>

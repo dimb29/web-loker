@@ -15,7 +15,8 @@
             </div>
         </div>
     </div>
-<div wire:loading wire:target="postDetail,delSaveJob,saveJob" class="fixed z-20 inset-0 place-content-center opacity-25 bg-gray-400">
+<div wire:loading wire:target="postDetail,delSaveJob,saveJob" class="fixed z-20 inset-0 place-content-center">
+<div class="fixed justify-center h-full w-full opacity-25 bg-gray-400"> </div>
     <div class="flex justify-center mt-56">
             <img class="object-cover w-36" src="http://localhost:8000/storage/loaders/rings.svg">
     </div>
@@ -32,7 +33,7 @@
                                     mt-4 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
                                     text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" 
                                     data-mdb-ripple="true" data-mdb-ripple-color="light">
-                                <div wire:click="postDetail({{$post->post_id}})" id="daft_job"
+                                <div wire:click="postDetail({{$post->post_id}})"
                                 data-id="{{ $post->post_id}}" class="daft-job">
                                     <img class="object-cover h-48 w-screen rounded-lg"src="{{ $post->url }}">
                                     <div class="pt-6 px-6 -mt-4">
@@ -96,13 +97,14 @@
                                     </div>
                                 @endif
                                 @endif
-
 </div>
                                 
                             @endforeach
                         @endif
                         @if($posts->hasMorePages())
-                        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                        <div class="loadjob" hidden>
+                            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                        </div>
                         @endif
                     </div>
                 </div>
@@ -166,7 +168,6 @@
             autoplaySpeed: 2000,
         });
     }else{
-        document.getElementById("daft_job").removeAttribute('wire:click')
         $('.slider').slick({
             arrows: true,
             slidesToShow: 1,
@@ -177,35 +178,9 @@
             autoplaySpeed: 2000,
         });
     }
-
-        (function(){
-            var width = screen.width,
-            height = screen.height;
-            
-            setInterval(function () {
-                if (screen.width !== width || screen.height !== height) {
-                    width = screen.width;
-                    height = screen.height;
-                    $(window).trigger('resolutionchange');
-                    alert("resolution change")
-                }
-            }, 50);
-        }());
-        // var ApiWilIndo = "https://dev.farizdotid.com/api/daerahindonesia/"
-        // $.get(ApiWilIndo + 'provinsi',  // url
-        // function (data, textStatus, jqXHR) {  // success callback
-        //     console.log(data)
-        //     var i;
-        //     for(i=0; i < data.provinsi.length; i++){
-        //         // console.log(data.provinsi[i])
-        //         datprov = data.provinsi[i]
-        //         var apdata = '<option value="'+datprov.id+'">'+datprov.nama+'</option>'
-        //         // console.log(apdata)
-        //         $('#sel-loc').append(apdata)
-        //     }
-        // });
             window.onscroll = function (ev) {
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                    $('.loadjob').show()
                     window.livewire.emit('post-data');
                 }
             };

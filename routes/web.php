@@ -63,7 +63,7 @@ Route::get('dashboard/posts/{id}', p::class);
 
 Route::get('dashboard/filter', Filter::class)->name('tags');
 // Route::get('dashboard/berita/{id}', Berita::class)->name('berita');
-Route::get('dashboard/berita/{id}', Berita::class);
+Route::get('dashboard/berita/{id}', Berita::class)->name('berita/{id}');
 Route::get('dashboard/search', Search::class)->name('search');
 // Route::get('dashboard/navprov', ProvilNav::class)->name('navprov');
 
