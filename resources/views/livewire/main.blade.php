@@ -218,17 +218,6 @@
 </div>
 <script>
     $(document).ready(function(){
-        // $('.daft-job').click(function(){
-        //     var dataId = $(this).attr("data-id");
-        //     console.log(dataId);
-        //     var url = "{{url('dashboard/posts/')}}/"+dataId+" #post-frame";
-        //     console.log(url);
-        //     if($('.myframe').is(":visible")){
-        //         $('.myframe').load("{{url('dashboard/posts/')}}/"+dataId+" #post-frame");
-        //     } else{
-        //         window.open("{{url('dashboard/posts/')}}/"+dataId,'_blank');
-        //     }
-        // })
     if($('.myframe').is(":visible")){
         $('.slider').slick({
             arrows: true,
