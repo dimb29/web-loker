@@ -25,7 +25,7 @@ class Berita extends Component
     public $tagids = array();
     public $photos = [];
     public $isOpen = 0;
-    public $limitPerPage = 3;
+    public $limitPerPage = 1;
     public $searchjob,$kualif_lulus,$jenis_kerja,$spes_kerja,$peng_kerja,$ting_kerja;
     public $sj_split,$loc_split,$kl_split,$jk_split;
     public $locations = "";
@@ -44,7 +44,7 @@ class Berita extends Component
     }
 
     public function postScroll(){
-        $this->limitPerPage = $this->limitPerPage + 3;
+        $this->limitPerPage = $this->limitPerPage + 1;
     }
     public function searchJobs($search){
         $this->searchjob = $search[0];

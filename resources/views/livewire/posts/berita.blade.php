@@ -15,9 +15,15 @@
             </div>
         </div>
     </div>
-<div wire:loading wire:target="postDetail,delSaveJob,saveJob" class="fixed z-20 inset-0 place-content-center opacity-25 bg-gray-400">
-    <div class="flex justify-center mt-56">
-            <img class="object-cover w-36" src="http://localhost:8000/storage/loaders/rings.svg">
+<div wire:loading wire:target="postDetail,delSaveJob,saveJob" class="fixed z-20 inset-0 place-content-center ">
+    <div class="fixed justify-center h-full w-full opacity-25 bg-slate-100"> </div>
+    <div class="flex justify-center my-72">
+    <lord-icon
+    src="https://cdn.lordicon.com/kbtmbyzy.json"
+    trigger="loop"
+    colors="primary:#121331,secondary:#08a88a"
+    style="width:250px;height:250px">
+</lord-icon>
     </div>
 </div>
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8">
@@ -28,11 +34,11 @@
                     <div class="flex flex-col">
                         @if($posts != '')
                             @foreach ($posts as $post)
-                            <div class="mb-8 bg-white rounded-lg shadow-xl 
+                            <div id="daft_job" class="flex flex-col mb-8 bg-white rounded-lg shadow-xl 
                                     mt-4 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
                                     text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" 
                                     data-mdb-ripple="true" data-mdb-ripple-color="light">
-                                <div wire:click="postDetail({{$post->post_id}})" id="daft_job"
+                                <div wire:click="postDetail({{$post->post_id}})"
                                 data-id="{{ $post->post_id}}" class="daft-job">
                                     <img class="object-cover h-48 w-screen rounded-lg"src="{{ $post->url }}">
                                     <div class="pt-6 px-6 -mt-4">
@@ -83,16 +89,26 @@
                                 @endif
                                 @endforeach
                                 @if($getpostid == $post->post_id)
+                                <div class="tooltip-wrap">
                                     <div class="mb-2 text-right z-10 px-4">
                                         <button wire:click="delSaveJob({{$post->post_id}})" class="w-10 h-10 focus:outline-none rounded-3xl hover:bg-gray-300">
-                                            <i class="fa-solid fa-bookmark"></i>
+                                            <i class="text-2xl fa-solid fa-bookmark"></i>
                                         </button>
+                                        <div class="tooltip-content">
+    <p>Simpan Loker</p>
+  </div> 
+</div>
                                     </div>
                                 @else
+                                <div class="tooltip-wrap">
                                     <div class="mb-2 text-right z-10 px-4">
                                         <button wire:click="saveJob({{$post->post_id}})" class="w-10 h-10 focus:outline-none rounded-3xl hover:bg-gray-300">
-                                            <i class="fa-regular fa-bookmark"></i>
+                                            <i class="text-2xl fa-regular fa-bookmark"></i>
                                         </button>
+                                        <div class="tooltip-content">
+    <p>Simpan Loker</p>
+  </div> 
+</div>
                                     </div>
                                 @endif
                                 @endif
