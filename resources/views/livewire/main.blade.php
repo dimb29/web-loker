@@ -1,6 +1,6 @@
 <x-slot name="header">
-    <div class="flex flex-col h-48">
-    <img class="object-cover h-48 w-full" src="http://localhost:8000/storage/photos/jobicon1.jpg">
+    <div class="flex flex-col h-56">
+    <img class="object-cover h-56 w-full" src="http://localhost:8000/storage/photos/bghd.svg">
     </div>
 </x-slot>
 
@@ -19,7 +19,7 @@
                             </svg>
                             </div>
 
-                            <input type="search" id="search-title" list="title-list" wire:model="searchjob" name="searchjob" type="text" placeholder="Search by listing, location, bedroom number..." 
+                            <input type="search" id="search-title" list="title-list" wire:model="searchjob" name="searchjob" type="text" placeholder="Cari berdasarkan posisi pekerjaan, kata kunci, atau nama perusahaan" 
                             class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
                             <datalist id="title-list">
                                         @foreach ($postsearch as $post)
@@ -28,19 +28,21 @@
                                     </datalist>
                             </div>
 
-                            <div class="flex items-center justify-between mt-4">
+                            <div class="flex items-center justify-between mb-6 mt-4">
                             
-                                <p class="mb-4">
-                                <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md active:shadow-lg transition duration-150 ease-in-out" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                                
+                                <button class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md active:shadow-lg transition duration-150 ease-in-out" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
                                     Filters
                                 </button>
-                                </p>
-                                <div class="flex items-center justify-end -mt-4" data-mdb-ripple="true"
-                                        data-mdb-ripple-color="light">
-                                    <button wire:click="searchJobs()" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800">
+                                
+                               
+                                    <button wire:click="searchJobs()" 
+                                        data-mdb-ripple="true"
+                                        data-mdb-ripple-color="light"
+                                        class="w-48 justify-end inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800">
                                         SEARCH
                                     </button>
-                                </div>
+                                
                             </div>
                             <!-- px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md -->
                             <!-- inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 -->
@@ -50,8 +52,8 @@
 
                             <div>
                             <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-                                <input type="search" id="search-title" list="job-list" wire:model.defer="locations" name="locations" type="text" placeholder="Search by location..." 
-                                class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+                                <input type="search" id="search-title" list="job-list" wire:model.defer="locations" name="locations" type="text" placeholder=" Semua Lokasi" 
+                                class="px-4 py-3 w-full pholderc rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
                                 <datalist id="job-list">
                                     @foreach ($provinces as $provinsi)
                                         <option value="{{ ucwords(strtolower($provinsi['name'])) }}">
@@ -100,7 +102,7 @@
     </div>
 
     <div class="max-w-7xl mx-auto lg:px-8 pt-15">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+        <div class="cyanshadow bg-white overflow-hidden sm:rounded-lg px-4 py-4">
         <h2 class="secondary-heading mt-2 ml-4">Job Recommendation</h2>
             <livewire:slider>
         </div>
@@ -110,7 +112,7 @@
             
 
 <div class="flex justify-end">
-        <div class="sm:max-w-7xl pt-24 transition duration-150 transform hover:scale-110 hover:-translate-y-2">
+        <div class="sm:max-w-7xl pt-24 ">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
 
 
@@ -154,7 +156,7 @@
 </div>
 
 
-            <div class="max-w-7xl pt-24 transition duration-150 transform hover:scale-110 hover:-translate-y-2">
+            <div class="max-w-7xl pt-24 ">
              <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
 
                     <div class="sm:flex flex-row my-4">
@@ -199,16 +201,17 @@
         <a  href="{{ url('dashboard/berita/sj_send=') }}">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-4">
 
-                <div class="sm:flex flex-row sm:my-6">
-                    <div class="sm:w-1/3 lg:ml-80">
-                    <img class="sm:ml-48 sm:h-96" src="https://static-exp1.licdn.com/aero-v1/sc/h/dkfub4sc7jgzg3o31flfr91rv">
-                    </div>
-
-                    <div class="sm:w-2/3 ml-24 sm:mt-28">
+                <div class="sm:flex flex-row sm:ml-48 sm:my-6">
+                    <div class="sm:w-1/3 sm:ml-96 sm:mt-28">
                     <h2 class="secondary-heading">Find the right job</h2>
                     <h2 class="secondary-heading">for you now..</h2>
                     </div>
+
+                    <div class="sm:w-1/3 ">
+                    <img class=" sm:h-96" src="http://localhost:8000/storage/photos/chara22.svg">
+                    </div>
                 </div>
+        </a>
 
             </div>
         </div>

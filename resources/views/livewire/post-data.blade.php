@@ -118,10 +118,15 @@
 
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10">
 <a href="#top">
-
+<lord-icon
+    src="https://cdn.lordicon.com/msoeawqm.json"
+    trigger="loop"
+    colors="primary:#ffffff,secondary:#08a88a"
+    style="width:32px;height:32px"
+    class="ml-4 -mb-16">
+</lord-icon>
 <button type="button" class="w-full text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:shadow-lg shadow-cyan-500/50 hover:from-cyan-500 hover:to-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-
-Cyan</button>
+Cari Loker Lainnya</button>
 </a>
 </div>
 

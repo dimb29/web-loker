@@ -43,28 +43,22 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-dropdown')
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="">
-                    {{ $header }}
-                </div>
-            </header>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
             <!-- Side Bar-->
+            <div class="absolute top-0 left-0 z-20 inset-0 w-32 h-16 sm:hidden">
+                <button class="open-side mx-4 my-6">Profil Saya</button>
+            </div>
             <aside class="sidebar fixed w-full max-w-screen z-30 inset-0 sm:hidden" hidden aria-label="Sidebar">
-                    <div class="overflow-y-auto h-full max-h-screen py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+                    <div class="overflow-y-auto h-full max-h-screen bg-cyan-50 py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
                         <div class="flex text-gray-900">
-                            <div class="flex-auto w-14">
-                                <i class="close-side fa-solid fa-arrow-left"></i>
+                            <div class="flex-auto h-18 w-18 mt-4 mr-4">
+                                <i class="close-side fa-solid fa-arrow-left text-xl"></i>
                             </div>
-                            <div class="flex-auto w-full"> 
+                            <div class="flex-auto w-full mt-4">
                                 My Profile
                             </div>
                         </div>
-                        <ul class="space-y-2" style="list-style: none" >
+                        <ul class="space-y-2 mt-12" style="list-style: none" >
                             <li>
                                 <x-jet-responsive-nav-link :active="request()->routeIs('profile.show')" 
                                 href="{{ route('profile.show') }}"
@@ -109,13 +103,27 @@
                                 </x-jet-responsive-nav-link>
                             </li>
                         </ul>
+                        <div class="fixed bot-0 right-0 mr-4 mt-48">
+                        <img class="object-cover h-72 w-full" src="http://localhost:8000/storage/photos/chara20.svg">
+                        </div>
                     </div>
                 </aside>
                 <!--/ Side Bar -->
+
+            <!-- Page Heading -->
+            <header class="bg-white shadow">
+                <div class="">
+                    {{ $header }}
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
             </main>
 
             <!-- Page footer -->
-            <footer class="text-center bg-gray-900 text-white">
+            <footer class="text-center bg-cyan-800 text-white">
                 <div class="justify-center">
                     <h5 class="text-white text-xl font-medium h-16 pt-6">Temukan Kami</h5>
                 <div>
@@ -225,7 +233,7 @@
                     </div>
                 </div>
 
-                <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.2);">
+                <div class="text-center p-4 bg-cyan-900">
                     © 2021 Copyright:
                     <a class="text-whitehite" href="https://tailwind-elements.com/">Tailwind Elements</a>
 
