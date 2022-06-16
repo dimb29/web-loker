@@ -37,7 +37,7 @@
                             <div class="flex flex-col mb-8 bg-white rounded-lg shadow-xl 
                                     mt-4 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
                                     text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" 
-                                    data-mdb-ripple="true" data-mdb-ripple-color="light">
+                                    data-mdb-ripple="true" data-mdb-ripple-color="light" id="daft_job">
                                 <div wire:click="postDetail({{$post->post_id}})"
                                 data-id="{{ $post->post_id}}" class="daft-job">
                                     <img class="object-cover h-48 w-screen rounded-lg"src="{{ $post->url }}">

@@ -29,7 +29,7 @@ class Post extends Component
             'tingkatkerja',
             'perusahaan',
             ])->find($id);
-        dd($this);
+        // dd($this);
         
     }
 

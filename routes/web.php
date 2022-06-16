@@ -13,6 +13,10 @@ use App\Http\Livewire\Posts\Posts;
 use App\Http\Livewire\Posts\Post as p;
 use App\Http\Livewire\Tags\Tagposts;
 use App\Http\Livewire\Tags\Tags;
+use App\Http\Livewire\Payment\Payments;
+use App\Http\Livewire\Payment\Method;
+use App\Http\Livewire\Payment\PayOn;
+use App\Http\Livewire\Pdf\Mpdf;
 use App\Http\Livewire\Filter\CommponentFilter as Filter;
 use Illuminate\Support\Facades\Route;
 
@@ -53,19 +57,29 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Main::class)->name('dashboard');
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', Main::class)->name('dashboard');
-Route::get('/dashboard', Main::class)->name('dashboard');
 
-Route::get('dashboard/categories', Categories::class)->name('categories');
-Route::get('dashboard/categories/{id}/posts', Categoryposts::class);
+Route::prefix('dashboard')->group(function(){
+    Route::get('/', Main::class)->name('dashboard');
+    
+    Route::get('/categories', Categories::class)->name('categories');
+    Route::get('/categories/{id}/posts', Categoryposts::class);
+    
+    Route::get('/posts', Posts::class)->name('posts');
+    Route::get('/posts/{id}', p::class);
+    
+    Route::get('/filter', Filter::class)->name('tags');
+    // Route::get('/berita/{id}', Berita::class)->name('berita');
+    Route::get('/berita/{id}', Berita::class)->name('berita/{id}');
+    Route::get('/search', Search::class)->name('search');
+    // Route::get('/navprov', ProvilNav::class)->name('navprov');
 
-Route::get('dashboard/posts', Posts::class)->name('posts');
-Route::get('dashboard/posts/{id}', p::class);
-
-Route::get('dashboard/filter', Filter::class)->name('tags');
-// Route::get('dashboard/berita/{id}', Berita::class)->name('berita');
-Route::get('dashboard/berita/{id}', Berita::class)->name('berita/{id}');
-Route::get('dashboard/search', Search::class)->name('search');
-// Route::get('dashboard/navprov', ProvilNav::class)->name('navprov');
+    Route::prefix('payment')->group(function(){
+        Route::get('/',Payments::class)->name('payment');
+        Route::get('/payon', PayOn::class);
+        Route::get('/detail/{id}', [Mpdf::class, 'detailPayPdf']);
+        Route::get('/{id}', Method::class);
+    });
+});
 
 Route::prefix('user')->group(function(){
     Route::get('/saveloker', SimpanLoker::class)->name('saveloker');

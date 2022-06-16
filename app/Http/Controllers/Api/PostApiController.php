@@ -26,10 +26,32 @@ class PostApiController extends Controller
         return new PostResource($post);
     }
 
+    public function store(Request $request){
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required',
+        ]);
+        return Post::create($request->all());
+    }
+
+    public function update(Request $request, $id){
+        $post = Post::find($id);
+        return $post->update($request->all());
+    }
+
+    public function destroy($id){
+        return Post::destroy($id);
+    }
+
     public function comments($id)
     {
         $post = Post::find($id);
         $comments = $post->comments->all();
         return CommentResource::collection($comments);
+    }
+
+    public function search($name){
+        return Post::where('title', 'like', '%'.$name.'%')->get();
     }
 }

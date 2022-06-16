@@ -32,6 +32,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick.js"></script>
         <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
+        <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
 
     <style>
         figure{
@@ -53,16 +54,13 @@
             <main>
                 {{ $slot }}
             <!-- Side Bar-->
-            <div class="fixed z-20 inset-0 w-32 h-16 sm:hidden">
-                <button class="open-side mx-4 my-6">Profil Saya</button>
-            </div>
             <aside class="sidebar fixed w-full max-w-screen z-30 inset-0 sm:hidden" hidden aria-label="Sidebar">
                     <div class="overflow-y-auto h-full max-h-screen py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
                         <div class="flex text-gray-900">
                             <div class="flex-auto w-14">
                                 <i class="close-side fa-solid fa-arrow-left"></i>
                             </div>
-                            <div class="flex-auto w-full">
+                            <div class="flex-auto w-full"> 
                                 My Profile
                             </div>
                         </div>
