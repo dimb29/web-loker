@@ -7,7 +7,7 @@
 	  </svg>
 	</div>
 
-	<input type="search" id="search-title" list="title-list" wire:model="searchjob" name="searchjob" type="text" placeholder="Search by listing, location, bedroom number..." 
+	<input type="search" id="search-title" list="title-list" wire:model="searchjob" name="searchjob" type="text" placeholder="Cari berdasarkan posisi pekerjaan, kata kunci, atau nama perusahaan" 
 	class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
 	<datalist id="title-list">
                  @foreach ($postsearch as $post)
@@ -16,19 +16,19 @@
             </datalist>
 	  </div>
 
-	<div class="flex items-center justify-between mt-4">
+	<div class="flex items-center justify-between mb-6 mt-4">
 	
-		<p class="mb-4">
+		
 		<button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md active:shadow-lg transition duration-150 ease-in-out" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
 			Filters
 		</button>
-		</p>
-		<div class="flex items-center justify-end -mt-4" data-mdb-ripple="true"
-				data-mdb-ripple-color="light">
-			<button wire:click="searchJob()" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800">
-				SEARCH
-			</button>
-		</div>
+		
+		<button wire:click="searchJob()" data-mdb-ripple="true"
+			data-mdb-ripple-color="light"
+			class="w-48 justify-end inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800">
+			SEARCH
+		</button>
+		
 	</div>
 	<!-- px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md -->
 	<!-- inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 -->
@@ -38,8 +38,8 @@
 
 	<div>
 	  <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-		<input type="search" id="search-title" list="job-list" wire:model.defer="locations" name="locations" type="text" placeholder="Search by location..." 
-		class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+		<input type="search" id="search-title" list="job-list" wire:model.defer="locations" name="locations" type="text" placeholder=" Semua Lokasi" 
+		class="px-4 py-3 pholderc w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
 		<datalist id="job-list">
 			@foreach($cities as $kota)
 				<option value="{{ ucwords(strtolower($kota['name'])) }}">
