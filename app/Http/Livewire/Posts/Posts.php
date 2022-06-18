@@ -25,7 +25,7 @@ class Posts extends Component
     use WithPagination;
     use WithFileUploads;
 
-    public $title, $content, $category, $post_id, $views;
+    public $title, $content, $category, $post_id, $views, $email, $wa;
     public $location, $jenker, $kualif, $pengkerja, $spesialis, $tingker;
     public $tagids = array();
     public $photos = [];
@@ -60,13 +60,17 @@ class Posts extends Component
             'pengkerja' => 'required',
             'spesialis' => 'required',
             'tingker'   => 'required',
-            'location'   => 'required',
+            'location'  => 'required',
+            'email'     => 'required',
+            'wa'        => 'required',
         ]);
         // dd($this->location);
         // Update or Insert Post
         $post = Post::updateOrCreate(['id' => $this->post_id], [
             'title' => $this->title,
             'content' => $this->content,
+            'email' => $this->email,
+            'wa' => $this->wa,
             'category_id' => intVal($this->category),
             'jeniskerja_id' => intVal($this->jenker),
             'kualifikasilulus_id' => intVal($this->kualif),
@@ -147,6 +151,8 @@ class Posts extends Component
         $this->pengkerja = $post->pengalamankerja_id;
         $this->tingker = $post->tingkatkerja_id;
         $this->tagids = $post->tags->pluck('id');
+        $this->wa = $post->wa;
+        $this->email = $post->email;
 
         $this->openModal();
     }

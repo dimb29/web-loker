@@ -25,6 +25,8 @@ class Post extends Model
         'province_id',
         'location_id',
         'author_id',
+        'email',
+        'wa',
     ];
 
     public function author(){

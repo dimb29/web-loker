@@ -7,8 +7,8 @@
     <!-- Jenis Kerja -->
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="container">
-            <div class="flex flex-wrap">
-                <div class="w-1/3 sm:w-1/5 m-2 text-white">
+            <div class="flex flex-col sm:flex-row">
+                <div class="sm:w-1/4 m-2 text-white">
                     <div wire:click="typePaid('1')" class="flex flex-col opacity-40 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 
                     overflow-hidden shadow-xl sm:rounded-lg px-4 py-4 cursor-pointer hover:shadow-2xl 
                     transition duration-150 transform hover:-translate-y-2">
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-1/3 sm:w-1/5 m-2 text-white">
+                <div class="sm:w-1/4 m-2 text-white">
                     <div wire:click="typePaid('2')" class="flex flex-col bg-gradient-to-r from-gray-500 via-gray-400 to-gray-600 overflow-hidden shadow-xl sm:rounded-lg px-4 py-4 cursor-pointer hover:shadow-2xl
                     transition duration-150 transform hover:-translate-y-2">
                         <div class="text-center">
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-1/3 sm:w-1/5 m-2 text-white">
+                <div class="sm:w-1/4 m-2 text-white">
                     <div wire:click="typePaid('3')" class="flex flex-col bg-gradient-to-r from-amber-700 via-amber-600 to-amber-900 overflow-hidden shadow-xl sm:rounded-lg px-4 py-4 cursor-pointer hover:shadow-2xl
                     transition duration-150 transform hover:-translate-y-2">
                         <div class="text-center">
@@ -105,8 +105,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-1/3 sm:w-1/5 m-2 text-white">
-                    <div wire:click="typePaid('4')" class="flex flex-col rounde bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 overflow-hidden shadow-xl sm:rounded-lg px-4 py-4 cursor-pointer hover:shadow-2xl
+                <div class="sm:w-1/4 m-2 text-white">
+                    <div wire:click="typePaid('4')" class="flex flex-col bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 overflow-hidden shadow-xl sm:rounded-lg px-4 py-4 cursor-pointer hover:shadow-2xl
                     transition duration-150 transform hover:-translate-y-2">
                         <div class="text-center">
                             <h1 class="text-xl font-bold">" ECO "</h1>

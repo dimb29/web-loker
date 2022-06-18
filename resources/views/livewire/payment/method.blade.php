@@ -53,7 +53,7 @@
                         Bayar
                     </button>
                 </div>
-                <div id="modal-bayar"class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                <div id="modal-bayar" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden absolute top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                     <div class="relative p-4 w-full max-w-md h-full md:h-auto">
                         <!-- Modal content -->
                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">

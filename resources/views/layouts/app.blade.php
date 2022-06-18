@@ -102,7 +102,7 @@
                                 </x-jet-responsive-nav-link>
                             </li>
                         </ul>
-                        <div class="fixed bottom-0 right-0">
+                        <div class="fixed bottom-0 right-0 mr-4 mt-48">
                         <img class="object-cover h-72 w-full" src="http://localhost:8000/storage/photos/chara20.svg">
                         </div>
                     </div>
