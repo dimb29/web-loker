@@ -27,6 +27,7 @@ class Berita extends Component
     public $isOpen = 0;
     public $limitPerPage = 3;
     public $searchjob,$kualif_lulus,$jenis_kerja,$spes_kerja,$peng_kerja,$ting_kerja;
+    public $minrange,$maxrange;
     public $sj_split,$loc_split,$kl_split,$jk_split;
     public $locations = "";
     // public $posts;
@@ -54,6 +55,8 @@ class Berita extends Component
         $this->locations = $search[1];
         $this->kualif_lulus = $search[2];
         $this->jenis_kerja = $search[3];
+        $this->minrange = $search[4];
+        $this->maxrange = $search[5];
         $this->myid = "";
         // dd($search);
         // dd($this->locations);
@@ -68,15 +71,19 @@ class Berita extends Component
             $loc_split = str_replace('+',' ',explode('=', $split[1]));
             $kl_split = str_replace('+',' ',explode('=', $split[2]));
             $jk_split = str_replace('+',' ',explode('=', $split[3]));
+            $minr_split = str_replace('+',' ',explode('=', $split[4]));
+            $maxr_split = str_replace('+',' ',explode('=', $split[5]));
             // dd($sj_split);
-            if($sj_split[1] != '' || $loc_split[1] != '' || $kl_split[1] != '' || $jk_split[1] != ''){
-                if($this->searchjob != '' || $this->locations != '' || $this->kualif_lulus != '' || $this->jenis_kerja != ''){
+            if($sj_split[1] != '' || $loc_split[1] != '' || $kl_split[1] != '' || $jk_split[1] != '' || $maxr_split[1] != '' || $minr_split[1] != ''){
+                if($this->searchjob != '' || $this->locations != '' || $this->kualif_lulus != '' || $this->jenis_kerja != '' || $this->maxrange != '' || $this->minrange != ''){
     
                 }else{
                     $this->searchjob = $sj_split[1];
                     $this->locations = $loc_split[1];
                     $this->kualif_lulus = $kl_split[1];
                     $this->jenis_kerja = $jk_split[1];
+                    $this->minrange = $kl_split[1];
+                    $this->maxrange = $jk_split[1];
                 }
             }
         }elseif(count($split) == 1){
@@ -96,6 +103,10 @@ class Berita extends Component
                 $this->spes_kerja = $fil_split[1];
             }elseif($fil_split[0] == 'tk_send'){
                 $this->ting_kerja = $fil_split[1];
+            }elseif($fil_split[0] == 'minrange'){
+                $this->minrange = $fil_split[1];
+            }elseif($fil_split[0] == 'maxrange'){
+                $this->maxrange = $fil_split[1];
             }
         }
     } 
@@ -104,31 +115,38 @@ class Berita extends Component
     {
         $now = Carbon::now();
         $regency = Regency::where('name', 'like',$this->locations . '%')->first();
-        // dd($this->peng_kerja);
-        if($this->locations == ""){
-            $posts = Post::leftJoin('images','posts.id', 'images.post_id')
-                            ->leftJoin('regencies', 'posts.location_id', 'regencies.id')
-                            ->where('posts.title', 'like', '%' . $this->searchjob . '%')
-                            ->where('posts.jeniskerja_id', 'like',$this->jenis_kerja . '%')
-                            ->where('posts.kualifikasilulus_id', 'like',$this->kualif_lulus . '%')
-                            ->where('posts.pengalamankerja_id', 'like',$this->peng_kerja . '%')
-                            ->where('posts.spesialiskerja_id', 'like',$this->spes_kerja . '%')
-                            ->where('posts.tingkatkerja_id', 'like',$this->ting_kerja . '%')
-                            ->orderBy('posts.id', 'desc')->paginate($this->limitPerPage);
-                            $this->emit('postStore');
-        }else{
-            $posts = Post::leftJoin('images','posts.id', 'images.post_id')
-                            ->leftJoin('regencies', 'posts.location_id', 'regencies.id')
-                            ->where('posts.title', 'like', '%' . $this->searchjob . '%')
-                            ->where('posts.location_id', 'like',$regency->id . '%')
-                            ->where('posts.jeniskerja_id', 'like',$this->jenis_kerja . '%')
-                            ->where('posts.kualifikasilulus_id', 'like',$this->kualif_lulus . '%')
-                            ->where('posts.pengalamankerja_id', 'like',$this->peng_kerja . '%')
-                            ->where('posts.spesialiskerja_id', 'like',$this->spes_kerja . '%')
-                            ->where('posts.tingkatkerja_id', 'like',$this->ting_kerja . '%')
-                            ->orderBy('posts.id', 'desc')->paginate($this->limitPerPage);
-                            $this->emit('postStore');
-        }
+        // dd($this->minrange);
+            $posts = Post::search($this->searchjob);
+            if($this->locations != null){
+                if(strlen($regency->id) > 2){
+                    $posts->where('location_id',$regency->id);
+                }else{
+                    $posts->where('province_id',$regency->id);
+                }
+            }
+            if($this->jenis_kerja != null){
+                $posts->where('jeniskerja_id',$this->jenis_kerja);
+            }
+            if($this->kualif_lulus != null){
+                $posts->where('kualifikasilulus_id',$this->kualif_lulus);
+            }
+            if($this->peng_kerja != null){
+                $posts->where('pengalamankerja_id',$this->peng_kerja);
+            }
+            if($this->spes_kerja != null){
+                $posts->where('spesialiskerja_id',$this->spes_kerja);
+            }
+            if($this->ting_kerja != null){
+                $posts->where('tingkatkerja_id',$this->ting_kerja);
+            }
+            if($this->minrange != null){
+                $posts->where('salary_start','>=',$this->minrange);
+            }
+            if($this->maxrange != null){
+                $posts->where('salary_end','<=',$this->maxrange);
+            }
+            $post = $posts->paginate($this->limitPerPage);
+            // dd($post);
 // dd($posts);
         $no = 1;
 
@@ -155,7 +173,7 @@ class Berita extends Component
 
                         
         return view('livewire.posts.berita', [
-            'posts' => $posts,
+            'posts' => $post,
             'categories' => Category::all(),
             'tags' => Tag::all(),
             'no' => $no,

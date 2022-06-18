@@ -3,6 +3,7 @@
 
 use App\Http\Livewire\Main;
 use App\Http\Livewire\Search;
+use App\Http\Livewire\SearchSingle;
 use App\Http\Livewire\ProvilNav;
 use App\Http\Livewire\NavigationDropdown;
 use App\Http\Livewire\Categories\Categories;
@@ -71,6 +72,7 @@ Route::prefix('dashboard')->group(function(){
     // Route::get('/berita/{id}', Berita::class)->name('berita');
     Route::get('/berita/{id}', Berita::class)->name('berita/{id}');
     Route::get('/search', Search::class)->name('search');
+    Route::get('/range', SearchSingle::class);
     // Route::get('/navprov', ProvilNav::class)->name('navprov');
 
     Route::prefix('payment')->group(function(){

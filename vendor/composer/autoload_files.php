@@ -26,6 +26,8 @@ return array(
     '538ca81a9a966a6716601ecf48f4eaef' => $vendorDir . '/opis/closure/functions.php',
     'e39a8b23c42d4e1452234d762b03835a' => $vendorDir . '/ramsey/uuid/src/functions.php',
     '2c102faa651ef8ea5874edb585946bce' => $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
+    '979dffec6fa5205cabd2c2cd1e9e6b3a' => $vendorDir . '/algolia/algoliasearch-client-php/src/Http/Psr7/functions.php',
+    '6783aef8c489bbc166eee2536fe605d5' => $vendorDir . '/algolia/algoliasearch-client-php/src/functions.php',
     '9cdd7b9056abc3081735233ba9dd9c7f' => $vendorDir . '/facade/flare-client-php/src/helpers.php',
     '37a3dc5111fe8f707ab4c132ef1dbc62' => $vendorDir . '/guzzlehttp/guzzle/src/functions_include.php',
     '265b4faa2b3a9766332744949e83bf97' => $vendorDir . '/laravel/framework/src/Illuminate/Collections/helpers.php',

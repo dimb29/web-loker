@@ -5,11 +5,29 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '7083a68a734e6ea5c34347b360c5478144b3fe43',
+        'reference' => '028698d37c87baf2734eaa8d0c916e2f6ad8fb1e',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
     'versions' => array(
+        'algolia/algoliasearch-client-php' => array(
+            'pretty_version' => '3.2.0',
+            'version' => '3.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../algolia/algoliasearch-client-php',
+            'aliases' => array(),
+            'reference' => '8d78421f831b31868506e429828935c4dd1a0f23',
+            'dev_requirement' => false,
+        ),
+        'algolia/scout-extended' => array(
+            'pretty_version' => 'v2.0.2',
+            'version' => '2.0.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../algolia/scout-extended',
+            'aliases' => array(),
+            'reference' => '1534b7060f70f82ceade6b50db2e8a9ac8b5869f',
+            'dev_requirement' => false,
+        ),
         'asm89/stack-cors' => array(
             'pretty_version' => 'v2.1.1',
             'version' => '2.1.1.0',
@@ -481,7 +499,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '7083a68a734e6ea5c34347b360c5478144b3fe43',
+            'reference' => '028698d37c87baf2734eaa8d0c916e2f6ad8fb1e',
             'dev_requirement' => false,
         ),
         'laravel/sanctum' => array(
@@ -491,6 +509,15 @@
             'install_path' => __DIR__ . '/../laravel/sanctum',
             'aliases' => array(),
             'reference' => '31fbe6f85aee080c4dc2f9b03dc6dd5d0ee72473',
+            'dev_requirement' => false,
+        ),
+        'laravel/scout' => array(
+            'pretty_version' => 'v9.4.9',
+            'version' => '9.4.9.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/scout',
+            'aliases' => array(),
+            'reference' => '61ce79ce87fbebb28dcc0dd8f95776aa0dec00c8',
             'dev_requirement' => false,
         ),
         'laravel/serializable-closure' => array(
@@ -988,6 +1015,15 @@
             'replaced' => array(
                 0 => '4.2.3',
             ),
+        ),
+        'riimu/kit-phpencoder' => array(
+            'pretty_version' => 'v2.4.1',
+            'version' => '2.4.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../riimu/kit-phpencoder',
+            'aliases' => array(),
+            'reference' => 'ca6f004e1290aec7ef4bebf6c0807b30fcf981d7',
+            'dev_requirement' => false,
         ),
         'sabberworm/php-css-parser' => array(
             'pretty_version' => '8.4.0',

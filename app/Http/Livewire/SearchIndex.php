@@ -11,22 +11,32 @@ use Illuminate\Http\Client\Response;
 class SearchIndex extends Component
 {
     use WithPagination;
-    // protected $updatesQueryString = [
-    //     ['searchtitle' => ['except' => '']]
-    // ];
-    public $searchjob,$locations,$kualif_lulus,$jenis_kerja;
+    protected $listeners = [
+        'minRange',
+        'maxRange',
+    ];
+
+    public $searchjob,$locations,$kualif_lulus,$jenis_kerja,$minrange,$maxrange;
     public $isOpen = 0;
 
     public $myid = 0;
     public function postDetail($id){
         $this->myid = $id;
     }
+    public function minRange($value){
+        if(!is_null($value))
+        $this->minrange = $value*1000000;
+    }
+    public function maxRange($value){
+        if(!is_null($value))
+        $this->maxrange = $value*1000000;
+    }
 
     public function searchJob(){
         // $this->postjob = $postjob;
-        $emit = $this->emit('searchJobs', [$this->searchjob,$this->locations,$this->kualif_lulus,$this->jenis_kerja]);
+        $emit = $this->emit('searchJobs', [$this->searchjob,$this->locations,$this->kualif_lulus,$this->jenis_kerja,$this->minrange,$this->maxrange]);
         // $emit = $this->emit('searchJobs', [$this->locations]);
-        // dd($emit);
+        // dd($this->minrange." ".$this->maxrange);
     }
     public function render()
     {
@@ -36,6 +46,8 @@ class SearchIndex extends Component
         $this->locations = null;
         $this->kualif_lulus = null;
         $this->jenis_kerja = null;
+        $this->minrange = null;
+        $this->maxrange = null;
     }
     public function searchClick()
     {

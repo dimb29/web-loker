@@ -34,7 +34,7 @@ class Method extends Component
     public function createVa(){
         Xendit::setApiKey($this->token);
         $external_id = 'va-'.time();
-        // dd($this->getprice->price);
+        // dd($this->bank_code);
         $params = ["external_id" => $external_id,
             "bank_code" => $this->bank_code,
             "name" => Auth::user()->first_name." ".Auth::user()->last_name,
@@ -55,6 +55,7 @@ class Method extends Component
             'admin_fee' =>  4500,
 
         ]);
+        dd($params);
 
         $createVA = \Xendit\VirtualAccounts::create($params);
         session()->flash('message', 'virtual account berhasil dibuat.');

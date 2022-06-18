@@ -42,6 +42,7 @@ return array(
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Svg\\' => array($vendorDir . '/phenx/php-svg-lib/src/Svg'),
     'Sabberworm\\CSS\\' => array($vendorDir . '/sabberworm/php-css-parser/src'),
+    'Riimu\\Kit\\PHPEncoder\\' => array($vendorDir . '/riimu/kit-phpencoder/src'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Ramsey\\Collection\\' => array($vendorDir . '/ramsey/collection/src'),
     'Psy\\' => array($vendorDir . '/psy/psysh/src'),
@@ -69,6 +70,7 @@ return array(
     'Laravel\\Telescope\\Database\\Factories\\' => array($vendorDir . '/laravel/telescope/database/factories'),
     'Laravel\\Telescope\\' => array($vendorDir . '/laravel/telescope/src'),
     'Laravel\\SerializableClosure\\' => array($vendorDir . '/laravel/serializable-closure/src'),
+    'Laravel\\Scout\\' => array($vendorDir . '/laravel/scout/src'),
     'Laravel\\Sanctum\\' => array($vendorDir . '/laravel/sanctum/src'),
     'Laravel\\Jetstream\\' => array($vendorDir . '/laravel/jetstream/src'),
     'Laravel\\Fortify\\' => array($vendorDir . '/laravel/fortify/src'),
@@ -106,4 +108,6 @@ return array(
     'BaconQrCode\\' => array($vendorDir . '/bacon/bacon-qr-code/src'),
     'Asm89\\Stack\\' => array($vendorDir . '/asm89/stack-cors/src'),
     'App\\' => array($baseDir . '/app'),
+    'Algolia\\ScoutExtended\\' => array($vendorDir . '/algolia/scout-extended/src'),
+    'Algolia\\AlgoliaSearch\\' => array($vendorDir . '/algolia/algoliasearch-client-php/src'),
 );

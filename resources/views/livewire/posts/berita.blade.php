@@ -1,12 +1,11 @@
 
 <x-slot name="header">
-<div class="flex flex-col h-56">
-    <img class="object-cover h-56 w-full" src="http://localhost:8000/storage/photos/bghd.svg">
+<div class="flex flex-col h-48">
+    <img class="object-cover h-48 w-full" src="http://localhost:8000/storage/photos/jobicon1.jpg">
     </div>
 </x-slot>
 <x-slot name="footer">
 </x-slot>
-            
 <div class="py-12 bg-yellow">
     <div class="flex-auto ">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 -mt-40">
@@ -15,12 +14,10 @@
             </div>
         </div>
     </div>
-<div wire:loading wire:target="postDetail,delSaveJob,saveJob" class="fixed z-20 inset-0 place-content-center ">
-    <div class="fixed justify-center h-full w-full opacity-25 bg-slate-300"> </div>
-    <div class="flex justify-center my-72">
-    <div
-    class="my-48 dots">
-</div>
+<div wire:loading wire:target="postDetail,delSaveJob,saveJob" class="fixed z-20 inset-0 place-content-center">
+<div class="fixed justify-center h-full w-full opacity-25 bg-gray-400"> </div>
+    <div class="flex justify-center mt-56">
+            <img class="object-cover w-36" src="http://localhost:8000/storage/loaders/rings.svg">
     </div>
 </div>
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-8">
@@ -31,13 +28,13 @@
                     <div class="flex flex-col">
                         @if($posts != '')
                             @foreach ($posts as $post)
-                            <div class="flex flex-col mb-8 bg-white rounded-lg shadow-xl 
+                            <div class="mb-8 bg-white rounded-lg shadow-xl 
                                     mt-4 transition duration-150 transform hover:scale-110 hover:-translate-y-2 
                                     text-grey-500 hover:text-blue-500 cursor-pointer transition border-b border-r" 
-                                    data-mdb-ripple="true" data-mdb-ripple-color="light" id="daft_job">
-                                <div wire:click="postDetail({{$post->post_id}})"
-                                data-id="{{ $post->post_id}}" class="daft-job">
-                                    <img class="object-cover h-48 w-screen rounded-lg"src="{{ $post->url }}">
+                                    data-mdb-ripple="true" data-mdb-ripple-color="light">
+                                <div wire:click="postDetail({{$post->id}})"
+                                data-id="{{ $post->id}}" class="daft-job">
+                                    <img class="object-cover h-48 w-screen rounded-lg"src="{{ $post->images['0']['url'] }}">
                                     <div class="pt-6 px-6 -mt-4">
                                         <h5 class="text-gray-900 text-xl font-semibold h-16  mb-8">
                                             {{ $post->title }}
@@ -81,31 +78,21 @@
                                 @if(Auth::user() != null)
                                 @php $getpostid = null @endphp
                                 @foreach($simpan_job as $simjob)
-                                @if($simjob->post_id == $post->post_id)
+                                @if($simjob->post_id == $post->id)
                                 @php $getpostid = $simjob->post_id @endphp
                                 @endif
                                 @endforeach
-                                @if($getpostid == $post->post_id)
-                                <div class="tooltip-wrap">
+                                @if($getpostid == $post->id)
                                     <div class="mb-2 text-right z-10 px-4">
-                                        <button wire:click="delSaveJob({{$post->post_id}})" class="w-10 h-10 focus:outline-none rounded-3xl hover:bg-gray-300">
-                                            <i class="text-2xl fa-solid fa-bookmark"></i>
+                                        <button wire:click="delSaveJob({{$post->id}})" class="w-10 h-10 focus:outline-none rounded-3xl hover:bg-gray-300">
+                                            <i class="fa-solid fa-bookmark"></i>
                                         </button>
-                                        <div class="tooltip-content">
-    <p>Simpan Loker</p>
-  </div> 
-</div>
                                     </div>
                                 @else
-                                <div class="tooltip-wrap">
                                     <div class="mb-2 text-right z-10 px-4">
-                                        <button wire:click="saveJob({{$post->post_id}})" class="w-10 h-10 focus:outline-none rounded-3xl hover:bg-gray-300">
-                                            <i class="text-2xl fa-regular fa-bookmark"></i>
+                                        <button wire:click="saveJob({{$post->id}})" class="w-10 h-10 focus:outline-none rounded-3xl hover:bg-gray-300">
+                                            <i class="fa-regular fa-bookmark"></i>
                                         </button>
-                                        <div class="tooltip-content">
-    <p>Simpan Loker</p>
-  </div> 
-</div>
                                     </div>
                                 @endif
                                 @endif
@@ -143,21 +130,16 @@
                 </div>
             </div>
         @endif
-        <div class="sm:hidden bg-cyan-50 mb-8 mr-2 shadow-xl shadow-inner rounded-full section" id="anchoredCtaWeb">
-                <a href="#top">
-                <div class="child1 mx-2">
-                <lord-icon
-                    src="https://cdn.lordicon.com/msoeawqm.json"
-                    trigger="loop"
-                    colors="primary:#b4b4b4,secondary:#08a88a"
-                    style="width:50px;height:50px">
-                </lord-icon>
-                <p class="text-gray-900 -mt-2 font-medium">
-                Search
-                </p>
-                </div>
-                </a>
-        </div>
+        <div class="bg-slate-50 rounded-full section" id="anchoredCtaWeb">
+  <div class="container">
+  <lord-icon
+    src="https://cdn.lordicon.com/msoeawqm.json"
+    trigger="loop"
+    colors="primary:#b4b4b4,secondary:#08a88a"
+    style="width:50px;height:50px">
+</lord-icon>
+ </div>
+</div>
     </div>
 </div>
 
@@ -203,15 +185,15 @@
             };
     });
 
-        document.addEventListener("scroll", function() {
-    const anchoredCtaWeb = document.getElementById("anchoredCtaWeb");
-    if (window.pageYOffset > 200) {
-        anchoredCtaWeb.classList.add("show");
-    }
-    if (window.pageYOffset < 200) {
-        anchoredCtaWeb.classList.remove("show");
-    }
-    });
+    document.addEventListener("scroll", function() {
+  const anchoredCtaWeb = document.getElementById("anchoredCtaWeb");
+  if (window.pageYOffset > 200) {
+    anchoredCtaWeb.classList.add("show");
+  }
+  if (window.pageYOffset < 200) {
+    anchoredCtaWeb.classList.remove("show");
+  }
+});
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>

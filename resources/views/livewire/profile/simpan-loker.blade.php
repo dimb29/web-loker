@@ -36,8 +36,8 @@
                             </div>
                         </div>
                         <div class="m-2 px-4 top-0">
-                            <button
-                                class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150"
+                            <button data-id="{{$post->post_id}}"
+                                class="del-btn inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150"
                                 data-modal-toggle="popup-modal">
                                     <i class="fa-solid fa-trash-can"></i> | 
                                 Delete
@@ -55,7 +55,7 @@
                     <div class="p-6 text-center">
                     <svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this content?</h3>
-                    <button wire:click="delSaveJob({{$post->post_id}})" data-modal-toggle="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                    <button wire:click="" data-modal-toggle="popup-modal" type="button" class="sure-del text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                     Yes, I'm sure
                     </button>
                     <button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
@@ -65,6 +65,7 @@
                     </div>
                     @endif
                 @endforeach
+                <!-- wire:click="delSaveJob({{$post->post_id}})"  -->
             </div>
         </div>
         <div class="py-4">
@@ -77,6 +78,11 @@
         $('.job-list').on('click', function(){
             var dataId = $(this).attr('data-id')
             window.open("{{url('dashboard/posts/')}}/"+dataId,'_blank');
+        })
+        $('.del-btn').click(function(){
+            var dataId = $(this).attr('data-id')
+            $('.sure-del').attr("wire:click", 'delSaveJob('+dataId+')')
+            // alert('berhasil')
         })
     })
 </script>

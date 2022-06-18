@@ -1,3 +1,5 @@
+
+
 <div class="flex justify-center ...">
 <div class="w-full md:w-5/6 shadow-xl p-5 rounded-lg bg-white">
   <div class="relative">
@@ -63,7 +65,13 @@
                 <option value="{{$jenker->id}}">{{$jenker->name_jk}}</option>
         	@endforeach
 		  </select>
-
+		<button data-modal-toggle="modal-gaji"
+				type="button"
+				data-mdb-ripple="true"
+				data-mdb-ripple-color="light"
+				class="px-4 py-3 w-full rounded-md border-transparent focus:border-gray-500 focus:ring-0 text-sm inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md
+				hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+				>Gaji</button>
 		<button
 				type="button"
 				data-mdb-ripple="true"
@@ -73,6 +81,69 @@
 				hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
 			>Reset Filter
 		</button>
+		<div id="modal-gaji"class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+			<div class="relative p-4 w-full max-w-md h-full md:h-auto">
+				<!-- Modal content -->
+				<style>
+				input[type=range]::-webkit-slider-thumb {
+					pointer-events: all;
+					width: 24px;
+					height: 24px;
+					-webkit-appearance: none;
+				/* @apply w-6 h-6 appearance-none pointer-events-auto; */
+				}
+				</style> 
+				<div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+					<!-- Modal body -->
+					<div class="p-6 space-y-6">
+						<div x-data="range()" x-init="mintrigger(); maxtrigger()" class="relative max-w-xl w-full">
+							<div>
+							<div class="flex flex-col text-center items-center py-5">
+								<div>
+									<p>Rentang gaji per bulan</p>
+									<b class="min_price"></b> sampai <b class="max_price"></b>
+								</div>
+								<div class="flex justify-between items-center py-5">
+									<div>
+										<input type="hidden" maxlength="5" x-on:input="mintrigger" x-model="minprice" class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
+									</div>
+									<div>
+										<input type="hidden" maxlength="5" x-on:input="maxtrigger" x-model="maxprice" class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
+									</div>
+								</div>
+							</div>
+							<input type="range"
+									step="0.5"
+									x-bind:min="min" x-bind:max="max"
+									x-on:input="mintrigger"
+									x-model="minprice"
+									class="minrange absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
+
+							<input type="range" 
+									step="0.5"
+									x-bind:min="min" x-bind:max="max"
+									x-on:input="maxtrigger"
+									x-model="maxprice"
+									class="maxrange absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
+
+							<div class="relative z-10 h-2">
+
+								<div class="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-200"></div>
+								<div class="absolute z-20 top-0 bottom-0 rounded-md bg-green-300" x-bind:style="'right:'+maxthumb+'%; left:'+minthumb+'%'"></div>
+								<div class="absolute z-30 w-6 h-6 top-0 left-0 bg-green-300 rounded-full -mt-2 -ml-1" x-bind:style="'left: '+minthumb+'%'"></div>
+								<div class="absolute z-30 w-6 h-6 top-0 right-0 bg-green-300 rounded-full -mt-2 -mr-3" x-bind:style="'right: '+maxthumb+'%'"></div>
+						
+							</div>
+						</div>
+					</div>
+					<!-- Modal footer -->
+					<div class="flex justify-center items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+						<button onclick="onclickrange()" data-modal-toggle="modal-gaji" type="button" class="mod-gaji text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Setuju</button>
+						<button data-modal-toggle="modal-gaji" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Tutup</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	  </div>
 	</div>
   </div>
@@ -82,4 +153,36 @@
 $(document).ready(function() {
     $('.sel-loc').select2();
 });
+
+function range() {
+        return {
+          minprice: 3, 
+          maxprice: 10,
+          min: 1, 
+          max: 20,
+          minthumb: 0,
+          maxthumb: 0,
+          
+          mintrigger() {   
+            this.minprice = Math.min(this.minprice, this.maxprice - 0.5);      
+            this.minthumb = ((this.minprice - this.min) / (this.max - this.min)) * 100;
+		  	$(".min_price").text(this.minprice+'jt');
+          },
+           
+          maxtrigger() {
+            this.maxprice = Math.max(this.maxprice, this.minprice + 0.5); 
+            this.maxthumb = 100 - (((this.maxprice - this.min) / (this.max - this.min)) * 100); 
+		  	$(".max_price").text(this.maxprice+'jt');
+			// console.log(this.maxprice);
+          },
+        }
+    }
+		  function onclickrange(){
+			var minVal = $('.minrange').val()
+			var maxVal = $('.maxrange').val()
+            window.livewire.emit('minRange',minVal);
+            window.livewire.emit('maxRange',maxVal);
+			// alert(dataVal)
+		  }
 </script>
+<script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
