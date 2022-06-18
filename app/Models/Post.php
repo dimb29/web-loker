@@ -23,6 +23,8 @@ class Post extends Model
         'tingkatkerja_id',
         'location_id',
         'author_id',
+        'email',
+        'wa',
     ];
 
     public function author(){

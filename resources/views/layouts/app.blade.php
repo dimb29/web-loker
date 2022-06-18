@@ -49,7 +49,7 @@
                 <button class="open-side mx-4 my-6">Profil Saya</button>
             </div>
             <aside class="sidebar fixed w-full max-w-screen z-30 inset-0 sm:hidden" hidden aria-label="Sidebar">
-                    <div class="overflow-y-auto h-full max-h-screen bg-cyan-50 py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+                    <div class="h-full max-h-screen bg-cyan-50 py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
                         <div class="flex text-gray-900">
                             <div class="flex-auto h-18 w-18 mt-4 mr-4">
                                 <i class="close-side fa-solid fa-arrow-left text-xl"></i>
@@ -103,7 +103,7 @@
                                 </x-jet-responsive-nav-link>
                             </li>
                         </ul>
-                        <div class="fixed bot-0 right-0 mr-4 mt-48">
+                        <div class="fixed bottom-0 right-0 mr-4 mt-48">
                         <img class="object-cover h-72 w-full" src="http://localhost:8000/storage/photos/chara20.svg">
                         </div>
                     </div>

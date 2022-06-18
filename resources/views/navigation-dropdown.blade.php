@@ -9,9 +9,6 @@
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-            <div class="flex z-20 inset-0 w-32 h-16 sm:hidden">
-                <button class="open-side mx-4 my-6">Profil Saya</button>
-            </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
