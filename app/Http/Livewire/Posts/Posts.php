@@ -28,8 +28,17 @@ class Posts extends Component
     public $title, $content, $category, $post_id, $views, $email, $wa;
     public $location, $jenker, $kualif, $pengkerja, $spesialis, $tingker;
     public $tagids = array();
+    public $multitle = array();
+    public $multitles = array();
     public $photos = [];
     public $isOpen = 0;
+    protected $listeners = [
+        'multiTitle'
+    ];
+
+    public function multiTitle($title){
+        $this->multitle = $title;
+    }
 
 
     public function render()
@@ -64,7 +73,7 @@ class Posts extends Component
             'email'     => 'required',
             'wa'        => 'required',
         ]);
-        // dd($this->location);
+        // dd($this->multitle);
         // Update or Insert Post
         $post = Post::updateOrCreate(['id' => $this->post_id], [
             'title' => $this->title,
@@ -118,6 +127,19 @@ class Posts extends Component
                 ]);
             }
         }
+        if (count($this->multitle) > 0) {
+            $post_title = DB::table('post_title')->where('post_id', $post->id)->delete();
+            // dd($this->multitle);
+            foreach ($this->multitle as $multitle) {
+                DB::table('post_title')->insert([
+                    'post_id' => $post->id,
+                    // 'title_id' => intVal($multitle),
+                    'title' =>  $multitle,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
 
         session()->flash(
             'message',
@@ -138,9 +160,12 @@ class Posts extends Component
 
     public function edit($id)
     {
-        $post = Post::with('tags')->findOrFail($id);
+        $post = Post::with('tags','PostTitles')->findOrFail($id);
+        // dd($post->content);
 
         $this->post_id = $id;
+        $this->multitles = $post->postTitles;
+        $this->multitle = $post->postTitles->pluck('title');
         $this->title = $post->title;
         $this->content = $post->content;
         $this->category = $post->category_id;
@@ -153,6 +178,7 @@ class Posts extends Component
         $this->tagids = $post->tags->pluck('id');
         $this->wa = $post->wa;
         $this->email = $post->email;
+        // dd($this->multitle);
 
         $this->openModal();
     }
@@ -171,6 +197,7 @@ class Posts extends Component
     public function closeModal()
     {
         $this->isOpen = false;
+        $this->resetInputFields();
     }
 
     private function resetInputFields()

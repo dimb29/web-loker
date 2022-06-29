@@ -21,7 +21,7 @@
                                                             {{ $postrend->first_name . ' ' . $postrend->last_name }}
                                                             </h5>
                                                             <h5 class="text-gray-900 text-xl font-medium">
-                                                                {{ $postrend->regency->name }}
+                                                                
                                                             </h5>
                                         </div>
                                         <div class="p-6 font-medium text-sm text-gray-400">

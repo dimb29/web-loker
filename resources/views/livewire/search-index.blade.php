@@ -1,5 +1,4 @@
 
-
 <div class="flex justify-center ...">
 <div class="w-full md:w-5/6 shadow-xl p-5 rounded-lg bg-white">
   <div class="relative">
@@ -149,6 +148,13 @@
   </div>
 </div>
 </div>
+	<div wire:loading.delay.longest class="fixed z-20 inset-0 place-content-center">
+		<div class="fixed justify-center h-full w-full opacity-25 bg-gray-400"> </div>
+			<div class="flex justify-center mt-56">
+					<img class="object-cover w-36" src="http://localhost:8000/storage/loaders/rings.svg">
+			</div>
+		</div>
+	</div>
 <script>
 $(document).ready(function() {
     $('.sel-loc').select2();

@@ -52,20 +52,23 @@
 
                             <div>
                             <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
-                                <input type="search" id="search-title" list="job-list" wire:model.defer="locations" name="locations" type="text" placeholder=" Semua Lokasi" 
-                                class="px-4 py-3 w-full pholderc rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-                                <datalist id="job-list">
-                                    @foreach ($provinces as $provinsi)
-                                        <option value="{{ ucwords(strtolower($provinsi['name'])) }}">
-                                            {{ ucwords(strtolower($provinsi['name'])) }}
-                                        </option>
-                                    @endforeach
-                                    @foreach($cities as $kota)
-                                        <option value="{{ ucwords(strtolower($kota['name'])) }}">
-                                            {{ ucwords(strtolower($kota['name'])) }}
-                                        </option>
-                                    @endforeach
-                                </datalist>
+                                <style>
+                                    .dropdown-menu {
+                                        background: #F7F7F7;
+                                        list-style: none;
+                                        position: absolute;
+                                        z-index: 20;
+                                        padding: 5px;
+                                        width: 25%;
+                                    }
+                                    .dropdown-item {
+                                        clear: both;
+                                        width: 100%;
+                                    }
+                                </style>
+                                <input id="search-loc" wire:model.defer="locations" name="locations" type="text" placeholder=" Semua Lokasi" 
+                                class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+                                
 
                                 <select wire:model.defer="kualif_lulus"
                                 class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
@@ -261,6 +264,16 @@
                     window.livewire.emit('post-data');
                 }
             };
+    });
+    var route = "{{ url('dashboard/autocomplete-search') }}";
+    $('#search-loc').typeahead({
+        source: function (query, process) {
+            return $.get(route, {
+                query: query
+            }, function (data) {
+                return process(data);
+            });
+        }
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>

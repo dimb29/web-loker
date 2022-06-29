@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Post;
+use App\Models\Regency;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,7 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class Main extends Component
@@ -23,6 +25,7 @@ class Main extends Component
     protected $listeners = [
         'post-data' => 'postScroll',
         'post-detail' => 'postDetail',
+        'multiTtile'
     ];
     public function postScroll(){
         $this->limitPerPage = $this->limitPerPage + 1;
@@ -81,6 +84,14 @@ class Main extends Component
 
                     ]);
     }
+
+    public function autocompleteSearch(Request $request){
+        // dd($request);
+        $query = $request->get('query');
+        $filterResult = Regency::where('name', 'LIKE', '%'. $query. '%')->get();
+        return response()->json($filterResult);
+    }
+
     // public function scrollPost($id){
         
     //     if($id !== null){

@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         ->get();
 
         $provinces = Province::all();
-        $regencies = Regency::all();        
+        // $regencies = Regency::all();        
         $this->jenker = JenisKerja::all();
         $this->kualif = KualifikasiLulus::all();
         $this->pengkerja = PengalamanKerja::all();
@@ -57,7 +57,7 @@ class AppServiceProvider extends ServiceProvider
             'spesialises' => $this->spesialis,
             'tingkers' => $this->tingker,
             'provinces' => $provinces,
-            'cities'    => $regencies,
+            // 'cities'    => $regencies,
         ]);
     }
 }

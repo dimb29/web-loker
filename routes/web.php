@@ -74,6 +74,7 @@ Route::prefix('dashboard')->group(function(){
     Route::get('/search', Search::class)->name('search');
     Route::get('/range', SearchSingle::class);
     // Route::get('/navprov', ProvilNav::class)->name('navprov');
+    Route::get('/autocomplete-search', [Main::class, 'autocompleteSearch']);
 
     Route::prefix('payment')->group(function(){
         Route::get('/',Payments::class)->name('payment');

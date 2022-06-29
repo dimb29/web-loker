@@ -60,6 +60,11 @@ class Post extends Model
     public function tags(){
         return $this->belongsToMany(Tag::class);
     }
+
+    public function postTitles(){
+        return $this->hasMany(PostTitle::class);
+    }
+
     public function postsave(){
         return $this->hasMany(User::class);
     }
