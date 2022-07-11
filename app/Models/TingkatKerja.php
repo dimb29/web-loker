@@ -15,6 +15,6 @@ class TingkatKerja extends Model
         'name_tk',
     ];
     public function posts(){
-        return $this->hasMany(Post::class);
+        return $this->belongsToMany(Post::class);
     }
 }

@@ -50,11 +50,18 @@ class LogoutOtherBrowserSessionsForm extends Component
     public function logoutOtherBrowserSessions(StatefulGuard $guard)
     {
         $this->resetErrorBag();
-
-        if (! Hash::check($this->password, Auth::user()->password)) {
-            throw ValidationException::withMessages([
-                'password' => [__('This password does not match our records.')],
-            ]);
+        if(Auth::guard('employer')->user() != null){
+            if (! Hash::check($this->password, Auth::guard('employer')->user()->password)) {
+                throw ValidationException::withMessages([
+                    'password' => [__('This password does not match our records.')],
+                ]);
+            }
+        }else{
+            if (! Hash::check($this->password, Auth::user()->password)) {
+                throw ValidationException::withMessages([
+                    'password' => [__('This password does not match our records.')],
+                ]);
+            }
         }
 
         $guard->logoutOtherDevices($this->password);
@@ -77,10 +84,17 @@ class LogoutOtherBrowserSessionsForm extends Component
             return;
         }
 
-        DB::table(config('session.table', 'sessions'))
-            ->where('user_id', Auth::user()->getAuthIdentifier())
-            ->where('id', '!=', request()->session()->getId())
-            ->delete();
+        if(Auth::guard('employer')->user() != null){
+            DB::table(config('session.table', 'sessions'))
+                ->where('employer_id', Auth::guard('employer')->user()->getAuthIdentifier())
+                ->where('id', '!=', request()->session()->getId())
+                ->delete();
+        }else{
+            DB::table(config('session.table', 'sessions'))
+                ->where('user_id', Auth::user()->getAuthIdentifier())
+                ->where('id', '!=', request()->session()->getId())
+                ->delete();
+        }
     }
 
     /**
@@ -93,20 +107,35 @@ class LogoutOtherBrowserSessionsForm extends Component
         if (config('session.driver') !== 'database') {
             return collect();
         }
-
-        return collect(
-            DB::table(config('session.table', 'sessions'))
-                    ->where('user_id', Auth::user()->getAuthIdentifier())
-                    ->orderBy('last_activity', 'desc')
-                    ->get()
-        )->map(function ($session) {
-            return (object) [
-                'agent' => $this->createAgent($session),
-                'ip_address' => $session->ip_address,
-                'is_current_device' => $session->id === request()->session()->getId(),
-                'last_active' => Carbon::createFromTimestamp($session->last_activity)->diffForHumans(),
-            ];
-        });
+        if(Auth::guard('employer')->user() != null){
+            return collect(
+                DB::table(config('session.table', 'sessions'))
+                        ->where('employer_id', Auth::guard('employer')->user()->getAuthIdentifier())
+                        ->orderBy('last_activity', 'desc')
+                        ->get()
+            )->map(function ($session) {
+                return (object) [
+                    'agent' => $this->createAgent($session),
+                    'ip_address' => $session->ip_address,
+                    'is_current_device' => $session->id === request()->session()->getId(),
+                    'last_active' => Carbon::createFromTimestamp($session->last_activity)->diffForHumans(),
+                ];
+            });
+        }else{
+            return collect(
+                DB::table(config('session.table', 'sessions'))
+                        ->where('user_id', Auth::user()->getAuthIdentifier())
+                        ->orderBy('last_activity', 'desc')
+                        ->get()
+            )->map(function ($session) {
+                return (object) [
+                    'agent' => $this->createAgent($session),
+                    'ip_address' => $session->ip_address,
+                    'is_current_device' => $session->id === request()->session()->getId(),
+                    'last_active' => Carbon::createFromTimestamp($session->last_activity)->diffForHumans(),
+                ];
+            });
+        }
     }
 
     /**

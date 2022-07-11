@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\Regency;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Http;
@@ -14,14 +15,19 @@ class SearchIndex extends Component
     protected $listeners = [
         'minRange',
         'maxRange',
+        'dataLocation',
     ];
 
-    public $searchjob,$locations,$kualif_lulus,$jenis_kerja,$minrange,$maxrange;
+    public $searchjob,$locations,$kualif_lulus,$jenis_kerja,$minrange,$maxrange,$mylocation;
     public $isOpen = 0;
 
     public $myid = 0;
     public function postDetail($id){
         $this->myid = $id;
+    }
+    public function dataLocation($id){
+        $this->mylocation = $id;
+        $this->locations =  $id;
     }
     public function minRange($value){
         if(!is_null($value))
@@ -34,7 +40,7 @@ class SearchIndex extends Component
 
     public function searchJob(){
         // $this->postjob = $postjob;
-        $emit = $this->emit('searchJobs', [$this->searchjob,$this->locations,$this->kualif_lulus,$this->jenis_kerja,$this->minrange,$this->maxrange]);
+        $emit = $this->emit('searchJobs', [$this->searchjob,$this->mylocation,$this->kualif_lulus,$this->jenis_kerja,$this->minrange,$this->maxrange]);
         // $emit = $this->emit('searchJobs', [$this->locations]);
         // dd($this->minrange." ".$this->maxrange);
     }

@@ -32,7 +32,11 @@ class UpdateProfileInformationForm extends Component
      */
     public function mount()
     {
-        $this->state = Auth::user()->withoutRelations()->toArray();
+        if(Auth::guard('employer')->user() != null){
+            $this->state = Auth::guard('employer')->user()->withoutRelations()->toArray();
+        }else{
+            $this->state = Auth::user()->withoutRelations()->toArray();
+        }
     }
 
     /**
@@ -45,15 +49,24 @@ class UpdateProfileInformationForm extends Component
     {
         $this->resetErrorBag();
 
-        $updater->update(
-            Auth::user(),
-            $this->photo
-                ? array_merge($this->state, ['photo' => $this->photo])
-                : $this->state
-        );
+        if(Auth::guard('employer')->user() != null){
+            $updater->update(
+                Auth::guard('employer')->user(),
+                $this->photo
+                    ? array_merge($this->state, ['photo' => $this->photo])
+                    : $this->state
+            );
+        }else{
+            $updater->update(
+                Auth::user(),
+                $this->photo
+                    ? array_merge($this->state, ['photo' => $this->photo])
+                    : $this->state
+            );
+        }
 
         if (isset($this->photo)) {
-            return redirect()->route('profile.show');
+            return redirect()->route('employer-profil');
         }
 
         $this->emit('saved');
@@ -68,7 +81,11 @@ class UpdateProfileInformationForm extends Component
      */
     public function deleteProfilePhoto()
     {
-        Auth::user()->deleteProfilePhoto();
+        if(Auth::guard('employer')->user() != null){
+            Auth::guard('employer')->user()->deleteProfilePhoto();
+        }else{
+            Auth::user()->deleteProfilePhoto();
+        }
 
         $this->emit('refresh-navigation-dropdown');
     }
@@ -80,7 +97,11 @@ class UpdateProfileInformationForm extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        if(Auth::guard('employer')->user() != null){
+            return Auth::guard('employer')->user();
+        }else{
+            return Auth::user();
+        }
     }
 
     /**

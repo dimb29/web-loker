@@ -14,6 +14,6 @@ class KualifikasiLulus extends Model
         'name_kl',
     ];
     public function posts(){
-        return $this->hasMany(Post::class);
+        return $this->belongsToMany(Post::class);
     }
 }

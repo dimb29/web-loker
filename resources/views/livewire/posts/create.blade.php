@@ -1,3 +1,17 @@
+<style>
+    .select2-container{
+        width:100%;
+        height:50px;
+    }
+    .select2-selection{
+        height:45px;
+        border: 1px solid #f8fafc;
+        padding: 3px;
+        box-shadow: 1px 1px 2px 1px #e2e8f0;
+    }
+    .selection{
+    }
+</style>
 <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
@@ -55,17 +69,6 @@
                                 id="content" wire:model="content" placeholder="Enter Content"></textarea>
                             @error('content') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
-                        <div class="mb-4">
-                            <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Category:</label>
-                            <select name="category" id="category" wire:model="category"
-                                class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
-                                <option value="" selected>Select Category</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
-                                @endforeach
-                            </select>
-                            @error('category') <span class="text-red-500">{{ $message }}</span>@enderror
-                        </div>
 
                         <div class="mb-4">
                             <div x-data="{ isUploading: false, progress: 0 }"
@@ -88,34 +91,52 @@
                                 @error('photos') <span class="text-red-500">{{ $message }}</span>@enderror
                             </div>
                         </div>
-
-                        <div class="mb-4">
-                            <label for="tagids" class="block text-gray-700 text-sm font-bold mb-2">Tags:</label>
-                            <select multiple name="tagids[]" id="tagids[]" wire:model="tagids"
-                                class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
-                                @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->title }}</option>
-                                @endforeach
-                            </select>
+                        
+                        <div class="flex flex-col">
+                            <label for="minrange" class="block text-gray-700 text-sm font-bold mb-2">Jangka Gaji:</label>
+                            <div class="flex flex-row">
+                                <div class="w-1/2 mr-1 mb-4">
+                                    <input type="text"
+                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="minrange" name="minrange" wire:model.defer="minrange" 
+                                        placeholder="minimal gaji, contoh: 2.000.000"></input>
+                                    @error('minrange') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="w-1/2 mr-1 mb-4">
+                                    <input type="text"
+                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="maxrange" name="maxrange" wire:model.defer="maxrange" 
+                                        placeholder="maksimal gaji, contoh: 5.000.000"></input>
+                                    @error('maxrange') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+                            <div class="flex flex-row">
+                                @if($this->checkgaji == 1)
+                                <input wire:model="checkgaji" type="checkbox" id="rangecek" name="rangecek" value="1" checked>
+                                @else
+                                <input wire:model="checkgaji" type="checkbox" id="rangecek" name="rangecek" value="1">
+                                @endif
+                                <label for="rangecek">&nbsp Tampilkan jangka gaji.</label><br>
+                            </div>
                         </div>
                         
                         <div class="flex flex-row">
-                            <div class="w-1/2 mr-1 mb-4">
+                            <div class="w-1/2 mr-1 mb-4" wire:ignore>
                                 <label for="location" class="block text-gray-700 text-sm font-bold mb-2">Lokasi:</label>
-                                <select name="location" id="location" wire:model="location"
+                                <select multiple name="location" id="location" wire:model.defer="location"
                                     class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
-                                    <option value="" selected>Select Lokasi</option>
-                                    @foreach ($provinces as $provinsi)
-                                        <option value="{{ $provinsi->id }}">{{ ucwords(strtolower($provinsi->name)) }}</option>
+                                    
+                                    @foreach ($locations as $location)
+                                        <option value="{{ $location->id }}">{{ $location->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('location') <span class="text-red-500">{{ $message }}</span>@enderror
+                               @error('location') <span class="text-red-500">{{ $message }}</span>@enderror
                             </div>
-                            <div class="w-1/2 ml-1 mb-4">
+                            <div class="w-1/2 ml-1 mb-4" wire:ignore>
                                 <label for="jenker" class="block text-gray-700 text-sm font-bold mb-2">Jenis Kerja:</label>
-                                <select name="jenker" id="jenker" wire:model="jenker"
+                                <select multiple name="jenker" id="jenker" wire:model.defer="jenker"
                                     class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
-                                    <option value="" selected>Select Jenis Pekerjaan</option>
+                                    
                                     @foreach ($jenkers as $jenker)
                                         <option value="{{ $jenker->id }}">{{ $jenker->name_jk }}</option>
                                     @endforeach
@@ -125,22 +146,22 @@
                         </div>
 
                         <div class="flex flex-row">
-                            <div class="w-1/2 mr-1 mb-4">
+                            <div class="w-1/2 mr-1 mb-4" wire:ignore>
                                 <label for="kualif" class="block text-gray-700 text-sm font-bold mb-2">Kualifikasi Lulusan:</label>
-                                <select name="kualif" id="kualif" wire:model="kualif"
+                                <select multiple name="kualif" id="kualif" wire:model.defer="kualif"
                                     class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
-                                    <option value="" selected>Select Lulusan</option>
+                                    
                                     @foreach ($kualifs as $kualif)
                                         <option value="{{ $kualif->id }}">{{ $kualif->name_kl }}</option>
                                     @endforeach
                                 </select>
                                 @error('kualif') <span class="text-red-500">{{ $message }}</span>@enderror
                             </div>
-                            <div class="w-1/2 ml-1 mb-4">
+                            <div class="w-1/2 ml-1 mb-4" wire:ignore>
                                 <label for="pengkerja" class="block text-gray-700 text-sm font-bold mb-2">Pengalaman Kerja:</label>
-                                <select name="pengkerja" id="pengkerja" wire:model="pengkerja"
+                                <select multiple name="pengkerja" id="pengkerja" wire:model.defer="pengkerja"
                                     class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
-                                    <option value="" selected>Select Pengalaman</option>
+                                    
                                     @foreach ($pengkerjas as $pengkerja)
                                         <option value="{{ $pengkerja->id }}">{{ $pengkerja->name_pk }}</option>
                                     @endforeach
@@ -150,22 +171,22 @@
                         </div>
 
                         <div class="flex flex-row">
-                            <div class="w-1/2 mr-1 mb-4">
+                            <div class="w-1/2 mr-1 mb-4" wire:ignore>
                                 <label for="spesialis" class="block text-gray-700 text-sm font-bold mb-2">Spesialis Pekerjaan:</label>
-                                <select name="spesialis" id="spesialis" wire:model="spesialis"
+                                <select multiple name="spesialis" id="spesialis" wire:model.defer="spesialis"
                                     class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
-                                    <option value="" selected>Select Spesialis</option>
+                                    
                                     @foreach ($spesialises as $spesialis)
                                         <option value="{{ $spesialis->id }}">{{ $spesialis->name_sk }}</option>
                                     @endforeach
                                 </select>
                                 @error('spesialis') <span class="text-red-500">{{ $message }}</span>@enderror
                             </div>
-                            <div class="w-1/2 ml-1 mb-4">
+                            <div class="w-1/2 ml-1 mb-4" wire:ignore>
                                 <label for="tingker" class="block text-gray-700 text-sm font-bold mb-2">Tingkat Kerja:</label>
-                                <select name="tingker" id="tingker" wire:model="tingker"
+                                <select multiple name="tingker" id="tingker" wire:model.defer="tingker"
                                     class="shadow appearance-none w-full border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
-                                    <option value="" selected>Select Tingkat</option>
+                                    
                                     @foreach ($tingkers as $tingker)
                                         <option value="{{ $tingker->id }}">{{ $tingker->name_tk }}</option>
                                     @endforeach
@@ -195,7 +216,7 @@
 
                 <div class="flex flex row sm:px-6 sm:flex sm:flex-row-reverse">
                     <span class="flex ml-2 mr-2 rounded-md shadow-sm sm:w-auto">
-                        <button wire:click.prevent="store()" type="button"
+                        <button type="button"
                             class="savepost inline-flex items-center px-6 py-2 my-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                             Save
                         </button>
@@ -272,24 +293,38 @@ ClassicEditor
         var multval = $('#multitle').val();
         window.livewire.emit('multiTitle',multval)
     });
-    $('.del_slec').click(function(){
-        alert("berhasil oye");
-        // var selId = $(this).attr('data-id')
-        // console.log(selId)
-        // $('.'+selId).remove();
+    $('#location').select2();
+    $('#jenker').select2();
+    $('#kualif').select2();
+    $('#pengkerja').select2();
+    $('#spesialis').select2();
+    $('#tingker').select2();
+    $('.savepost').on('click',function(){
+        var locval = $('#location').val();
+        var jenkval = $('#jenker').val();
+        var kualval = $('#kualif').val();
+        var pengkval = $('#pengkerja').val();
+        var speskval = $('#spesialis').val();
+        var tingkval = $('#tingker').val();
+        // alert(kualval+" "+jenkval+" "+pengkval+" "+speskval+" "+tingkval);
+        window.livewire.emit('store',[locval,jenkval,kualval,pengkval,speskval,tingkval]);
     })
 $(document).ready(function(){
-    $('.close-modal').click(function(){
-        $('#modal-creates').fadeOut();
-        // alert('berhasil')
-        // $('#multitle').val("");
-        $('#multitle').find('option').remove();
-        $('.field_wrapper').children('div').remove();
-    })
-    $('.savepost').click(function(){
-        $('#modal-creates').fadeIn();
-        // alert('berhasil')
-        // $('#multitle').val("");
+    var route = "{{ url('dashboard/autocomplete-search') }}";
+    $('#search-loc').typeahead({
+        source: function (query, process) {
+            var dataquery = query;
+            return $.get(route, {
+                query: query
+            }, function (data) {
+                return process(data);
+            });
+        }
+    });
+    $('#search-loc').on('change',function(){
+        console.log($(this).val())
+        $sloc_val = $(this).val()
+        window.livewire.emit('dataLocation',$sloc_val)
     })
 })
 </script>

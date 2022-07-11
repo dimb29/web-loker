@@ -28,6 +28,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'referral',
         'liked_posts',
         'disliked_posts',
         'favourite_posts',
@@ -38,10 +39,6 @@ class User extends Authenticatable
 
     public function comments(){
         return $this->hasMany(Comment::class, 'author_id', 'id');
-    }
-
-    public function perusahaan(){
-        return $this->hasMany(Perusahaan::class, 'owner_id', 'id');
     }
 
     public function posts(){

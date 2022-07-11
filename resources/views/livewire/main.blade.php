@@ -1,12 +1,13 @@
 <x-slot name="header">
     <div class="flex flex-col h-56">
-    <img class="object-cover h-56 w-full" src="http://localhost:8000/storage/photos/bghd.svg">
+    <img class="object-cover h-56 w-full" src="{{url('storage/photos/bghd.svg')}}">
     </div>
+
 </x-slot>
 
 <x-slot name="footer">
 </x-slot>
-<div class="py-12 bg-yellow bg-fixed ..." style="background-image: url(http://localhost:8000/storage/photos/bgbnww.jpg)">
+<div class="py-12 bg-yellow bg-fixed ..." style="background-image: {{url('storage/photos/bgbnww.jpg')}}">
     <div class="flex-auto ">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 -mt-40">
             <div class=" justify-center">
@@ -39,8 +40,8 @@
                                     <button wire:click="searchJobs()" 
                                         data-mdb-ripple="true"
                                         data-mdb-ripple-color="light"
-                                        class="w-48 justify-end inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800">
-                                        SEARCH
+                                        class="search-myjob w-48 justify-end inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800">
+                                        SEARCHS
                                     </button>
                                 
                             </div>
@@ -66,7 +67,7 @@
                                         width: 100%;
                                     }
                                 </style>
-                                <input id="search-loc" wire:model.defer="locations" name="locations" type="text" placeholder=" Semua Lokasi" 
+                                <input id="search-loc" wire:model.defer="locations" type="search" placeholder=" Semua Lokasi" 
                                 class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
                                 
 
@@ -201,27 +202,91 @@
 
 
         <div class="sm:max-w-full mt-28">
-        <a  href="{{ url('dashboard/berita/sj_send=') }}">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-4">
+            <a  href="{{ url('dashboard/berita/sj_send=') }}">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-4">
 
-                <div class="sm:flex flex-row sm:ml-48 sm:my-6">
-                    <div class="sm:w-1/3 sm:ml-96 sm:mt-28">
-                    <h2 class="secondary-heading">Find the right job</h2>
-                    <h2 class="secondary-heading">for you now..</h2>
+                    <div class="sm:flex flex-row sm:ml-48 sm:my-6">
+                        <div class="sm:w-1/3 sm:ml-96 sm:mt-28">
+                        <h2 class="secondary-heading">Find the right job</h2>
+                        <h2 class="secondary-heading">for you now..</h2>
+                        </div>
+
+                        <div class="sm:w-1/3 ">
+                        <img class=" sm:h-96" src="{{url('storage/photos/chara22.svg')}}">
+                        </div>
                     </div>
-
-                    <div class="sm:w-1/3 ">
-                    <img class=" sm:h-96" src="http://localhost:8000/storage/photos/chara22.svg">
-                    </div>
-                </div>
-        </a>
-
-            </div>
+            </a>
+         </div>
         </div>
 
-
-        
 </div>
+            
+
+<div class="sm:hidden flex flex-row fixed justify-center left-0 right-0 bottom-0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylee.css') }}">
+
+</head>
+
+<bodyy>
+
+    <ul class="nav">
+        <span class="nav-indicator"></span>
+        <li>
+            <a class="animate-bounce" href="https://sayarajin.com/dashboard/account">
+                <i class='bx bxs-contact' ></i>
+                <span class="title">About Us</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://sayarajin.com/dashboard/berita/sj_send=">
+                <i class='bx bx-search'></i>
+                <span class="title">Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://sayarajin.com/" class="nav-item-active">
+                <i class='bx bx-home'></i>
+                <span class="title">Homepage</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://sayarajin.com/user/saveloker">
+                <i class='bx bx-bookmark'></i>
+                <span class="title">Bookmark</span>
+            </a>
+        </li>
+        <li>
+            <a >
+                <i class='bx bx-user'></i>
+                <span class="title">Account</span>
+            </a>
+        </li>
+    </ul>
+
+
+    <!-- https://css-tricks.com/gooey-effect/ -->
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="filter-svg">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+                <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+        </defs>
+    </svg>
+
+    
+
+</bodyy>
+</div>
+
+
 <script>
     $(document).ready(function(){
     if($('.myframe').is(":visible")){
@@ -245,6 +310,15 @@
             autoplaySpeed: 2000,
         });
     }
+        $('.slider2').slick({
+            arrows: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            draggable: true,
+            touchMove: true,
+            autoplay: true,
+            autoplaySpeed: 1000,
+        });
 
         // (function(){
         //     var width = screen.width,
@@ -268,6 +342,7 @@
     var route = "{{ url('dashboard/autocomplete-search') }}";
     $('#search-loc').typeahead({
         source: function (query, process) {
+            var dataquery = query;
             return $.get(route, {
                 query: query
             }, function (data) {
@@ -275,6 +350,31 @@
             });
         }
     });
+    $('#search-loc').on('change',function(){
+        console.log($(this).val())
+        $sloc_val = $(this).val()
+        window.livewire.emit('dataLocation',$sloc_val)
+    })
+
+
+let nav = document.querySelector('.nav')
+
+nav.querySelectorAll('li a').forEach((a, i) => {
+a.onclick = (e) => {
+if (a.classList.contains('nav-item-active')) return
+
+nav.querySelectorAll('li a').forEach(el => {
+    el.classList.remove('nav-item-active')
+})
+
+a.classList.add('nav-item-active')
+
+let nav_indicator = nav.querySelector('.nav-indicator')
+
+nav_indicator.style.left = `calc(${(i * 80) + 40}px - 45px)`
+}
+})
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 @livewireScripts

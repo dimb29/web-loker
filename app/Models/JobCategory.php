@@ -12,7 +12,7 @@ class JobCategory extends Model
     protected $fillabel = [
         'name_jc',
     ];
-    public function posts(){
-        return $this->hasMany(Post::class);
-    }
+    // public function posts(){
+    //     return $this->hasMany(Post::class);
+    // }
 }

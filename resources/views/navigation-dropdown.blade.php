@@ -21,13 +21,13 @@
                             {{ __('News') }}
                         </x-jet-nav-link>
                     </div>
-                    @if(Auth::user() != null)
+                    @if(Auth::user() != null || Auth::guard('employer') != null)
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('posts') }}" :active="request()->routeIs('posts')">
                             {{ __('Tambah Loker') }}
                         </x-jet-nav-link>
                     </div>
-                    @if(Auth::user()->user_type == "administr")
+                    @if(Auth::user() || Auth::guard('employer') != null)
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('categories') }}" :active="request()->routeIs('categories')">
                             {{ __('Categories') }}
@@ -47,14 +47,28 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-            @if(Auth::user() != null)
+            @if(Auth::user() != null || Auth::guard('employer')->user() != null)
                 <x-jet-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                        @if(Auth::guard('employer')->user() != null)
+                        <div class="flex flex-row">
                             <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-                                <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" />
+                                <img class="h-8 w-8 rounded-full object-cover" src="{{url(Auth::guard('employer')->user()->profile_photo_path)}}" alt="{{Auth::guard('employer')->user()->name}}" />
+                            </button>&nbsp
+                            <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                                <div>{{Auth::guard('employer')->user()->name}}</div>
+                                <div class="ml-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
                             </button>
+                        </div>
                         @else
+                        <div class="flex flex-row">
+                            <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                                <img class="h-8 w-8 rounded-full object-cover" src="{{url( Auth::user()->profile_photo_path) }}" alt="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" />
+                            </button>&nbsp
                             <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                 <div>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</div>
 
@@ -64,6 +78,7 @@
                                     </svg>
                                 </div>
                             </button>
+                        </div>
                         @endif
                     </x-slot>
 

@@ -29,8 +29,11 @@ class UpdatePasswordForm extends Component
     {
         $this->resetErrorBag();
 
-        $updater->update(Auth::user(), $this->state);
-
+        if(Auth::guard('employer')->user() != null){
+            $updater->update(Auth::guard('employer')->user(), $this->state);
+        }else{
+            $updater->update(Auth::user(), $this->state);
+        }
         $this->state = [
             'current_password' => '',
             'password' => '',
@@ -47,7 +50,11 @@ class UpdatePasswordForm extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        if(Auth::guard('employer')->user() != null){
+            return Auth::guard('employer')->user();
+        }else{
+            return Auth::user();
+        }
     }
 
     /**

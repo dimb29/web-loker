@@ -39,8 +39,11 @@ class TwoFactorAuthenticationForm extends Component
         if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
             $this->ensurePasswordIsConfirmed();
         }
-
-        $enable(Auth::user());
+        if(Auth::guard('employer')->user() != null){
+            $enable(Auth::guard('employer')->user());
+        }else{
+            $enable(Auth::user());
+        }
 
         $this->showingQrCode = true;
         $this->showingRecoveryCodes = true;
@@ -71,8 +74,11 @@ class TwoFactorAuthenticationForm extends Component
         if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
             $this->ensurePasswordIsConfirmed();
         }
-
-        $generate(Auth::user());
+        if(Auth::guard('employer')->user() != null){
+            $generate(Auth::guard('employer')->user());
+        }else{
+            $generate(Auth::user());
+        }
 
         $this->showingRecoveryCodes = true;
     }
@@ -89,7 +95,11 @@ class TwoFactorAuthenticationForm extends Component
             $this->ensurePasswordIsConfirmed();
         }
 
-        $disable(Auth::user());
+        if(Auth::guard('employer')->user() != null){
+            $disable(Auth::guard('employer')->user());
+        }else{
+            $disable(Auth::user());
+        }
     }
 
     /**
@@ -99,7 +109,11 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        if(Auth::guard('employer')->user() != null){
+            return Auth::guard('employer')->user();
+        }else{
+            return Auth::user();
+        }
     }
 
     /**

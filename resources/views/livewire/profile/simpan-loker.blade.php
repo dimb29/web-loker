@@ -18,6 +18,7 @@
                     </div>
                 </div>
             @endif
+            @if($posts != null)
             <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-3  gap-4">
                 @foreach ($posts as $post)
                     @if($post->author->user_type == Auth::user()->user_type)
@@ -26,7 +27,7 @@
                         rounded-lg hover:text-blue-600 transition cursor-pointer duration-150 transform hover:scale-110 hover:-translate-y-2 ">
                         <div class="job-list " data-id="{{$post->id}}">
                             <div class="px-6 py-4">
-                                <img class="rounded-lg object-cover h-48 w-96" src="{{ $post->url }}">
+                                <img class="rounded-lg object-cover h-48 w-96" src="{{ url($post->url) }}">
                                 <div class="font-bold text-xl mb-2">
                                     <input class="w-80 bg-transparent cursor-pointer" readonly type="text" value="{{ $post->title }}">
                                 </div>
@@ -65,14 +66,80 @@
                     </div>
                     @endif
                 @endforeach
-                <!-- wire:click="delSaveJob({{$post->post_id}})"  -->
             </div>
+            @endif
         </div>
         <div class="py-4">
             {{ $posts->links() }}
         </div>
     </div>
 </div>
+
+<div class="sm:hidden flex flex-row fixed justify-center left-0 right-0 bottom-0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylee.css') }}">
+
+</head>
+
+<bodyy>
+
+    <ul class="nav">
+        <span class="nav-indicator3"></span>
+        <li>
+            <a class="animate-bounce">
+                <i class='bx bxs-contact' ></i>
+                <span class="title">About Us</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://sayarajin.com/dashboard/berita/sj_send=">
+                <i class='bx bx-search'></i>
+                <span class="title">Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://sayarajin.com/">
+                <i class='bx bx-home'></i>
+                <span class="title">Homepage</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://sayarajin.com/user/saveloker" class="nav-item-active">
+                <i class='bx bx-bookmark'></i>
+                <span class="title">Bookmark</span>
+            </a>
+        </li>
+        <li>
+            <a >
+                <i class='bx bx-user'></i>
+                <span class="title">Account</span>
+            </a>
+        </li>
+    </ul>
+
+
+    <!-- https://css-tricks.com/gooey-effect/ -->
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="filter-svg">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+                <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+        </defs>
+    </svg>
+
+    
+
+</bodyy>
+</div>
+
+
 <script>
     $(document).ready(function(){
         $('.job-list').on('click', function(){
@@ -85,5 +152,25 @@
             // alert('berhasil')
         })
     })
+
+    
+let nav = document.querySelector('.nav')
+
+nav.querySelectorAll('li a').forEach((a, i) => {
+a.onclick = (e) => {
+if (a.classList.contains('nav-item-active')) return
+
+nav.querySelectorAll('li a').forEach(el => {
+    el.classList.remove('nav-item-active')
+})
+
+a.classList.add('nav-item-active')
+
+let nav_indicator = nav.querySelector('.nav-indicator3')
+
+nav_indicator.style.left = `calc(${(i * 80) + 40}px - 45px)`
+}
+})
+
 </script>
 <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>

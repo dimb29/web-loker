@@ -72,10 +72,18 @@ trait ConfirmsPasswords
      */
     public function confirmPassword()
     {
-        if (! app(ConfirmPassword::class)(app(StatefulGuard::class), Auth::user(), $this->confirmablePassword)) {
-            throw ValidationException::withMessages([
-                'confirmable_password' => [__('This password does not match our records.')],
-            ]);
+        if(Auth::guard('employer')->user() != null){
+            if (! app(ConfirmPassword::class)(app(StatefulGuard::class), Auth::guard('employer')->user(), $this->confirmablePassword)) {
+                throw ValidationException::withMessages([
+                    'confirmable_password' => [__('This password does not match our records.')],
+                ]);
+            }
+        }else{
+            if (! app(ConfirmPassword::class)(app(StatefulGuard::class), Auth::user(), $this->confirmablePassword)) {
+                throw ValidationException::withMessages([
+                    'confirmable_password' => [__('This password does not match our records.')],
+                ]);
+            }
         }
 
         session(['auth.password_confirmed_at' => time()]);

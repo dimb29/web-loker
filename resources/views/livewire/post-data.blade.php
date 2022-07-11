@@ -15,11 +15,27 @@
                     <div class="grid grid-flow-col">
                         @foreach ($post['images'] as $image)
                             <div class="py-4">
-                                <img class="h-72" src="{{ $image->url }}" alt="{{ $image->description }}" width="100%">
+                                <img class="h-72" src="{{ url($image->url) }}" alt="{{ $image->description }}" width="100%">
                             </div>
                         @endforeach
                     </div>
-                    <div class="font-bold text-xl mb-2">{{ $post->title }}</div>
+                    <div class="font-bold text-xl mb-2">
+                        @php
+                        $postt = $post->postTitles;
+                        for($i=0;$i < count($postt);$i++){
+                            if($i+1 == count($postt)){
+                                echo $postt[$i]->title;
+                            }else{
+                                echo $postt[$i]->title." - ";
+                            }
+                        }
+                        @endphp
+                    </div>
+                    <div class="text-md">
+                        @if($post->salary_check == 1)
+                        Rp {{ number_format($post->salary_start,0,',','.').' - Rp '.number_format($post->salary_end,0,',','.') }}
+                        @endif
+                    </div>
                     <div class="flex">
                         by&nbsp;<span class="italic">{{ $post->author->first_name . ' ' . $post->author->last_name }}</span>
                         &nbsp;on&nbsp;{{ $post->updated_at->format('F, d Y') }}
@@ -29,9 +45,6 @@
                     </div>
 
                     <div class="flex m-5">
-                        @php
-                            $tags=$post->tags->pluck('id', 'title');
-                        @endphp
                         <div class="flex flex-col">
                             <div class="flex flex-auto mt-10">
                                 <div class="text-xl font-medium">Informasi Tambahan :</div>
@@ -39,46 +52,99 @@
                             </div>
                             <div class="flex flex-row mt-5">
                                 <div class="w-96 h-24">
-                                <p class="font-bold"> Tingkat Pekerjaan </p>
-                                <a href="{{ url('dashboard/tags/posts') }}"
-                                    class="underline px-1">{{ $post->tingkatkerja->name_tk }}
-                                </a>
+                                    <p class="font-bold"> Tingkat Pekerjaan </p>
+                                    @php
+                                    $tingkatkerja = $post->tingkatkerja;
+                                    @endphp
+                                    @for($i=0;$i < count($tingkatkerja);$i++)
+                                        @if($i+1 == count($tingkatkerja))
+                                        <a href="{{ url('dashboard/tags/posts') }}"
+                                            class="underline px-1">
+                                                {{$tingkatkerja[$i]->name_tk}}
+                                        </a>
+                                            @else
+                                        <a href="{{ url('dashboard/tags/posts') }}"
+                                            class="underline px-1">
+                                                {{$tingkatkerja[$i]->name_tk}}
+                                        </a>
+                                        <br>
+                                        @endif
+                                    @endfor
                                 </div>
                                 <div class="w-64 h-24">
-                                <p class="font-bold"> Pengalaman kerja </p>
-                                <a href="{{ url('dashboard/tags/posts') }}"
-                                    class="underline px-1">{{ $post->pengalamankerja->name_pk }}
-                                </a>
-                                </div>
-                            </div>
-                            <div class="flex flex-row">
-                            <div class="w-96 h-24">
-                            <p class="font-bold"> Kualifikasi </p>
-                                <a href="{{ url('dashboard/tags/posts') }}"
-                                    class="underline px-1">{{ $post->kualifikasilulus->name_kl }}
-                                </a>
-                                </div>
-                                <div class="w-64 h-24">
-                                <p class="font-bold"> Jenis Pekerjaan </p>
-                                <a href="{{ url('dashboard/tags/posts') }}"
-                                    class="underline px-1">{{ $post->jeniskerja->name_jk }}
-                                </a>
+                                    <p class="font-bold"> Pengalaman kerja </p>
+                                    @php
+                                    $pengalamankerja = $post->pengalamankerja;
+                                    @endphp
+                                    @for($i=0;$i < count($pengalamankerja);$i++)
+                                        @if($i+1 == count($pengalamankerja))
+                                        <a href="{{ url('dashboard/tags/posts') }}"
+                                            class="underline px-1">
+                                                {{$pengalamankerja[$i]->name_pk}}
+                                        </a>
+                                            @else
+                                        <a href="{{ url('dashboard/tags/posts') }}"
+                                            class="underline px-1">
+                                                {{$pengalamankerja[$i]->name_pk}}
+                                        </a>
+                                        <br>
+                                        @endif
+                                    @endfor
                                 </div>
                             </div>
                             <div class="flex flex-row">
                                 <div class="w-96 h-24">
-                                <p class="font-bold"> Spesialisasi pekerjaan </p>
-                                <a href="{{ url('dashboard/tags/posts') }}"
-                                    class="underline px-1">{{ $post->spesialiskerja->name_sk }}
-                                </a>
+                                    <p class="font-bold"> Kualifikasi </p>
+                                    @php
+                                    $kualifikasilulus = $post->kualifikasilulus;
+                                    @endphp
+                                    @for($i=0;$i < count($kualifikasilulus);$i++)
+                                        @if($i+1 == count($kualifikasilulus))
+                                        <a href="{{ url('dashboard/tags/posts') }}"
+                                            class="underline px-1">
+                                                {{$kualifikasilulus[$i]->name_kl}}
+                                        </a>
+                                            @else
+                                        <a href="{{ url('dashboard/tags/posts') }}"
+                                            class="underline px-1">
+                                                {{$kualifikasilulus[$i]->name_kl}}
+                                        </a>
+                                        <br>
+                                        @endif
+                                    @endfor
                                 </div>
-                                    <div class="w-64 h-24">
-                                        <p class="font-bold"> Industri </p>
-                                        @foreach($post->perusahaan as $perusahaan)
-                                            {{$perusahaan->per_nama}}
+                                <div class="w-64 h-24">
+                                    <p class="font-bold"> Jenis Pekerjaan </p>
+                                    <a href="{{ url('dashboard/tags/posts') }}"
+                                        class="underline px-1">
+                                        @foreach($post->jeniskerja as $jeniskerja)
+                                        {{$jeniskerja->name_jk}}
                                         @endforeach
-                                    </div>
+                                    </a>
                                 </div>
+                            </div>
+                            <div class="flex flex-row">
+                                <div class="w-96 h-24">
+                                    <p class="font-bold"> Spesialisasi pekerjaan </p>
+                                    @php
+                                    $spesialiskerja = $post->spesialiskerja;
+                                    @endphp
+                                    @for($i=0;$i < count($spesialiskerja);$i++)
+                                        @if($i+1 == count($spesialiskerja))
+                                        <a href="{{ url('dashboard/tags/posts') }}"
+                                            class="underline px-1">
+                                                {{$spesialiskerja[$i]->name_sk}}
+                                        </a>
+                                            @else
+                                        <a href="{{ url('dashboard/tags/posts') }}"
+                                            class="underline px-1">
+                                                {{$spesialiskerja[$i]->name_sk}}
+                                        </a>
+                                        <br>
+                                        @endif
+                                    @endfor
+                                </div>
+                            </div>
                                 <div class="flex flex-row">
                                     <div class="w-96 h-24">
                                     <p class="font-bold"> 
@@ -87,12 +153,12 @@
                                     <button id="copy_link" data-link="{{url('dashboard/posts/'.$post->id)}}" class="w-8 h-8 text-indigo-100 transition-colors p-1 duration-150 bg-indigo-700 rounded-3xl focus:shadow-outline hover:bg-indigo-800">
                                         <i class="fa-solid fa-link"></i>
                                     </button>
-                                    <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Flocalhost%3A8000%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&text=Lowongan Kerja Sebagai {{$post->title}} di {{$perusahaan->per_nama}}&url={{url('dashboard/posts/'.$post->id)}}">
+                                    <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Flocalhost%3A8000%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&text=Lowongan Kerja Sebagai {{$post->title}} di &url={{url('dashboard/posts/'.$post->id)}}">
                                         <button class="w-8 h-8 text-indigo-100 transition-colors p-1 duration-150 bg-indigo-700 rounded-3xl focus:shadow-outline hover:bg-indigo-800">
                                             <i class="fa-brands fa-twitter"></i>
                                         </button>
                                     </a>
-                                    <a href="https://api.whatsapp.com/send/?text=Lowongan Kerja Sebagai {{$post->title}} di {{$perusahaan->per_nama}} | {{url('dashboard/posts/'.$post->id)}}" data-action="share/whatsapp/share" target="_blank">
+                                    <a href="https://api.whatsapp.com/send/?text=Lowongan Kerja Sebagai {{$post->title}} di | {{url('dashboard/posts/'.$post->id)}}" data-action="share/whatsapp/share" target="_blank">
                                     <button class="w-8 h-8 text-indigo-100 transition-colors p-1 duration-150 bg-green-400 rounded-3xl focus:shadow-outline hover:bg-indigo-800">
                                         <i class="fa-brands fa-whatsapp"></i>
                                     </button>    
@@ -111,6 +177,46 @@
                                     </div>
                                 </div>
                         </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<div class="mb-12 mt-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" id="post-frame">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+                <div class="flex flex-col sm:w-full overflow-x-auto sm:overflow-hidden">
+                    <div class="flex flex-auto my-4">
+                        <p class="text-xl font-medium ml-4">Kirim Lamaran</p>                
+                    </div>
+                    <div class="flex flex-row ml-4 sm:w-full">
+                        <div class="place-self-center">
+                            <i class="place-self-center fa-solid fa-envelope text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="ml-2 text-lg">Email</p>
+                        </div>
+                        <div>
+                            <p class="ml-12 text-lg">:</p>
+                        </div>
+                        <div>
+                            <p class="ml-2 text-lg">{{ $post->email}}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-row ml-4 sm:w-full">
+                        <div class="place-self-center">
+                            <i class="place-self-center fa-brands fa-whatsapp fa-lg"></i>
+                        </div>
+                        <div>
+                            <p class="ml-2 text-lg">Whatsapp</p>
+                        </div>
+                        <div>
+                            <p class="ml-2 text-lg">:</p>
+                        </div>
+                        <div>
+                            <p class="ml-2 text-lg">{{ $post->wa}}</p>
+                        </div>
+                    </div>
                 </div>
         </div>
     </div>

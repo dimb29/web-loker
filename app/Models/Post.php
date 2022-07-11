@@ -16,7 +16,6 @@ class Post extends Model
         'content',
         'post_type',
         'meta_data',
-        'category_id',
         'jeniskerja_id',
         'kualifikasilulus_id',
         'pengalamankerja_id',
@@ -27,15 +26,25 @@ class Post extends Model
         'author_id',
         'email',
         'wa',
+        'salary_start',
+        'salary_end',
+        'salary_check',
     ];
+    
+    // public function toSearchableArray(){
+    
+    //     $array = Post::with('kualifikasilulus')->toArray();
+ 
+    //     return $array;
+    // }
 
     public function author(){
         return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
-    public function category(){
-        return $this->belongsTo(Category::class);
-    }
+    // public function category(){
+    //     return $this->belongsTo(Category::class);
+    // }
 
     public function likes_comment(){
         return $this->belongsTo(LikesComment::class, 'id', 'id_post');
@@ -43,10 +52,6 @@ class Post extends Model
 
     public function comments(){
         return $this->hasMany(Comment::class)->with(['author', 'likes_comment']);
-    }
-
-    public function perusahaan(){
-        return $this->hasMany(Perusahaan::class, 'owner_id','author_id')->with(['author']);
     }
 
     public function images(){
@@ -70,32 +75,32 @@ class Post extends Model
     }
 
     public function jeniskerja(){
-        return $this->belongsTo(JenisKerja::class);
+        return $this->belongsToMany(JenisKerja::class);
     }
     
-    public function jobcategory(){
-        return $this->belongsTo(JobCategory::class);
-    }
+    // public function jobcategory(){
+    //     return $this->belongsTo(JobCategory::class);
+    // }
     
     public function kualifikasilulus(){
-        return $this->belongsTo(KualifikasiLulus::class);
+        return $this->belongsToMany(KualifikasiLulus::class);
     }
     
     public function pengalamankerja(){
-        return $this->belongsTo(PengalamanKerja::class);
+        return $this->belongsToMany(PengalamanKerja::class);
     }
     
     public function tingkatkerja(){
-        return $this->belongsTo(TingkatKerja::class);
+        return $this->belongsToMany(TingkatKerja::class);
     }
 
     public function spesialiskerja(){
-        return $this->belongsTo(SpesialisKerja::class);
+        return $this->belongsToMany(SpesialisKerja::class);
     }
     public function province(){
         return $this->belongsTo(Province::class, 'location_id', 'id');
     }
     public function regency(){
-        return $this->belongsTo(Regency::class, 'location_id', 'id');
+        return $this->belongsToMany(Regency::class);
     }
 }

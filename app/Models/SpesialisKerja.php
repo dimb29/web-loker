@@ -15,6 +15,6 @@ class SpesialisKerja extends Model
         'name_sk',
     ];
     public function posts(){
-        return $this->hasMany(Post::class);
+        return $this->belongsToMany(Post::class);
     }
 }

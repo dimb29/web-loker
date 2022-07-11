@@ -17,8 +17,22 @@ class CreateNewUser implements CreatesNewUsers
      * @param  array  $input
      * @return \App\Models\User
      */
+
     public function create(array $input)
     {
+
+        $chars = "abcdefghijkmnopqrstuvwxyz023456789"; 
+        srand((double)microtime()*1000000); 
+        $i = 0; 
+        $pass = '' ; 
+    
+        while ($i <= 7) { 
+            $num = rand() % 33; 
+            $tmp = substr($chars, $num, 1); 
+            $pass = $pass . $tmp; 
+            $i++; 
+        } 
+        // dd($pass);
         Validator::make($input, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -31,6 +45,7 @@ class CreateNewUser implements CreatesNewUsers
             'last_name' => $input['last_name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'referral' => $pass,
         ]);
     }
 }

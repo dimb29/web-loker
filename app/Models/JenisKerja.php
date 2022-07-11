@@ -15,6 +15,6 @@ class JenisKerja extends Model
     ];
 
     public function posts(){
-        return $this->hasMany(Post::class);
+        return $this->belongsToMany(Post::class);
     }
 }
